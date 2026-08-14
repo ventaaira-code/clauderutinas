@@ -27,12 +27,35 @@ El pedido fue a los 4 años de Regina.
 ### Descripción física
 - Muñeco de plástico de bebé
 - **Completamente pelón** (sin cabello)
-- Ojos azules intensos
+- Ojos azules intensos y expresivos
 - Mejillas rosadas
 - Manitas regordetes con hoyuelos de bebé
-- Trajecito de ropa peculiar
-- Relleno de fibritas
+- Ropa: camiseta blanca/gris con bordes y mangas rosas + shorts blancos
+- Pies descalzos
 - Aspecto de muñeco nuevo pero con historia de maltrato
+
+### Estilo visual oficial (CGI fotorrealista)
+
+**TEPO se produce como personaje CGI fotorrealista — NO como muñeco de plástico simple.**
+
+El estilo de referencia es el video `tepo-estilo-referencia-capcut-ai.mp4` generado en **CapCut AI**.
+
+Características visuales clave:
+- Piel semi-plástica con iluminación realista (subsurface scattering — la luz pasa levemente por la piel)
+- Ojos azules brillantes y expresivos — capaces de reaccionar (sorpresa, confusión, miedo cómico)
+- Integrado en ambientes reales con iluminación cinemática
+- Se mueve de forma autónoma — camina, voltea la cabeza, abre la boca, gesticula
+- Iluminación dramática: rayos de luz, focos industriales, luz natural de ventana
+- Calidad visual: cinematic 3D render, sin aspecto de dibujo animado
+
+**Herramienta principal:** CapCut AI → Text to Video  
+**Prompt base para mantener consistencia:**
+```
+A realistic CGI bald baby doll with blue eyes, chubby baby body, 
+wearing white/grey short-sleeve shirt with pink trim and white shorts. 
+Slightly plastic skin texture with realistic subsurface lighting. 
+Cinematic quality, photorealistic 3D render.
+```
 
 ---
 
