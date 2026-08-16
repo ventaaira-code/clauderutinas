@@ -376,8 +376,6 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:13px;li
                     <th>Material</th>
                     <th class="c" style="width:60px">Unidad</th>
                     <th class="c" style="width:65px">Cant.</th>
-                    <th class="r" style="width:95px">P. Unitario</th>
-                    <th class="r" style="width:100px">Importe</th>
                     <th style="width:24px"></th>
                   </tr></thead>
                   <tbody id="cart-body"></tbody>
@@ -404,15 +402,17 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:13px;li
         <div class="tot-panel">
           <div class="card cp" style="margin-bottom:.75rem">
             <div class="ct">Resumen</div>
-            <div class="t-row"><span class="tl">Partidas</span><span class="tv" id="tot-items">0</span></div>
-            <div class="t-row"><span class="tl">Subtotal</span><span class="tv" id="tot-sub">$0.00</span></div>
-            <div class="t-row"><span class="tl">IVA 16%</span><span class="tv" id="tot-iva">$0.00</span></div>
-            <div class="grand-box" style="margin-top:.75rem">
-              <div><div class="gb-lbl">Total estimado</div></div>
-              <div class="gb-amt" id="tot-total">$0.00</div>
+            <div class="t-row"><span class="tl">Partidas agregadas</span><span class="tv" id="tot-items">0</span></div>
+            <!-- Valores internos ocultos (usados al guardar en Supabase y WA al admin) -->
+            <span id="tot-sub" style="display:none"></span>
+            <span id="tot-iva" style="display:none"></span>
+            <span id="tot-total" style="display:none"></span>
+            <div style="background:#f0f9ff;border-radius:8px;padding:.85rem 1rem;margin-top:.65rem;border:1px solid #bae6fd">
+              <div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.09em;color:#0369a1;font-weight:700;margin-bottom:.25rem">Precio</div>
+              <div style="font-size:.78rem;font-weight:700;color:#1a2d5a;line-height:1.4">Se confirmará en tu cotización formal</div>
             </div>
-            <div style="margin-top:.75rem;font-size:.62rem;color:var(--text3);line-height:1.5">
-              Precios sujetos a vigencia de 15 días. COENERVGAS confirmará disponibilidad.
+            <div style="margin-top:.65rem;font-size:.6rem;color:var(--text3);line-height:1.55">
+              COENERVGAS te enviará precio y disponibilidad directamente por WhatsApp o correo.
             </div>
           </div>
           <button class="btn btn-acc" style="width:100%;justify-content:center;padding:.55rem" onclick="requestQuote()">
@@ -818,8 +818,6 @@ function renderCart(){
       <td><div style="font-weight:600;font-size:.78rem">${item.name}</div><div style="font-size:.62rem;color:var(--text3)">${item.size} · ${SPECS[item.spec]||''}</div></td>
       <td class="c">${item.unit}</td>
       <td class="c"><input class="qty-i" type="number" min="1" value="${item.qty}" onchange="updateQty('${item.id}',this.value)"></td>
-      <td class="r">${fmt(item.price)}</td>
-      <td class="r">${fmt(item.price*item.qty)}</td>
       <td><button class="btn-del" onclick="removeFromCart('${item.id}')">×</button></td>
     </tr>`).join('');
   renderTotals();
@@ -849,7 +847,7 @@ function renderCat(){
       <div class="ci-size">${item.size}</div>
       <div class="ci-desc">${item.desc}</div>
       <div class="ci-foot">
-        <div><div class="ci-price">${fmt(item.price)}</div><div class="ci-unit">por ${item.unit}</div></div>
+        <div><div class="ci-unit" style="font-size:.68rem;color:var(--text3)">por ${item.unit} · precio a confirmar</div></div>
         <button class="btn btn-acc btn-sm" onclick="addToCart(CAT_MAP['${item.id}'])">+ Agregar</button>
       </div>
     </div>`).join('');

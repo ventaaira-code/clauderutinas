@@ -12,12 +12,12 @@ module.exports = async function handler(req, res) {
 
   const sb = getSupabase();
 
-  // GET /api/quotes?phone=xxx  →  list quotes for client
+  // GET /api/quotes?phone=xxx  →  list quotes for that client only
   if (req.method === 'GET') {
     const { phone } = req.query;
-    let q = sb.from('quotes').select('*').order('created_at', { ascending: false }).limit(50);
-    if (phone) q = q.eq('client_phone', phone);
-    const { data, error } = await q;
+    if (!phone) return res.status(400).json({ error: 'Se requiere teléfono' });
+    const { data, error } = await sb.from('quotes').select('*')
+      .eq('client_phone', phone).order('created_at', { ascending: false }).limit(50);
     if (error) return res.status(500).json({ error: error.message });
     return res.status(200).json({ quotes: data || [] });
   }
