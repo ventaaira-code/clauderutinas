@@ -22,12 +22,20 @@ module.exports = async function handler(req, res) {
     return res.status(200).json({ quotes: data || [] });
   }
 
-  // POST /api/quotes  →  save new quote
+  // POST /api/quotes  →  save new quote + upsert client
   if (req.method === 'POST') {
     const body = req.body;
     if (!body.number) return res.status(400).json({ error: 'Se requiere número de cotización' });
     const { data, error } = await sb.from('quotes').insert(body).select().maybeSingle();
     if (error) return res.status(500).json({ error: error.message });
+    // Auto-register client if phone provided
+    if (body.client_phone) {
+      const client = { phone: body.client_phone, updated_at: new Date().toISOString() };
+      if (body.client_name)  client.name  = body.client_name;
+      if (body.client_rfc)   client.rfc   = body.client_rfc;
+      if (body.client_email) client.email = body.client_email;
+      await sb.from('clients').upsert(client, { onConflict: 'phone' });
+    }
     return res.status(200).json({ quote: data });
   }
 

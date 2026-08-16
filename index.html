@@ -947,6 +947,7 @@ function requestQuote(){
   // Sync quote to cloud
   fetch('/api/quotes',{method:'POST',headers:{'Content-Type':'application/json'},
     body:JSON.stringify({number:rec.num,client_phone:rec.tel,client_name:rec.emp,
+      client_rfc:rec.rfc,client_email:rec.email,
       obra:rec.obra,items:rec.items,subtotal:rec.sub,iva:rec.iva,total:rec.total,notes:rec.notas})
   }).catch(()=>{});
   // Notify admin via WhatsApp
