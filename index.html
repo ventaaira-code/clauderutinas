@@ -34,6 +34,13 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:13px;li
 .topbar{background:var(--surf);border-bottom:1px solid var(--border);padding:.6rem 1.4rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;box-shadow:var(--sh-sm)}
 .tb-title{font-size:.95rem;font-weight:700}.tb-sub{font-size:.65rem;color:var(--text3);margin-top:1px}
 .tb-actions{display:flex;gap:.45rem;align-items:center}
+.tb-brand{display:none;align-items:center;gap:.5rem;cursor:pointer;margin-right:.85rem;flex-shrink:0;padding:.2rem .3rem;border-radius:6px;transition:background .12s}
+.tb-brand:hover{background:var(--surf2)}
+.tb-bmark{width:30px;height:30px;flex-shrink:0}
+.tb-bname{font-size:.82rem;font-weight:900;letter-spacing:.04em;color:var(--pri);line-height:1.1}
+.tb-bname span{color:var(--acc)}
+.tb-bsub{font-size:.42rem;letter-spacing:.09em;text-transform:uppercase;color:var(--text3)}
+@media(max-width:760px){.tb-brand{display:flex}}
 .content{padding:1.3rem;flex:1}
 .sec{display:none}.sec.on{display:block}
 
@@ -275,13 +282,21 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:13px;li
   <div class="mn-i" onclick="goSec('catalogo',this)"><span class="mn-icon">📚</span>Catálogo</div>
   <div class="mn-i" onclick="goSec('ia',this)"><span class="mn-icon">🤖</span>IA</div>
   <div class="mn-i" onclick="goSec('historial',this)"><span class="mn-icon">🗂️</span>Historial</div>
-  <div class="mn-i" onclick="goSec('perfil',this)"><span class="mn-icon">👤</span>Perfil</div>
   <div class="mn-i" onclick="goSec('nosotros',this)"><span class="mn-icon">🏢</span>Nosotros</div>
 </div>
 
 <!-- MAIN -->
 <div class="main">
   <div class="topbar">
+    <div class="tb-brand" onclick="goSec('cotizar',null)" title="Inicio">
+      <svg class="tb-bmark" viewBox="20 12 56 66" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 62.9,23.7 A 26,26 0 1,0 62.9,66.3" stroke="#1a2d5a" stroke-width="11" fill="none" stroke-linecap="butt"/>
+        <line x1="58" y1="20.3" x2="67.8" y2="27.1" stroke="#1a2d5a" stroke-width="3.5" stroke-linecap="round"/>
+        <line x1="58" y1="69.7" x2="67.8" y2="62.9" stroke="#1a2d5a" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M 48,57 C 40,50 39,42 44,33 C 46,43 51,38 49,29 C 55,37 58,47 58,53 C 56,50 52,48 51,51 C 54,54 54,57 48,57 Z" fill="#f97316"/>
+      </svg>
+      <div><div class="tb-bname">COENER<span>V</span>GAS</div><div class="tb-bsub">+13 años · Gas LP</div></div>
+    </div>
     <div><div class="tb-title" id="tb-title">Nueva cotización</div><div class="tb-sub" id="tb-sub">Agrega materiales desde el catálogo o sube una imagen</div></div>
     <div class="tb-actions">
       <button class="btn btn-ghost btn-sm" onclick="clearCart()">🆕 Nueva cotización</button>
@@ -729,7 +744,7 @@ function goSec(id,el){
   }
   document.querySelectorAll('.mob-nav .mn-i').forEach(n=>n.classList.remove('active'));
   const mob=document.querySelectorAll('.mob-nav .mn-i');
-  const order=['cotizar','catalogo','ia','historial','perfil','nosotros'];
+  const order=['cotizar','catalogo','ia','historial','nosotros'];
   const idx=order.indexOf(id);
   if(mob[idx]) mob[idx].classList.add('active');
   document.getElementById('tb-title').textContent=TB[id].title;
