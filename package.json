@@ -1,0 +1,9 @@
+{
+  "name": "coenervgas",
+  "version": "1.0.0",
+  "description": "COENERVGAS – Plataforma de cotización Gas LP",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.30.0",
+    "@supabase/supabase-js": "^2.45.0"
+  }
+}

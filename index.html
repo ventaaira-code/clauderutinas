@@ -1,0 +1,1017 @@
+<title>COENERVGAS · Plataforma</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+:root{
+  --pri:#1a2d5a;--pri-l:#243d76;--pri-d:#0e1e3a;
+  --acc:#f97316;--acc-l:#fb923c;
+  --bg:#edf1f7;--surf:#fff;--surf2:#f7f9fc;--border:#dde4ee;
+  --text:#0f172a;--text2:#475569;--text3:#94a3b8;
+  --ok:#10b981;--warn:#f59e0b;--err:#ef4444;
+  --r:10px;--sh:0 1px 4px rgba(0,0,0,.08),0 6px 20px rgba(0,0,0,.06);--sh-sm:0 1px 3px rgba(0,0,0,.08);
+  --nav-w:214px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:13px;line-height:1.5;background:var(--bg);color:var(--text)}
+
+/* ── APP SHELL ── */
+.app{display:flex;min-height:100vh}
+.sidebar{width:var(--nav-w);background:var(--pri);position:fixed;top:0;left:0;bottom:0;display:flex;flex-direction:column;z-index:100;overflow-y:auto}
+.sl{padding:1.1rem 1rem .85rem;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:.6rem}
+.s-mark{width:34px;height:34px;background:#243d76;border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.s-name{font-size:.85rem;font-weight:900;letter-spacing:.05em;color:#fff;line-height:1.1}
+.s-name span{color:#f97316}.s-sub{font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3)}
+.n-lbl{font-size:.48rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.22);padding:.65rem .9rem .2rem}
+.ni{display:flex;align-items:center;gap:.55rem;padding:.48rem .9rem;color:rgba(255,255,255,.5);font-size:.76rem;font-weight:500;cursor:pointer;border-left:3px solid transparent;transition:all .14s;position:relative}
+.ni:hover{background:rgba(255,255,255,.06);color:rgba(255,255,255,.8)}
+.ni.active{background:rgba(249,115,22,.12);color:#fff;border-left-color:#f97316}
+.ni-icon{font-size:1rem;width:20px;text-align:center}
+.nbadge{margin-left:auto;background:#f97316;color:#fff;font-size:.52rem;font-weight:700;padding:1px 6px;border-radius:10px;display:none}
+.nbadge.on{display:inline-block}
+.s-bot{margin-top:auto;padding:.6rem .9rem 1.2rem;border-top:1px solid rgba(255,255,255,.08)}
+.s-ver{font-size:.5rem;color:rgba(255,255,255,.18);text-align:center}
+
+.main{margin-left:var(--nav-w);flex:1;display:flex;flex-direction:column}
+.topbar{background:var(--surf);border-bottom:1px solid var(--border);padding:.6rem 1.4rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;box-shadow:var(--sh-sm)}
+.tb-title{font-size:.95rem;font-weight:700}.tb-sub{font-size:.65rem;color:var(--text3);margin-top:1px}
+.tb-actions{display:flex;gap:.45rem;align-items:center}
+.content{padding:1.3rem;flex:1}
+.sec{display:none}.sec.on{display:block}
+
+/* ── BUTTONS ── */
+.btn{padding:.4rem .95rem;border-radius:7px;font-size:.73rem;font-weight:600;cursor:pointer;border:1.5px solid transparent;font-family:inherit;line-height:1;display:inline-flex;align-items:center;gap:.35rem;transition:all .12s}
+.btn-pri{background:var(--pri);color:#fff;border-color:var(--pri)}.btn-pri:hover{background:var(--pri-l)}
+.btn-acc{background:var(--acc);color:#fff;border-color:var(--acc)}.btn-acc:hover{background:var(--acc-l)}
+.btn-ghost{background:transparent;border-color:var(--border);color:var(--text2)}.btn-ghost:hover{border-color:var(--pri);color:var(--pri)}
+.btn-sm{padding:.25rem .6rem;font-size:.65rem}
+.btn-del{background:none;border:none;cursor:pointer;color:#cbd5e1;font-size:.9rem;padding:2px 5px;border-radius:3px;line-height:1}
+.btn-del:hover{color:var(--err);background:#fee2e2}
+
+/* ── CARDS ── */
+.card{background:var(--surf);border-radius:var(--r);box-shadow:var(--sh-sm);border:1px solid var(--border)}
+.cp{padding:1.1rem 1.2rem}
+.ct{font-size:.62rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--text3);margin-bottom:.7rem}
+
+/* ── FORM ── */
+.field{display:flex;flex-direction:column;gap:3px}
+.flbl{font-size:.58rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--text3)}
+.fi{font-family:inherit;font-size:.79rem;font-weight:500;color:var(--text);border:1px solid var(--border);background:var(--surf2);border-radius:6px;padding:.38rem .6rem;outline:none;width:100%}
+.fi:focus{border-color:var(--acc);background:#fff;box-shadow:0 0 0 3px rgba(249,115,22,.09)}
+.fi::placeholder{color:var(--text3);font-weight:400}
+.fi.sel{cursor:pointer}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem}
+.full{grid-column:1/-1}
+
+/* ── QUOTE BUILDER ── */
+.qb-wrap{display:grid;grid-template-columns:1fr 268px;gap:1.1rem;align-items:start}
+.qb-left{display:flex;flex-direction:column;gap:1rem}
+.qt-wrap{overflow-x:auto}
+.qt{width:100%;border-collapse:collapse;font-size:.78rem;font-variant-numeric:tabular-nums}
+.qt thead tr{background:var(--pri);color:#fff}
+.qt thead th{padding:.44rem .6rem;font-weight:700;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;text-align:left;white-space:nowrap}
+.qt thead th.r{text-align:right}.qt thead th.c{text-align:center}
+.qt tbody tr{border-bottom:1px solid #edf0f7}
+.qt tbody tr:nth-child(even){background:#f8fafd}
+.qt tbody td{padding:.38rem .6rem;vertical-align:middle}
+.qt tbody td.c{text-align:center}.qt tbody td.r{text-align:right;font-weight:700;color:var(--pri)}
+.qty-i{width:50px;text-align:center;font-family:inherit;font-size:.76rem;border:1px solid var(--border);border-radius:4px;padding:.18rem .3rem;outline:none}
+.qty-i:focus{border-color:var(--acc)}
+.empty-cart{text-align:center;padding:2.5rem 1rem;color:var(--text3)}
+.ec-icon{font-size:2rem;margin-bottom:.5rem}
+.ec-t{font-size:.8rem;font-weight:700;color:var(--text2);margin-bottom:.25rem}
+.ec-s{font-size:.7rem}
+
+/* Totals */
+.tot-panel{position:sticky;top:70px}
+.t-row{display:flex;justify-content:space-between;align-items:center;padding:.42rem 0;border-bottom:1px solid var(--border);font-size:.79rem}
+.t-row:last-child{border:none}
+.t-row .tl{color:var(--text2)}.t-row .tv{font-weight:700;font-variant-numeric:tabular-nums}
+.grand-box{background:var(--pri);border-radius:8px;padding:.85rem 1rem;margin-top:.5rem;display:flex;justify-content:space-between;align-items:center}
+.gb-lbl{color:rgba(255,255,255,.55);font-size:.58rem;text-transform:uppercase;letter-spacing:.08em}
+.gb-amt{color:#fff;font-size:1.3rem;font-weight:900;font-variant-numeric:tabular-nums}
+
+/* ── CATALOG ── */
+.cat-bar{display:flex;gap:.65rem;align-items:center;flex-wrap:wrap;margin-bottom:1rem}
+.sbox{flex:1;min-width:160px;display:flex;align-items:center;gap:.45rem;background:var(--surf);border:1px solid var(--border);border-radius:7px;padding:.3rem .7rem}
+.sbox input{flex:1;border:none;outline:none;font-family:inherit;font-size:.78rem;background:transparent;color:var(--text)}
+.si{color:var(--text3);font-size:.9rem}
+.pills{display:flex;gap:.35rem;flex-wrap:wrap}
+.pill{padding:.22rem .65rem;border-radius:20px;font-size:.63rem;font-weight:600;border:1.5px solid var(--border);background:var(--surf);color:var(--text2);cursor:pointer;transition:all .12s}
+.pill:hover{border-color:var(--pri);color:var(--pri)}
+.pill.on{background:var(--pri);border-color:var(--pri);color:#fff}
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:.7rem}
+.ci{background:var(--surf);border:1px solid var(--border);border-radius:9px;padding:.8rem .95rem;display:flex;flex-direction:column;gap:.3rem;transition:box-shadow .15s,border-color .15s}
+.ci:hover{box-shadow:var(--sh);border-color:#c0cee0}
+.ci-spec{font-size:.52rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--acc)}
+.ci-name{font-size:.8rem;font-weight:700;color:var(--text);line-height:1.25}
+.ci-size{font-size:.7rem;color:var(--text2)}
+.ci-desc{font-size:.62rem;color:var(--text3);line-height:1.4}
+.ci-foot{display:flex;justify-content:space-between;align-items:flex-end;margin-top:.4rem}
+.ci-price{font-size:.88rem;font-weight:900;color:var(--pri);font-variant-numeric:tabular-nums}
+.ci-unit{font-size:.57rem;color:var(--text3)}
+
+/* ── IA ── */
+.ia-layout{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
+.drop{border:2px dashed var(--border);border-radius:12px;padding:2.5rem 1.5rem;text-align:center;background:var(--surf);cursor:pointer;transition:all .18s}
+.drop:hover,.drop.drag-over{border-color:var(--acc);background:rgba(249,115,22,.04)}
+.drop-icon{font-size:2.2rem;margin-bottom:.6rem}
+.drop-t{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:.25rem}
+.drop-s{font-size:.7rem;color:var(--text3);line-height:1.55}
+.drop-chips{display:flex;gap:.35rem;justify-content:center;margin-top:.7rem;flex-wrap:wrap}
+.dchip{background:var(--surf2);border:1px solid var(--border);border-radius:4px;padding:.15rem .5rem;font-size:.58rem;font-weight:600;color:var(--text2)}
+.ia-file-preview{display:none;margin-top:.75rem}
+.ia-file-preview.on{display:block}
+.ia-thumb{width:100%;max-height:200px;object-fit:contain;border-radius:7px;border:1px solid var(--border);background:var(--surf2)}
+.ia-fname{font-size:.7rem;color:var(--text2);margin-top:.4rem;text-align:center}
+.ia-actions{display:flex;gap:.5rem;justify-content:center;margin-top:.65rem}
+
+.ia-panel{background:var(--surf);border:1px solid var(--border);border-radius:10px;padding:1rem 1.1rem}
+.ia-loading{display:none;text-align:center;padding:2rem 0}
+.ia-loading.on{display:block}
+.spin{display:inline-block;width:28px;height:28px;border:3px solid var(--border);border-top-color:var(--acc);border-radius:50%;animation:spin .7s linear infinite;margin-bottom:.6rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ia-results{display:none}.ia-results.on{display:block}
+.ri{display:flex;align-items:center;gap:.55rem;padding:.45rem 0;border-bottom:1px solid var(--border)}
+.ri:last-child{border:none}
+.ri-check{color:var(--ok);font-size:.95rem}
+.ri-name{flex:1;font-size:.76rem;font-weight:500}
+.ri-qty{font-size:.72rem;color:var(--text2);white-space:nowrap;font-variant-numeric:tabular-nums}
+.ia-empty{text-align:center;padding:2.5rem 1rem;color:var(--text3);font-size:.75rem}
+
+/* ── PROFILE ── */
+.prof-head{display:flex;align-items:center;gap:1rem;margin-bottom:1.1rem}
+.avt{width:56px;height:56px;background:var(--pri);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:#fff;font-weight:900;flex-shrink:0}
+.prof-name-big{font-size:1.1rem;font-weight:900;color:var(--text)}
+.prof-rfc{font-size:.7rem;color:var(--text3)}
+
+/* ── HISTORY ── */
+.hist-list{display:flex;flex-direction:column;gap:.6rem}
+.hi{background:var(--surf);border:1px solid var(--border);border-radius:9px;padding:.8rem 1rem;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:box-shadow .12s}
+.hi:hover{box-shadow:var(--sh)}
+.hi-num{font-weight:900;font-size:.82rem;color:var(--pri)}
+.hi-client{font-size:.73rem;color:var(--text2)}
+.hi-date{font-size:.62rem;color:var(--text3)}
+.hi-total{font-weight:700;font-variant-numeric:tabular-nums;color:var(--pri)}
+.hi-items{font-size:.62rem;color:var(--text3)}
+
+/* ── BADGE (client-section info) ── */
+.info-row{display:flex;align-items:center;gap:.5rem;padding:.35rem 0;font-size:.76rem;border-bottom:1px solid var(--border)}
+.info-row:last-child{border:none}
+.info-lbl{width:90px;color:var(--text3);font-size:.65rem;text-transform:uppercase;letter-spacing:.06em;flex-shrink:0}
+.info-val{font-weight:500;color:var(--text)}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:1.4rem;right:1.4rem;background:var(--pri);color:#fff;padding:.6rem 1rem;border-radius:8px;font-size:.75rem;font-weight:600;box-shadow:var(--sh);z-index:999;transform:translateY(60px);opacity:0;transition:all .22s;pointer-events:none;display:flex;align-items:center;gap:.45rem;max-width:280px}
+.toast.on{transform:translateY(0);opacity:1}
+.toast.ok{background:var(--ok)}.toast.acc{background:var(--acc)}
+
+/* ── STATS ROW ── */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin-bottom:1.1rem}
+.stat{background:var(--surf);border:1px solid var(--border);border-radius:9px;padding:.85rem 1rem}
+.stat-val{font-size:1.4rem;font-weight:900;color:var(--pri);font-variant-numeric:tabular-nums}
+.stat-lbl{font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);margin-top:2px}
+
+/* ── MOBILE ── */
+@media(max-width:760px){
+  .sidebar{display:none}
+  .main{margin-left:0}
+  .qb-wrap{grid-template-columns:1fr}
+  .ia-layout{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr 1fr}
+  .grid2,.grid3{grid-template-columns:1fr}
+  .mob-nav{display:flex!important;position:fixed;bottom:0;left:0;right:0;background:var(--pri);z-index:100;height:58px}
+  .mn-i{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:rgba(255,255,255,.4);cursor:pointer;font-size:.48rem;letter-spacing:.05em;position:relative}
+  .mn-icon{font-size:1.15rem}
+  .mn-i.active{color:#f97316}
+  .content{padding-bottom:72px}
+}
+@media(min-width:761px){.mob-nav{display:none}}
+@media print{
+  .sidebar,.topbar,.mob-nav,.tot-panel .btn,.btn-acc,.btn-ghost,.drop,.ia-panel{display:none!important}
+  .main{margin-left:0}.qb-wrap{grid-template-columns:1fr}
+  .card{box-shadow:none;border:1px solid #dde4ee}
+}
+</style>
+
+<!-- APP -->
+<div class="app">
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="sl">
+    <div class="s-mark">
+      <svg width="22" height="22" viewBox="20 12 56 66" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 62.9,23.7 A 26,26 0 1,0 62.9,66.3" stroke="white" stroke-width="11" fill="none" stroke-linecap="butt"/>
+        <line x1="58" y1="20.3" x2="67.8" y2="27.1" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+        <line x1="58" y1="69.7" x2="67.8" y2="62.9" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M 48,57 C 40,50 39,42 44,33 C 46,43 51,38 49,29 C 55,37 58,47 58,53 C 56,50 52,48 51,51 C 54,54 54,57 48,57 Z" fill="#f97316"/>
+      </svg>
+    </div>
+    <div><div class="s-name">COENER<span>V</span>GAS</div><div class="s-sub">Cotizador en línea</div></div>
+  </div>
+
+  <div class="n-lbl">Principal</div>
+  <div class="ni active" data-sec="cotizar" onclick="goSec('cotizar',this)">
+    <span class="ni-icon">📋</span> Nueva cotización
+    <span class="nbadge" id="badge">0</span>
+  </div>
+  <div class="ni" data-sec="catalogo" onclick="goSec('catalogo',this)">
+    <span class="ni-icon">📚</span> Catálogo
+  </div>
+  <div class="ni" data-sec="ia" onclick="goSec('ia',this)">
+    <span class="ni-icon">🤖</span> Analizar con IA
+  </div>
+
+  <div class="n-lbl">Mi cuenta</div>
+  <div class="ni" data-sec="historial" onclick="goSec('historial',this)">
+    <span class="ni-icon">🗂️</span> Mis cotizaciones
+  </div>
+  <div class="ni" data-sec="perfil" onclick="goSec('perfil',this)">
+    <span class="ni-icon">👤</span> Mi perfil
+  </div>
+
+  <div class="s-bot"><div class="s-ver">COENERVGAS · Salamanca, Gto. · 464 109 2242</div></div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mob-nav">
+  <div class="mn-i active" onclick="goSec('cotizar',this)"><span class="mn-icon">📋</span>Cotizar</div>
+  <div class="mn-i" onclick="goSec('catalogo',this)"><span class="mn-icon">📚</span>Catálogo</div>
+  <div class="mn-i" onclick="goSec('ia',this)"><span class="mn-icon">🤖</span>IA</div>
+  <div class="mn-i" onclick="goSec('historial',this)"><span class="mn-icon">🗂️</span>Historial</div>
+  <div class="mn-i" onclick="goSec('perfil',this)"><span class="mn-icon">👤</span>Perfil</div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="topbar">
+    <div><div class="tb-title" id="tb-title">Nueva cotización</div><div class="tb-sub" id="tb-sub">Agrega materiales desde el catálogo o sube una imagen</div></div>
+    <div class="tb-actions">
+      <button class="btn btn-ghost btn-sm" onclick="clearCart()">🗑 Limpiar</button>
+      <button class="btn btn-pri btn-sm" onclick="requestQuote()">📄 Solicitar cotización</button>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- ════ COTIZAR ════ -->
+    <div id="sec-cotizar" class="sec on">
+      <div class="qb-wrap">
+        <!-- Left: client info + table -->
+        <div class="qb-left">
+          <!-- Client info -->
+          <div class="card">
+            <div class="cp">
+              <div class="ct">Datos del solicitante</div>
+              <div class="grid2">
+                <div class="field"><label class="flbl">Empresa / Nombre</label><input class="fi" id="q-emp" placeholder="Tu empresa o nombre completo"></div>
+                <div class="field"><label class="flbl">RFC</label><input class="fi" id="q-rfc" placeholder="RFC (opcional)"></div>
+                <div class="field"><label class="flbl">Teléfono / WhatsApp</label><input class="fi" id="q-tel" placeholder="10 dígitos"></div>
+                <div class="field"><label class="flbl">Correo electrónico</label><input class="fi" id="q-email" placeholder="correo@dominio.com"></div>
+                <div class="field full"><label class="flbl">Obra / Dirección de entrega</label><input class="fi" id="q-obra" placeholder="Dirección de la obra o proyecto"></div>
+                <div class="field"><label class="flbl">Contacto en obra</label><input class="fi" id="q-contacto" placeholder="Nombre del contacto"></div>
+                <div class="field"><label class="flbl">Referencias</label><input class="fi" id="q-ref" placeholder="Recomendado por, proyecto…"></div>
+              </div>
+              <div style="margin-top:.7rem;display:flex;gap:.4rem;flex-wrap:wrap">
+                <button class="btn btn-ghost btn-sm" onclick="loadProfile()">📂 Cargar mis datos</button>
+                <button class="btn btn-ghost btn-sm" onclick="saveProfileFromQuote()">💾 Guardar datos</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Items table -->
+          <div class="card">
+            <div class="cp">
+              <div class="ct" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.65rem">
+                <span>Materiales solicitados</span>
+                <button class="btn btn-ghost btn-sm" onclick="goSec('catalogo',null)">+ Del catálogo</button>
+              </div>
+              <div class="qt-wrap">
+                <table class="qt">
+                  <thead><tr>
+                    <th class="c" style="width:30px">#</th>
+                    <th>Material</th>
+                    <th class="c" style="width:60px">Unidad</th>
+                    <th class="c" style="width:65px">Cant.</th>
+                    <th class="r" style="width:95px">P. Unitario</th>
+                    <th class="r" style="width:100px">Importe</th>
+                    <th style="width:24px"></th>
+                  </tr></thead>
+                  <tbody id="cart-body"></tbody>
+                </table>
+              </div>
+              <div id="cart-empty" class="empty-cart" style="display:none">
+                <div class="ec-icon">🔧</div>
+                <div class="ec-t">Sin materiales todavía</div>
+                <div class="ec-s">Busca en el <a href="#" onclick="goSec('catalogo',null);return false" style="color:var(--acc)">catálogo</a> o sube una imagen con IA</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Notes -->
+          <div class="card">
+            <div class="cp">
+              <div class="ct">Notas y condiciones especiales</div>
+              <textarea class="fi" id="q-notas" rows="2" placeholder="Especificaciones de entrega, urgencia, tipo de instalación…" style="resize:vertical"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: totals -->
+        <div class="tot-panel">
+          <div class="card cp" style="margin-bottom:.75rem">
+            <div class="ct">Resumen</div>
+            <div class="t-row"><span class="tl">Partidas</span><span class="tv" id="tot-items">0</span></div>
+            <div class="t-row"><span class="tl">Subtotal</span><span class="tv" id="tot-sub">$0.00</span></div>
+            <div class="t-row"><span class="tl">IVA 16%</span><span class="tv" id="tot-iva">$0.00</span></div>
+            <div class="grand-box" style="margin-top:.75rem">
+              <div><div class="gb-lbl">Total estimado</div></div>
+              <div class="gb-amt" id="tot-total">$0.00</div>
+            </div>
+            <div style="margin-top:.75rem;font-size:.62rem;color:var(--text3);line-height:1.5">
+              Precios sujetos a vigencia de 15 días. COENERVGAS confirmará disponibilidad.
+            </div>
+          </div>
+          <button class="btn btn-acc" style="width:100%;justify-content:center;padding:.55rem" onclick="requestQuote()">
+            📄 Solicitar cotización formal
+          </button>
+          <button class="btn btn-ghost" style="width:100%;justify-content:center;padding:.45rem;margin-top:.4rem" onclick="window.print()">
+            🖨 Imprimir borrador
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════ CATÁLOGO ════ -->
+    <div id="sec-catalogo" class="sec">
+      <div class="cat-bar">
+        <div class="sbox">
+          <span class="si">🔍</span>
+          <input type="text" id="cat-search" placeholder="Buscar por nombre, calibre, especificación…" oninput="renderCat()">
+        </div>
+        <div class="pills" id="cat-pills">
+          <span class="pill on" data-cat="all" onclick="setPill(this,'all')">Todos</span>
+          <span class="pill" data-cat="tuberia" onclick="setPill(this,'tuberia')">🪈 Tubería</span>
+          <span class="pill" data-cat="conexiones" onclick="setPill(this,'conexiones')">🔩 Conexiones</span>
+          <span class="pill" data-cat="valvulas" onclick="setPill(this,'valvulas')">🔴 Válvulas</span>
+          <span class="pill" data-cat="reguladores" onclick="setPill(this,'reguladores')">⚙️ Reguladores</span>
+          <span class="pill" data-cat="mangueras" onclick="setPill(this,'mangueras')">🌀 Mangueras/Flex</span>
+        </div>
+      </div>
+      <div class="cat-grid" id="cat-grid"></div>
+    </div>
+
+    <!-- ════ IA ════ -->
+    <div id="sec-ia" class="sec">
+      <div style="margin-bottom:.85rem">
+        <div style="font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:.2rem">Analizar lista o plano con IA</div>
+        <div style="font-size:.72rem;color:var(--text3)">Sube una foto de un plano, lista a mano, PDF o imagen — la IA extrae los materiales y los agrega a tu cotización.</div>
+      </div>
+      <div class="ia-layout">
+        <!-- Upload zone -->
+        <div>
+          <div class="drop" id="drop-zone" onclick="document.getElementById('file-pick').click()" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="handleDrop(event)">
+            <div class="drop-icon">📂</div>
+            <div class="drop-t">Sube tu imagen o documento</div>
+            <div class="drop-s">Arrastra aquí, o haz clic para seleccionar.<br>También puedes tomar una foto desde tu celular.</div>
+            <div class="drop-chips">
+              <span class="dchip">📷 Foto / JPG / PNG</span>
+              <span class="dchip">📄 PDF</span>
+              <span class="dchip">📝 Lista de texto</span>
+            </div>
+          </div>
+          <input type="file" id="file-pick" accept="image/*,.pdf,.txt" style="display:none" onchange="handleFile(this.files[0])">
+
+          <!-- Preview -->
+          <div class="ia-file-preview" id="ia-preview">
+            <img class="ia-thumb" id="ia-thumb" src="" alt="Vista previa">
+            <div class="ia-fname" id="ia-fname"></div>
+            <div class="ia-actions">
+              <button class="btn btn-acc" onclick="runIA()">🤖 Analizar con IA</button>
+              <button class="btn btn-ghost btn-sm" onclick="clearIA()">✕ Quitar</button>
+            </div>
+          </div>
+
+          <!-- Tips -->
+          <div style="margin-top:.9rem;background:#f0f9f4;border:1px solid #a7f3d0;border-radius:8px;padding:.75rem 1rem;font-size:.68rem;color:#065f46;line-height:1.6">
+            <strong>🤖 IA activa — Claude Vision</strong><br>
+            Sube una foto clara del plano o lista. Funciona mejor con imágenes bien iluminadas, sin desenfoque y con texto legible.
+          </div>
+        </div>
+
+        <!-- Results panel -->
+        <div class="ia-panel">
+          <div class="ct">Materiales detectados</div>
+
+          <div class="ia-empty" id="ia-empty">
+            <div style="font-size:2rem;margin-bottom:.5rem">🤖</div>
+            Sube una imagen o documento<br>para que la IA extraiga los materiales.
+          </div>
+
+          <div class="ia-loading" id="ia-loading">
+            <div class="spin"></div>
+            <div style="font-size:.75rem;color:var(--text2);font-weight:600">Analizando imagen…</div>
+            <div style="font-size:.65rem;color:var(--text3);margin-top:.25rem">Identificando materiales y calibres</div>
+          </div>
+
+          <div class="ia-results" id="ia-results">
+            <div id="ia-list"></div>
+            <div style="margin-top:.85rem;display:flex;flex-direction:column;gap:.4rem">
+              <button class="btn btn-acc" style="width:100%;justify-content:center" onclick="addIAToCart()">+ Agregar todo a cotización</button>
+              <button class="btn btn-ghost btn-sm" style="width:100%;justify-content:center" onclick="clearIA()">Analizar otro archivo</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════ HISTORIAL ════ -->
+    <div id="sec-historial" class="sec">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+        <div style="font-size:.88rem;font-weight:700">Mis cotizaciones guardadas</div>
+        <button class="btn btn-ghost btn-sm" onclick="clearHistory()">🗑 Borrar todo</button>
+      </div>
+      <div class="hist-list" id="hist-list"></div>
+      <div id="hist-empty" style="display:none" class="empty-cart">
+        <div class="ec-icon">🗂️</div>
+        <div class="ec-t">Sin cotizaciones guardadas</div>
+        <div class="ec-s">Al solicitar una cotización se guardará aquí automáticamente.</div>
+      </div>
+    </div>
+
+    <!-- ════ PERFIL ════ -->
+    <div id="sec-perfil" class="sec">
+      <div class="card cp" style="max-width:540px">
+        <div class="prof-head">
+          <div class="avt" id="avt-initials">?</div>
+          <div><div class="prof-name-big" id="prof-display-name">Tu nombre</div><div class="prof-rfc" id="prof-display-rfc">RFC no registrado</div></div>
+        </div>
+        <div class="ct">Mis datos (se cargan automáticamente al cotizar)</div>
+        <div class="grid2" style="gap:.65rem">
+          <div class="field"><label class="flbl">Empresa / Nombre completo</label><input class="fi" id="p-emp" placeholder="Tu empresa o nombre"></div>
+          <div class="field"><label class="flbl">RFC</label><input class="fi" id="p-rfc" placeholder="RFC"></div>
+          <div class="field"><label class="flbl">Teléfono</label><input class="fi" id="p-tel" placeholder="10 dígitos"></div>
+          <div class="field"><label class="flbl">Correo</label><input class="fi" id="p-email" placeholder="correo@dominio.com"></div>
+          <div class="field full"><label class="flbl">Dirección / Obra habitual</label><input class="fi" id="p-obra" placeholder="Dirección de entrega habitual"></div>
+          <div class="field"><label class="flbl">Contacto en obra</label><input class="fi" id="p-contacto" placeholder="Nombre del contacto"></div>
+          <div class="field"><label class="flbl">Referencias</label><input class="fi" id="p-ref" placeholder="Recomendado por…"></div>
+        </div>
+        <div style="margin-top:.85rem;display:flex;gap:.45rem">
+          <button class="btn btn-pri" onclick="saveProfile()">💾 Guardar perfil</button>
+          <button class="btn btn-ghost btn-sm" onclick="clearProfile()">✕ Borrar datos</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+</div><!-- /app -->
+
+<!-- TOAST -->
+<div class="toast" id="toast">✓ Listo</div>
+
+<script>
+// ══════════════════════════════════════
+// CATALOG DATA
+// ══════════════════════════════════════
+const SPECS={
+  'acero-negro':'Acero negro','acero-carbon':'Acero al carbón Sch.80',
+  'cobre-l':'Cobre tipo L','cobre-k':'Cobre tipo K','cobre-c':'Cobre tipo C/M',
+  'galvanizado':'Galvanizado','acero-neg-con':'Acero negro','galv-con':'Galvanizado',
+  'cobre-con':'Cobre soldable','bola':'Válvula de bola','cierre':'Cierre rápido',
+  'aguja':'Válvula de aguja','check':'Check / retención',
+  '1a':'1ª etapa','2a':'2ª etapa','mono':'Monobloque','ind':'Industrial',
+  'corrugado':'Flex corrugado inox','hule':'Manguera hule'
+};
+
+const CAT=[
+// ── TUBERÍA ──
+{id:'t01',cat:'tuberia',spec:'acero-negro',name:'Tubo acero negro Sch.40',size:'1/2"',unit:'metro',price:45,desc:'ASTM A-53 Gr.B, Schedule 40'},
+{id:'t02',cat:'tuberia',spec:'acero-negro',name:'Tubo acero negro Sch.40',size:'3/4"',unit:'metro',price:68,desc:'ASTM A-53 Gr.B, Schedule 40'},
+{id:'t03',cat:'tuberia',spec:'acero-negro',name:'Tubo acero negro Sch.40',size:'1"',unit:'metro',price:98,desc:'ASTM A-53 Gr.B, Schedule 40'},
+{id:'t04',cat:'tuberia',spec:'acero-negro',name:'Tubo acero negro Sch.40',size:'1-1/4"',unit:'metro',price:138,desc:'ASTM A-53 Gr.B, Schedule 40'},
+{id:'t05',cat:'tuberia',spec:'acero-negro',name:'Tubo acero negro Sch.40',size:'1-1/2"',unit:'metro',price:168,desc:'ASTM A-53 Gr.B, Schedule 40'},
+{id:'t06',cat:'tuberia',spec:'acero-negro',name:'Tubo acero negro Sch.40',size:'2"',unit:'metro',price:228,desc:'ASTM A-53 Gr.B, Schedule 40'},
+{id:'t07',cat:'tuberia',spec:'acero-negro',name:'Tubo acero negro Sch.40',size:'2-1/2"',unit:'metro',price:325,desc:'ASTM A-53 Gr.B, Schedule 40'},
+{id:'t08',cat:'tuberia',spec:'acero-negro',name:'Tubo acero negro Sch.40',size:'3"',unit:'metro',price:435,desc:'ASTM A-53 Gr.B, Schedule 40'},
+{id:'t09',cat:'tuberia',spec:'acero-negro',name:'Tubo acero negro Sch.40',size:'4"',unit:'metro',price:685,desc:'ASTM A-53 Gr.B, Schedule 40'},
+{id:'t10',cat:'tuberia',spec:'acero-carbon',name:'Tubo acero carbón Sch.80',size:'1/2"',unit:'metro',price:74,desc:'ASTM A-53 Gr.B, pared extra gruesa'},
+{id:'t11',cat:'tuberia',spec:'acero-carbon',name:'Tubo acero carbón Sch.80',size:'3/4"',unit:'metro',price:108,desc:'ASTM A-53 Gr.B, Sch.80'},
+{id:'t12',cat:'tuberia',spec:'acero-carbon',name:'Tubo acero carbón Sch.80',size:'1"',unit:'metro',price:158,desc:'ASTM A-53 Gr.B, Sch.80'},
+{id:'t13',cat:'tuberia',spec:'acero-carbon',name:'Tubo acero carbón Sch.80',size:'1-1/4"',unit:'metro',price:218,desc:'ASTM A-53 Gr.B, Sch.80'},
+{id:'t14',cat:'tuberia',spec:'acero-carbon',name:'Tubo acero carbón Sch.80',size:'2"',unit:'metro',price:370,desc:'ASTM A-53 Gr.B, Sch.80'},
+{id:'t15',cat:'tuberia',spec:'cobre-l',name:'Tubo cobre tipo L',size:'3/8"',unit:'metro',price:98,desc:'ASTM B-88 Tipo L, pared media, soldable'},
+{id:'t16',cat:'tuberia',spec:'cobre-l',name:'Tubo cobre tipo L',size:'1/2"',unit:'metro',price:138,desc:'ASTM B-88 Tipo L'},
+{id:'t17',cat:'tuberia',spec:'cobre-l',name:'Tubo cobre tipo L',size:'3/4"',unit:'metro',price:215,desc:'ASTM B-88 Tipo L'},
+{id:'t18',cat:'tuberia',spec:'cobre-l',name:'Tubo cobre tipo L',size:'1"',unit:'metro',price:348,desc:'ASTM B-88 Tipo L'},
+{id:'t19',cat:'tuberia',spec:'cobre-k',name:'Tubo cobre tipo K',size:'1/2"',unit:'metro',price:188,desc:'ASTM B-88 Tipo K, pared gruesa, apto enterrado'},
+{id:'t20',cat:'tuberia',spec:'cobre-k',name:'Tubo cobre tipo K',size:'3/4"',unit:'metro',price:290,desc:'ASTM B-88 Tipo K'},
+{id:'t21',cat:'tuberia',spec:'cobre-k',name:'Tubo cobre tipo K',size:'1"',unit:'metro',price:450,desc:'ASTM B-88 Tipo K'},
+{id:'t22',cat:'tuberia',spec:'cobre-c',name:'Tubo cobre tipo C/M',size:'1/2"',unit:'metro',price:82,desc:'ASTM B-88 Tipo M, pared delgada, uso interior'},
+{id:'t23',cat:'tuberia',spec:'cobre-c',name:'Tubo cobre tipo C/M',size:'3/4"',unit:'metro',price:128,desc:'ASTM B-88 Tipo M'},
+{id:'t24',cat:'tuberia',spec:'galvanizado',name:'Tubo galvanizado',size:'1/2"',unit:'metro',price:56,desc:'Cédula 40, galvanizado en caliente'},
+{id:'t25',cat:'tuberia',spec:'galvanizado',name:'Tubo galvanizado',size:'3/4"',unit:'metro',price:82,desc:'Cédula 40, galvanizado'},
+{id:'t26',cat:'tuberia',spec:'galvanizado',name:'Tubo galvanizado',size:'1"',unit:'metro',price:122,desc:'Cédula 40, galvanizado'},
+{id:'t27',cat:'tuberia',spec:'galvanizado',name:'Tubo galvanizado',size:'1-1/4"',unit:'metro',price:168,desc:'Cédula 40, galvanizado'},
+// ── CONEXIONES ACERO NEGRO ──
+{id:'c01',cat:'conexiones',spec:'acero-neg-con',name:'Codo 90° acero negro',size:'1/2"',unit:'pieza',price:12,desc:'Rosca NPT, fundición'},
+{id:'c02',cat:'conexiones',spec:'acero-neg-con',name:'Codo 90° acero negro',size:'3/4"',unit:'pieza',price:18,desc:'Rosca NPT'},
+{id:'c03',cat:'conexiones',spec:'acero-neg-con',name:'Codo 90° acero negro',size:'1"',unit:'pieza',price:28,desc:'Rosca NPT'},
+{id:'c04',cat:'conexiones',spec:'acero-neg-con',name:'Codo 90° acero negro',size:'1-1/4"',unit:'pieza',price:44,desc:'Rosca NPT'},
+{id:'c05',cat:'conexiones',spec:'acero-neg-con',name:'Codo 90° acero negro',size:'2"',unit:'pieza',price:96,desc:'Rosca NPT'},
+{id:'c06',cat:'conexiones',spec:'acero-neg-con',name:'Codo 45° acero negro',size:'1/2"',unit:'pieza',price:14,desc:'Rosca NPT'},
+{id:'c07',cat:'conexiones',spec:'acero-neg-con',name:'Codo 45° acero negro',size:'3/4"',unit:'pieza',price:21,desc:'Rosca NPT'},
+{id:'c08',cat:'conexiones',spec:'acero-neg-con',name:'Codo 45° acero negro',size:'1"',unit:'pieza',price:33,desc:'Rosca NPT'},
+{id:'c09',cat:'conexiones',spec:'acero-neg-con',name:'Tee recta acero negro',size:'1/2"',unit:'pieza',price:15,desc:'Rosca NPT'},
+{id:'c10',cat:'conexiones',spec:'acero-neg-con',name:'Tee recta acero negro',size:'3/4"',unit:'pieza',price:23,desc:'Rosca NPT'},
+{id:'c11',cat:'conexiones',spec:'acero-neg-con',name:'Tee recta acero negro',size:'1"',unit:'pieza',price:36,desc:'Rosca NPT'},
+{id:'c12',cat:'conexiones',spec:'acero-neg-con',name:'Tee recta acero negro',size:'1-1/4"',unit:'pieza',price:56,desc:'Rosca NPT'},
+{id:'c13',cat:'conexiones',spec:'acero-neg-con',name:'Unión acero negro',size:'1/2"',unit:'pieza',price:18,desc:'Rosca NPT'},
+{id:'c14',cat:'conexiones',spec:'acero-neg-con',name:'Unión acero negro',size:'3/4"',unit:'pieza',price:27,desc:'Rosca NPT'},
+{id:'c15',cat:'conexiones',spec:'acero-neg-con',name:'Unión acero negro',size:'1"',unit:'pieza',price:42,desc:'Rosca NPT'},
+{id:'c16',cat:'conexiones',spec:'acero-neg-con',name:'Niple hexagonal acero negro',size:'1/2" × 2"',unit:'pieza',price:10,desc:'Rosca NPT'},
+{id:'c17',cat:'conexiones',spec:'acero-neg-con',name:'Niple hexagonal acero negro',size:'3/4" × 2"',unit:'pieza',price:16,desc:'Rosca NPT'},
+{id:'c18',cat:'conexiones',spec:'acero-neg-con',name:'Niple hexagonal acero negro',size:'1" × 2"',unit:'pieza',price:24,desc:'Rosca NPT'},
+{id:'c19',cat:'conexiones',spec:'acero-neg-con',name:'Bushing reductor acero negro',size:'3/4" → 1/2"',unit:'pieza',price:12,desc:'Reducción roscada NPT'},
+{id:'c20',cat:'conexiones',spec:'acero-neg-con',name:'Bushing reductor acero negro',size:'1" → 3/4"',unit:'pieza',price:18,desc:'Reducción roscada NPT'},
+{id:'c21',cat:'conexiones',spec:'acero-neg-con',name:'Tapón cuadrado acero negro',size:'1/2"',unit:'pieza',price:8,desc:'Tapón roscado macho NPT'},
+{id:'c22',cat:'conexiones',spec:'acero-neg-con',name:'Tapón cuadrado acero negro',size:'3/4"',unit:'pieza',price:12,desc:'Tapón roscado macho NPT'},
+{id:'c23',cat:'conexiones',spec:'acero-neg-con',name:'Tapón cuadrado acero negro',size:'1"',unit:'pieza',price:19,desc:'Tapón roscado macho NPT'},
+// ── CONEXIONES COBRE ──
+{id:'cc1',cat:'conexiones',spec:'cobre-con',name:'Codo 90° cobre soldable',size:'1/2"',unit:'pieza',price:23,desc:'ASTM B-16, soldable'},
+{id:'cc2',cat:'conexiones',spec:'cobre-con',name:'Codo 90° cobre soldable',size:'3/4"',unit:'pieza',price:37,desc:'ASTM B-16'},
+{id:'cc3',cat:'conexiones',spec:'cobre-con',name:'Codo 90° cobre soldable',size:'1"',unit:'pieza',price:60,desc:'ASTM B-16'},
+{id:'cc4',cat:'conexiones',spec:'cobre-con',name:'Tee cobre soldable',size:'1/2"',unit:'pieza',price:29,desc:'ASTM B-16'},
+{id:'cc5',cat:'conexiones',spec:'cobre-con',name:'Tee cobre soldable',size:'3/4"',unit:'pieza',price:47,desc:'ASTM B-16'},
+{id:'cc6',cat:'conexiones',spec:'cobre-con',name:'Adaptador macho cobre × rosca',size:'1/2"',unit:'pieza',price:31,desc:'Soldable × NPT macho'},
+{id:'cc7',cat:'conexiones',spec:'cobre-con',name:'Adaptador hembra cobre × rosca',size:'1/2"',unit:'pieza',price:29,desc:'Soldable × NPT hembra'},
+// ── VÁLVULAS ──
+{id:'v01',cat:'valvulas',spec:'bola',name:'Válvula de bola paso completo',size:'1/2"',unit:'pieza',price:95,desc:'Bronce, palanca, rosca NPT, PN 25'},
+{id:'v02',cat:'valvulas',spec:'bola',name:'Válvula de bola paso completo',size:'3/4"',unit:'pieza',price:138,desc:'Bronce, palanca, rosca NPT'},
+{id:'v03',cat:'valvulas',spec:'bola',name:'Válvula de bola paso completo',size:'1"',unit:'pieza',price:198,desc:'Bronce, palanca, rosca NPT'},
+{id:'v04',cat:'valvulas',spec:'bola',name:'Válvula de bola paso completo',size:'1-1/4"',unit:'pieza',price:288,desc:'Bronce, rosca NPT'},
+{id:'v05',cat:'valvulas',spec:'bola',name:'Válvula de bola paso completo',size:'1-1/2"',unit:'pieza',price:385,desc:'Bronce, rosca NPT'},
+{id:'v06',cat:'valvulas',spec:'bola',name:'Válvula de bola paso completo',size:'2"',unit:'pieza',price:525,desc:'Bronce, rosca NPT'},
+{id:'v07',cat:'valvulas',spec:'cierre',name:'Válvula cierre rápido para aparato',size:'1/2"',unit:'pieza',price:148,desc:'Latón, 1/4 vuelta, NPT'},
+{id:'v08',cat:'valvulas',spec:'cierre',name:'Válvula cierre rápido para aparato',size:'3/4"',unit:'pieza',price:198,desc:'Latón, 1/4 vuelta, NPT'},
+{id:'v09',cat:'valvulas',spec:'aguja',name:'Válvula de aguja (needle)',size:'1/4"',unit:'pieza',price:225,desc:'Regulación fina, acero inox'},
+{id:'v10',cat:'valvulas',spec:'aguja',name:'Válvula de aguja (needle)',size:'1/2"',unit:'pieza',price:315,desc:'Regulación fina, acero inox'},
+{id:'v11',cat:'valvulas',spec:'check',name:'Válvula check (retención)',size:'1/2"',unit:'pieza',price:138,desc:'Swing check, bronce, NPT'},
+{id:'v12',cat:'valvulas',spec:'check',name:'Válvula check (retención)',size:'3/4"',unit:'pieza',price:188,desc:'Swing check, bronce'},
+// ── REGULADORES ──
+{id:'r01',cat:'reguladores',spec:'1a',name:'Regulador 1ª etapa Gas LP',size:'Estándar',unit:'pieza',price:850,desc:'Alta presión → media, 1 kg/cm², acero inox'},
+{id:'r02',cat:'reguladores',spec:'1a',name:'Regulador 1ª etapa alta capacidad',size:'Industrial',unit:'pieza',price:1450,desc:'Para batería de cilindros'},
+{id:'r03',cat:'reguladores',spec:'2a',name:'Regulador 2ª etapa Gas LP',size:'Estándar',unit:'pieza',price:480,desc:'Media → baja presión, 28 mbar salida'},
+{id:'r04',cat:'reguladores',spec:'2a',name:'Regulador 2ª etapa alta capacidad',size:'Industrial',unit:'pieza',price:890,desc:'Alta capacidad comercial/industrial'},
+{id:'r05',cat:'reguladores',spec:'mono',name:'Regulador monobloque doméstico',size:'3/8" NPT',unit:'pieza',price:185,desc:'Uso doméstico, entrada 3/8"'},
+{id:'r06',cat:'reguladores',spec:'mono',name:'Regulador monobloque para aparatos',size:'1/2" NPT',unit:'pieza',price:248,desc:'Calentadores, estufas industriales'},
+{id:'r07',cat:'reguladores',spec:'ind',name:'Regulador industrial LP alta presión',size:'3/4" NPT',unit:'pieza',price:2800,desc:'Alta demanda, acero inox'},
+// ── MANGUERAS / FLEX ──
+{id:'m01',cat:'mangueras',spec:'corrugado',name:'Conector flexible corrugado inox',size:'1/2" × 30 cm',unit:'pieza',price:188,desc:'Acero inox, conexión de aparatos'},
+{id:'m02',cat:'mangueras',spec:'corrugado',name:'Conector flexible corrugado inox',size:'1/2" × 50 cm',unit:'pieza',price:238,desc:'Acero inox'},
+{id:'m03',cat:'mangueras',spec:'corrugado',name:'Conector flexible corrugado inox',size:'1/2" × 80 cm',unit:'pieza',price:298,desc:'Acero inox'},
+{id:'m04',cat:'mangueras',spec:'corrugado',name:'Conector flexible corrugado inox',size:'3/4" × 50 cm',unit:'pieza',price:325,desc:'Acero inox'},
+{id:'m05',cat:'mangueras',spec:'hule',name:'Manguera hule Gas LP certificada',size:'3/8" × 1 m',unit:'pieza',price:88,desc:'Alta presión, con abrazaderas'},
+{id:'m06',cat:'mangueras',spec:'hule',name:'Manguera hule Gas LP certificada',size:'1/2" × 1 m',unit:'pieza',price:112,desc:'Alta presión, con abrazaderas'},
+];
+
+const CAT_MAP={};
+CAT.forEach(i=>{CAT_MAP[i.id]=i});
+
+// ── STATE ──
+let cart=[], profile={}, history=[];
+let activeCat='all', iaItems=[];
+
+function loadState(){
+  cart=JSON.parse(localStorage.getItem('cvg-cart')||'[]');
+  profile=JSON.parse(localStorage.getItem('cvg-profile')||'{}');
+  history=JSON.parse(localStorage.getItem('cvg-history')||'[]');
+}
+function saveState(){
+  localStorage.setItem('cvg-cart',JSON.stringify(cart));
+  localStorage.setItem('cvg-profile',JSON.stringify(profile));
+  localStorage.setItem('cvg-history',JSON.stringify(history));
+}
+
+// ── FORMAT ──
+function fmt(n){return'$'+n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,',')}
+function parse(s){return parseFloat((s+'').replace(/[$,\s]/g,''))||0}
+
+// ── NAV ──
+const TB={
+  cotizar:{title:'Nueva cotización',sub:'Agrega materiales del catálogo o sube una imagen con IA'},
+  catalogo:{title:'Catálogo de materiales',sub:'Tubería, conexiones, válvulas y reguladores para Gas LP'},
+  ia:{title:'Analizar con IA',sub:'Sube un plano, lista a mano o PDF — la IA extrae los materiales'},
+  historial:{title:'Mis cotizaciones',sub:'Historial guardado en este dispositivo'},
+  perfil:{title:'Mi perfil',sub:'Tus datos se cargan automáticamente al cotizar'}
+};
+function goSec(id,el){
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('on'));
+  document.getElementById('sec-'+id).classList.add('on');
+  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));
+  if(el){el.classList.add('active')}else{
+    document.querySelector(`.ni[data-sec="${id}"]`)?.classList.add('active');
+  }
+  document.querySelectorAll('.mob-nav .mn-i').forEach(n=>n.classList.remove('active'));
+  const mob=document.querySelectorAll('.mob-nav .mn-i');
+  const order=['cotizar','catalogo','ia','historial','perfil'];
+  const idx=order.indexOf(id);
+  if(mob[idx]) mob[idx].classList.add('active');
+  document.getElementById('tb-title').textContent=TB[id].title;
+  document.getElementById('tb-sub').textContent=TB[id].sub;
+  // TB actions visibility
+  const tbActs=document.querySelector('.tb-actions');
+  tbActs.style.display=(id==='cotizar')?'flex':'none';
+  if(id==='historial') renderHistory();
+  if(id==='perfil') renderProfile();
+}
+
+// ── CART ──
+function addToCart(item){
+  const ex=cart.find(c=>c.id===item.id);
+  if(ex){ex.qty++;} else{cart.push({...item,qty:1});}
+  saveState();renderCart();toast('+ '+item.name+' '+item.size,'ok');
+}
+function removeFromCart(id){
+  cart=cart.filter(c=>c.id!==id);
+  saveState();renderCart();
+}
+function updateQty(id,v){
+  const item=cart.find(c=>c.id===id);
+  if(!item) return;
+  const q=parseInt(v)||0;
+  if(q<=0){removeFromCart(id);return;}
+  item.qty=q;
+  saveState();renderTotals();
+}
+function clearCart(){
+  if(!cart.length) return;
+  if(!confirm('¿Limpiar toda la lista de materiales?')) return;
+  cart=[];saveState();renderCart();
+}
+
+function renderCart(){
+  const tbody=document.getElementById('cart-body');
+  const empty=document.getElementById('cart-empty');
+  const badge=document.getElementById('badge');
+  if(!cart.length){
+    tbody.innerHTML='';
+    empty.style.display='block';
+    badge.classList.remove('on');
+    renderTotals();return;
+  }
+  empty.style.display='none';
+  badge.textContent=cart.length;badge.classList.add('on');
+  tbody.innerHTML=cart.map((item,i)=>`
+    <tr>
+      <td class="c">${i+1}</td>
+      <td><div style="font-weight:600;font-size:.78rem">${item.name}</div><div style="font-size:.62rem;color:var(--text3)">${item.size} · ${SPECS[item.spec]||''}</div></td>
+      <td class="c">${item.unit}</td>
+      <td class="c"><input class="qty-i" type="number" min="1" value="${item.qty}" onchange="updateQty('${item.id}',this.value)"></td>
+      <td class="r">${fmt(item.price)}</td>
+      <td class="r">${fmt(item.price*item.qty)}</td>
+      <td><button class="btn-del" onclick="removeFromCart('${item.id}')">×</button></td>
+    </tr>`).join('');
+  renderTotals();
+}
+
+function renderTotals(){
+  const sub=cart.reduce((s,i)=>s+i.price*i.qty,0);
+  const iva=sub*0.16;
+  document.getElementById('tot-items').textContent=cart.length;
+  document.getElementById('tot-sub').textContent=fmt(sub);
+  document.getElementById('tot-iva').textContent=fmt(iva);
+  document.getElementById('tot-total').textContent=fmt(sub+iva);
+}
+
+// ── CATALOG ──
+function renderCat(){
+  const q=(document.getElementById('cat-search').value||'').toLowerCase();
+  const grid=document.getElementById('cat-grid');
+  let items=CAT;
+  if(activeCat!=='all') items=items.filter(i=>i.cat===activeCat);
+  if(q) items=items.filter(i=>(i.name+i.size+i.desc+i.spec).toLowerCase().includes(q));
+  if(!items.length){grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:2.5rem;color:var(--text3);font-size:.78rem">Sin resultados para esa búsqueda.</div>';return;}
+  grid.innerHTML=items.map(item=>`
+    <div class="ci">
+      <div class="ci-spec">${SPECS[item.spec]||item.spec}</div>
+      <div class="ci-name">${item.name}</div>
+      <div class="ci-size">${item.size}</div>
+      <div class="ci-desc">${item.desc}</div>
+      <div class="ci-foot">
+        <div><div class="ci-price">${fmt(item.price)}</div><div class="ci-unit">por ${item.unit}</div></div>
+        <button class="btn btn-acc btn-sm" onclick="addToCart(CAT_MAP['${item.id}'])">+ Agregar</button>
+      </div>
+    </div>`).join('');
+}
+function setPill(el,cat){
+  document.querySelectorAll('#cat-pills .pill').forEach(p=>p.classList.remove('on'));
+  el.classList.add('on');activeCat=cat;renderCat();
+}
+
+// ── PROFILE ──
+function loadProfile(){
+  if(!Object.keys(profile).length){toast('Perfil vacío — guarda tus datos en "Mi perfil"');return;}
+  document.getElementById('q-emp').value=profile.emp||'';
+  document.getElementById('q-rfc').value=profile.rfc||'';
+  document.getElementById('q-tel').value=profile.tel||'';
+  document.getElementById('q-email').value=profile.email||'';
+  document.getElementById('q-obra').value=profile.obra||'';
+  document.getElementById('q-contacto').value=profile.contacto||'';
+  document.getElementById('q-ref').value=profile.ref||'';
+  toast('Datos cargados','ok');
+}
+function saveProfileFromQuote(){
+  profile={
+    emp:document.getElementById('q-emp').value,
+    rfc:document.getElementById('q-rfc').value,
+    tel:document.getElementById('q-tel').value,
+    email:document.getElementById('q-email').value,
+    obra:document.getElementById('q-obra').value,
+    contacto:document.getElementById('q-contacto').value,
+    ref:document.getElementById('q-ref').value
+  };
+  saveState();
+  // Sync to cloud
+  if(profile.tel||profile.rfc){
+    fetch('/api/client',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({name:profile.emp,phone:profile.tel,rfc:profile.rfc,
+        email:profile.email,address:profile.obra,contact:profile.contacto,references:profile.ref})
+    }).catch(()=>{});
+  }
+  toast('Perfil guardado','ok');
+}
+function saveProfile(){
+  profile={
+    emp:document.getElementById('p-emp').value,
+    rfc:document.getElementById('p-rfc').value,
+    tel:document.getElementById('p-tel').value,
+    email:document.getElementById('p-email').value,
+    obra:document.getElementById('p-obra').value,
+    contacto:document.getElementById('p-contacto').value,
+    ref:document.getElementById('p-ref').value
+  };
+  saveState();renderProfile();toast('Perfil guardado','ok');
+}
+function clearProfile(){
+  if(!confirm('¿Borrar tus datos guardados?')) return;
+  profile={};saveState();renderProfile();toast('Datos borrados');
+}
+function renderProfile(){
+  const f=id=>document.getElementById(id);
+  f('p-emp').value=profile.emp||'';
+  f('p-rfc').value=profile.rfc||'';
+  f('p-tel').value=profile.tel||'';
+  f('p-email').value=profile.email||'';
+  f('p-obra').value=profile.obra||'';
+  f('p-contacto').value=profile.contacto||'';
+  f('p-ref').value=profile.ref||'';
+  const name=profile.emp||'Tu nombre';
+  const initials=(name.split(' ').slice(0,2).map(w=>w[0]).join('')).toUpperCase()||'?';
+  document.getElementById('avt-initials').textContent=initials;
+  document.getElementById('prof-display-name').textContent=name;
+  document.getElementById('prof-display-rfc').textContent=profile.rfc?'RFC: '+profile.rfc:'RFC no registrado';
+}
+
+// ── HISTORY ──
+function requestQuote(){
+  const emp=document.getElementById('q-emp').value;
+  if(!emp){toast('Ingresa tu nombre o empresa para continuar');goSec('cotizar',null);document.getElementById('q-emp').focus();return;}
+  if(!cart.length){toast('Agrega al menos un material');return;}
+  const {sub,iva}=calcTotals2();
+  const n=history.length+501;
+  const rec={
+    num:'COT-'+String(n).padStart(3,'0'),
+    emp,
+    rfc:document.getElementById('q-rfc').value,
+    tel:document.getElementById('q-tel').value,
+    email:document.getElementById('q-email').value,
+    obra:document.getElementById('q-obra').value,
+    notas:document.getElementById('q-notas').value,
+    date:new Date().toLocaleDateString('es-MX'),
+    items:[...cart],
+    sub,iva,total:sub+iva
+  };
+  history.unshift(rec);
+  saveState();
+  // Sync quote to cloud
+  fetch('/api/quotes',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({number:rec.num,client_phone:rec.tel,client_name:rec.emp,
+      obra:rec.obra,items:rec.items,subtotal:rec.sub,iva:rec.iva,total:rec.total,notes:rec.notas})
+  }).catch(()=>{});
+  toast('✓ Cotización '+rec.num+' guardada','ok');
+  goSec('historial',null);
+  renderHistory();
+}
+function calcTotals2(){
+  const sub=cart.reduce((s,i)=>s+i.price*i.qty,0);
+  return{sub,iva:sub*0.16};
+}
+function renderHistory(){
+  const list=document.getElementById('hist-list');
+  const empty=document.getElementById('hist-empty');
+  if(!history.length){list.innerHTML='';empty.style.display='block';return;}
+  empty.style.display='none';
+  list.innerHTML=history.map(h=>`
+    <div class="hi" onclick="viewQuote('${h.num}')">
+      <div>
+        <div class="hi-num">${h.num}</div>
+        <div class="hi-client">${h.emp}${h.rfc?' · '+h.rfc:''}</div>
+        <div class="hi-date">${h.date}${h.obra?' · '+h.obra:''}</div>
+      </div>
+      <div style="text-align:right">
+        <div class="hi-total">${fmt(h.total)}</div>
+        <div class="hi-items">${h.items.length} partidas</div>
+      </div>
+    </div>`).join('');
+}
+function clearHistory(){
+  if(!history.length) return;
+  if(!confirm('¿Borrar todo el historial?')) return;
+  history=[];saveState();renderHistory();
+}
+function viewQuote(num){
+  const h=history.find(q=>q.num===num);
+  if(!h) return;
+  cart=[...h.items];
+  document.getElementById('q-emp').value=h.emp||'';
+  document.getElementById('q-rfc').value=h.rfc||'';
+  document.getElementById('q-tel').value=h.tel||'';
+  document.getElementById('q-email').value=h.email||'';
+  document.getElementById('q-obra').value=h.obra||'';
+  document.getElementById('q-notas').value=h.notas||'';
+  saveState();renderCart();goSec('cotizar',null);
+  toast('Cotización '+num+' restaurada','ok');
+}
+
+// ── IA (REAL) ──
+let iaFile=null;
+
+function handleFile(file){
+  if(!file) return;
+  iaFile=file;
+  document.getElementById('ia-preview').classList.add('on');
+  document.getElementById('ia-fname').textContent=file.name;
+  const thumb=document.getElementById('ia-thumb');
+  if(file.type.startsWith('image/')){
+    const r=new FileReader();
+    r.onload=e=>{thumb.src=e.target.result;thumb.style.display='block'};
+    r.readAsDataURL(file);
+  } else {
+    thumb.style.display='none';thumb.src='';
+  }
+  document.getElementById('ia-empty').style.display='none';
+  document.getElementById('ia-loading').classList.remove('on');
+  document.getElementById('ia-results').classList.remove('on');
+}
+function handleDrop(e){
+  e.preventDefault();
+  document.getElementById('drop-zone').classList.remove('drag-over');
+  const file=e.dataTransfer.files[0];
+  if(file) handleFile(file);
+}
+function clearIA(){
+  iaFile=null;iaItems=[];
+  document.getElementById('ia-preview').classList.remove('on');
+  document.getElementById('ia-thumb').src='';
+  document.getElementById('ia-loading').classList.remove('on');
+  document.getElementById('ia-results').classList.remove('on');
+  document.getElementById('ia-empty').style.display='block';
+  document.getElementById('file-pick').value='';
+}
+
+function fileToBase64(file){
+  return new Promise((resolve,reject)=>{
+    const r=new FileReader();
+    r.onload=e=>resolve(e.target.result.split(',')[1]);
+    r.onerror=reject;
+    r.readAsDataURL(file);
+  });
+}
+
+function matchToCatalog(materials){
+  return materials.map(mat=>{
+    const n=(mat.nombre||'').toLowerCase();
+    const s=(mat.calibre||'').replace(/"/g,'').trim();
+    // Try to match by name keywords + size
+    let match=CAT.find(c=>{
+      const cn=c.name.toLowerCase();
+      const cs=c.size.replace(/"/g,'').trim();
+      const sameSize=!s||cs===s||cs.includes(s)||s.includes(cs);
+      if(!sameSize) return false;
+      if(n.includes('tubo')&&cn.includes('tubo')){
+        if(n.includes('negro')&&cn.includes('negro')) return true;
+        if(n.includes('carbón')&&cn.includes('carbón')) return true;
+        if(n.includes('carbon')&&cn.includes('carbón')) return true;
+        if(n.includes('cobre')&&cn.includes('cobre')){
+          if(n.includes(' l')&&cn.includes('tipo l')) return true;
+          if(n.includes(' k')&&cn.includes('tipo k')) return true;
+          if(n.includes(' c')&&cn.includes('tipo c')) return true;
+          if(!n.includes(' l')&&!n.includes(' k')&&!n.includes(' c')&&cn.includes('tipo l')) return true;
+        }
+        if(n.includes('galvanizado')&&cn.includes('galvanizado')) return true;
+      }
+      if(n.includes('codo')&&cn.includes('codo')){
+        if(n.includes('90')&&cn.includes('90')) return true;
+        if(n.includes('45')&&cn.includes('45')) return true;
+      }
+      if(n.includes('tee')&&cn.includes('tee')) return true;
+      if(n.includes('unión')&&cn.includes('unión')) return true;
+      if(n.includes('union')&&cn.includes('unión')) return true;
+      if(n.includes('niple')&&cn.includes('niple')) return true;
+      if(n.includes('bushing')&&cn.includes('bushing')) return true;
+      if(n.includes('tapón')&&cn.includes('tapón')) return true;
+      if(n.includes('tapon')&&cn.includes('tapón')) return true;
+      if(n.includes('válvula de bola')&&cn.includes('bola')) return true;
+      if(n.includes('valvula de bola')&&cn.includes('bola')) return true;
+      if(n.includes('cierre')&&cn.includes('cierre')) return true;
+      if(n.includes('aguja')&&cn.includes('aguja')) return true;
+      if(n.includes('check')&&cn.includes('check')) return true;
+      if(n.includes('regulador')&&cn.includes('regulador')){
+        if(n.includes('1')&&cn.includes('1ª')) return true;
+        if(n.includes('2')&&cn.includes('2ª')) return true;
+        if(n.includes('monobloque')&&cn.includes('monobloque')) return true;
+        if(n.includes('industrial')&&cn.includes('industrial')) return true;
+        if(!n.includes('1')&&!n.includes('2')&&cn.includes('monobloque')) return true;
+      }
+      if((n.includes('flex')||n.includes('corrugado'))&&cn.includes('corrugado')) return true;
+      if(n.includes('manguera')&&cn.includes('manguera')) return true;
+      return false;
+    });
+    if(match) return{...match,qty:mat.cantidad||1};
+    // No match → custom item
+    return{
+      id:'ia-'+Date.now()+Math.random().toString(36).slice(2),
+      name:mat.nombre,size:mat.calibre||'',unit:mat.unidad||'pieza',
+      price:0,qty:mat.cantidad||1,spec:'ia',cat:'ia',
+      desc:'⚠ Verificar precio — no encontrado en catálogo'
+    };
+  });
+}
+
+async function runIA(){
+  if(!iaFile){toast('Selecciona una imagen primero');return;}
+  document.getElementById('ia-loading').classList.add('on');
+  document.getElementById('ia-results').classList.remove('on');
+  try{
+    const b64=await fileToBase64(iaFile);
+    const mt=iaFile.type||'image/jpeg';
+    const res=await fetch('/api/analyze',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({imageBase64:b64,mediaType:mt})
+    });
+    const data=await res.json();
+    document.getElementById('ia-loading').classList.remove('on');
+    if(!res.ok) throw new Error(data.error||'Error del servidor');
+    if(!data.materials||!data.materials.length){
+      toast('La IA no detectó materiales de gas LP en la imagen');
+      document.getElementById('ia-empty').style.display='block';
+      return;
+    }
+    iaItems=matchToCatalog(data.materials);
+    const list=document.getElementById('ia-list');
+    list.innerHTML=iaItems.map(i=>`
+      <div class="ri">
+        <span class="ri-check">${i.price>0?'✓':'⚠'}</span>
+        <span class="ri-name">${i.name} <span style="color:var(--text3)">${i.size}</span></span>
+        <span class="ri-qty">${i.qty} ${i.unit}</span>
+      </div>`).join('');
+    document.getElementById('ia-results').classList.add('on');
+    toast('IA detectó '+iaItems.length+' materiales','ok');
+  }catch(err){
+    document.getElementById('ia-loading').classList.remove('on');
+    document.getElementById('ia-empty').style.display='block';
+    toast('Error: '+err.message);
+  }
+}
+
+function addIAToCart(){
+  iaItems.forEach(item=>{
+    const ex=cart.find(c=>c.id===item.id);
+    if(ex){ex.qty+=item.qty}else{cart.push({...item})}
+  });
+  saveState();renderCart();
+  goSec('cotizar',null);
+  toast(iaItems.length+' materiales agregados a la cotización','ok');
+}
+
+// ── TOAST ──
+let toastTimer;
+function toast(msg,type=''){
+  clearTimeout(toastTimer);
+  const el=document.getElementById('toast');
+  el.textContent=(type==='ok'?'✓ ':'')+msg;
+  el.className='toast on'+(type?' '+type:'');
+  toastTimer=setTimeout(()=>el.classList.remove('on'),2800);
+}
+
+// ── INIT ──
+loadState();
+renderCart();
+renderCat();
+renderProfile();
+// Auto-load profile into quote form
+if(profile.emp) loadProfile();
+// Hide TB actions on non-cotizar sections by default (already shown)
+</script>
