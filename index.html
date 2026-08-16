@@ -247,7 +247,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:13px;li
   <div class="topbar">
     <div><div class="tb-title" id="tb-title">Nueva cotización</div><div class="tb-sub" id="tb-sub">Agrega materiales desde el catálogo o sube una imagen</div></div>
     <div class="tb-actions">
-      <button class="btn btn-ghost btn-sm" onclick="clearCart()">🗑 Limpiar</button>
+      <button class="btn btn-ghost btn-sm" onclick="clearCart()">🆕 Nueva cotización</button>
       <button class="btn btn-pri btn-sm" onclick="requestQuote()">📄 Solicitar cotización</button>
     </div>
   </div>
@@ -646,8 +646,8 @@ function updateQty(id,v){
 }
 function clearCart(){
   if(!cart.length) return;
-  if(!confirm('¿Limpiar toda la lista de materiales?')) return;
-  cart=[];saveState();renderCart();
+  if(!confirm('¿Iniciar nueva cotización? Se borrará la lista actual y los datos del solicitante.')) return;
+  newQuote();
 }
 
 function renderCart(){
@@ -802,6 +802,17 @@ function requestQuote(){
   toast('✓ Cotización '+rec.num+' guardada','ok');
   goSec('historial',null);
   renderHistory();
+  // Reset form for next quote
+  newQuote();
+}
+function newQuote(){
+  cart=[];
+  saveState();
+  renderCart();
+  ['q-emp','q-rfc','q-tel','q-email','q-obra','q-contacto','q-ref','q-notas'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.value='';
+  });
 }
 function calcTotals2(){
   const sub=cart.reduce((s,i)=>s+i.price*i.qty,0);
