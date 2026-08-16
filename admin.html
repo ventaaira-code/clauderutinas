@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>COENERVGAS · Admin</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;font-size:13px;background:#f0f4fa;color:#0f172a;min-height:100vh}
+
+/* LOGIN */
+.login-wrap{display:flex;align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(135deg,#1a2d5a 0%,#0e1e3a 100%)}
+.login-box{background:#fff;border-radius:14px;padding:2.5rem 2rem;width:340px;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.login-logo{text-align:center;margin-bottom:1.5rem}
+.login-logo .mark{display:inline-flex;align-items:center;justify-content:center;width:52px;height:52px;background:#1a2d5a;border-radius:12px;font-size:1.4rem;margin-bottom:.6rem}
+.login-logo h1{font-size:1.1rem;font-weight:900;color:#1a2d5a}
+.login-logo h1 span{color:#f97316}
+.login-logo p{font-size:.65rem;color:#94a3b8;letter-spacing:.1em;text-transform:uppercase;margin-top:2px}
+.lf label{display:block;font-size:.6rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:#64748b;margin-bottom:4px;margin-top:1rem}
+.lf input{width:100%;border:1.5px solid #dde4ee;border-radius:8px;padding:.5rem .75rem;font-family:inherit;font-size:.83rem;outline:none;transition:border-color .15s}
+.lf input:focus{border-color:#f97316;box-shadow:0 0 0 3px rgba(249,115,22,.1)}
+.lf .err{color:#ef4444;font-size:.7rem;margin-top:.4rem;display:none}
+.btn-login{width:100%;margin-top:1.3rem;padding:.65rem;background:#f97316;color:#fff;border:none;border-radius:8px;font-family:inherit;font-size:.82rem;font-weight:700;cursor:pointer;transition:background .15s}
+.btn-login:hover{background:#ea6c0a}
+
+/* APP */
+.app{display:none;flex-direction:column;min-height:100vh}
+.header{background:#1a2d5a;color:#fff;padding:.7rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.header-left{display:flex;align-items:center;gap:.75rem}
+.h-mark{width:34px;height:34px;background:#243d76;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem}
+.h-name{font-size:.85rem;font-weight:900;letter-spacing:.04em}
+.h-name span{color:#f97316}
+.h-badge{background:#ef4444;color:#fff;font-size:.5rem;font-weight:700;padding:2px 7px;border-radius:10px;letter-spacing:.06em;text-transform:uppercase}
+.btn-out{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;padding:.3rem .7rem;border-radius:6px;font-size:.65rem;cursor:pointer;font-family:inherit}
+.btn-out:hover{background:rgba(255,255,255,.2)}
+
+/* TABS */
+.tabs{background:#fff;border-bottom:1px solid #dde4ee;padding:0 1.5rem;display:flex;gap:0}
+.tab{padding:.65rem 1.1rem;font-size:.73rem;font-weight:600;color:#64748b;cursor:pointer;border-bottom:2.5px solid transparent;transition:all .12s;white-space:nowrap}
+.tab:hover{color:#1a2d5a}
+.tab.on{color:#1a2d5a;border-bottom-color:#f97316}
+
+/* CONTENT */
+.content{padding:1.3rem 1.5rem;flex:1}
+.panel{display:none}.panel.on{display:block}
+
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1rem;margin-bottom:1.3rem}
+.stat{background:#fff;border-radius:10px;padding:1rem 1.2rem;box-shadow:0 1px 4px rgba(0,0,0,.07);border:1px solid #e8edf5}
+.stat-val{font-size:1.8rem;font-weight:900;color:#1a2d5a;font-variant-numeric:tabular-nums;line-height:1}
+.stat-lbl{font-size:.62rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.09em;margin-top:.3rem}
+.stat-sub{font-size:.72rem;color:#f97316;font-weight:700;margin-top:.2rem}
+
+/* TABLE */
+.card{background:#fff;border-radius:10px;box-shadow:0 1px 4px rgba(0,0,0,.07);border:1px solid #e8edf5;overflow:hidden}
+.card-head{padding:.8rem 1.1rem;border-bottom:1px solid #e8edf5;display:flex;align-items:center;justify-content:space-between}
+.card-title{font-size:.8rem;font-weight:700;color:#0f172a}
+.card-sub{font-size:.65rem;color:#94a3b8}
+.tbl-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.75rem}
+thead th{background:#f8fafd;padding:.5rem .75rem;text-align:left;font-size:.6rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:#64748b;white-space:nowrap;border-bottom:1px solid #e8edf5}
+thead th.r{text-align:right}
+tbody tr{border-bottom:1px solid #f1f5f9;transition:background .1s}
+tbody tr:hover{background:#f8fafd}
+tbody td{padding:.45rem .75rem;vertical-align:middle}
+tbody td.r{text-align:right;font-variant-numeric:tabular-nums}
+.badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:.58rem;font-weight:700}
+.badge-ok{background:#dcfce7;color:#16a34a}
+.badge-pen{background:#fef9c3;color:#ca8a04}
+
+/* CATALOG GRID */
+.cat-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.9rem}
+.cat-search{display:flex;align-items:center;gap:.5rem;background:#fff;border:1px solid #dde4ee;border-radius:7px;padding:.3rem .7rem;font-size:.78rem}
+.cat-search input{border:none;outline:none;font-family:inherit;font-size:.78rem;min-width:200px}
+.cat-grid-wrap{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:.75rem}
+.cat-item{background:#fff;border-radius:8px;padding:.75rem 1rem;border:1px solid #e8edf5;display:flex;gap:.75rem;align-items:center}
+.ci-info{flex:1;min-width:0}
+.ci-name{font-size:.78rem;font-weight:700;color:#0f172a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ci-size{font-size:.65rem;color:#94a3b8;margin-top:1px}
+.ci-cat{font-size:.55rem;background:#edf1f7;color:#475569;padding:2px 6px;border-radius:4px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.ci-price{display:flex;align-items:center;gap:.35rem}
+.ci-price input{width:80px;text-align:right;border:1.5px solid #dde4ee;border-radius:6px;padding:.3rem .5rem;font-family:inherit;font-size:.82rem;font-weight:700;color:#1a2d5a;outline:none;font-variant-numeric:tabular-nums}
+.ci-price input:focus{border-color:#f97316;box-shadow:0 0 0 2px rgba(249,115,22,.1)}
+.ci-price span{font-size:.62rem;color:#94a3b8}
+.btn-save{padding:.28rem .6rem;border-radius:5px;border:none;background:#f97316;color:#fff;font-size:.62rem;font-weight:700;cursor:pointer;font-family:inherit;transition:all .12s}
+.btn-save:hover{background:#ea6c0a}
+.btn-save.saved{background:#10b981}
+.btn-save:disabled{opacity:.5;cursor:default}
+
+/* EMPTY */
+.empty{text-align:center;padding:3rem 1rem;color:#94a3b8}
+.empty-icon{font-size:2.5rem;margin-bottom:.5rem}
+.empty-t{font-size:.9rem;font-weight:700;color:#64748b;margin-bottom:.2rem}
+
+/* QUOTE DETAIL */
+.q-expand{display:none;background:#f8fafd;padding:.65rem .75rem;border-top:1px solid #e8edf5}
+.q-expand.on{display:block}
+.q-expand table{font-size:.72rem}
+.q-expand thead th{background:#edf1f7}
+
+/* UTIL */
+.btn-sm{padding:.28rem .65rem;border-radius:6px;border:1.5px solid #dde4ee;background:#fff;font-family:inherit;font-size:.65rem;font-weight:600;color:#475569;cursor:pointer}
+.btn-sm:hover{border-color:#1a2d5a;color:#1a2d5a}
+.search-bar{display:flex;align-items:center;gap:.5rem;background:#f8fafd;border:1px solid #dde4ee;border-radius:7px;padding:.3rem .7rem;margin-bottom:.9rem}
+.search-bar input{border:none;outline:none;background:transparent;font-family:inherit;font-size:.78rem;flex:1}
+#toast{position:fixed;bottom:1.2rem;right:1.2rem;background:#10b981;color:#fff;padding:.5rem 1.1rem;border-radius:8px;font-size:.75rem;font-weight:700;box-shadow:0 4px 16px rgba(0,0,0,.2);display:none;z-index:999}
+#toast.err{background:#ef4444}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-wrap" id="login-wrap">
+  <div class="login-box">
+    <div class="login-logo">
+      <div class="mark">🔥</div>
+      <h1>COEN<span>ERV</span>GAS</h1>
+      <p>Panel de Administración</p>
+    </div>
+    <div class="lf">
+      <label>Contraseña</label>
+      <input type="password" id="pw-input" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()">
+      <div class="err" id="pw-err">Contraseña incorrecta</div>
+    </div>
+    <button class="btn-login" onclick="doLogin()">Entrar</button>
+  </div>
+</div>
+
+<!-- APP -->
+<div class="app" id="app">
+  <div class="header">
+    <div class="header-left">
+      <div class="h-mark">🔥</div>
+      <div>
+        <div class="h-name">COEN<span>ERV</span>GAS</div>
+        <div style="font-size:.5rem;color:rgba(255,255,255,.4);letter-spacing:.1em;text-transform:uppercase">Admin · Acceso restringido</div>
+      </div>
+      <div class="h-badge">Admin</div>
+    </div>
+    <button class="btn-out" onclick="logout()">Salir</button>
+  </div>
+
+  <div class="tabs">
+    <div class="tab on" onclick="goTab('dashboard',this)">Dashboard</div>
+    <div class="tab" onclick="goTab('cotizaciones',this)">Cotizaciones</div>
+    <div class="tab" onclick="goTab('clientes',this)">Clientes</div>
+    <div class="tab" onclick="goTab('catalogo',this)">Catálogo & Precios</div>
+  </div>
+
+  <div class="content">
+    <!-- DASHBOARD -->
+    <div class="panel on" id="panel-dashboard">
+      <div class="stats-row" id="stats-row">
+        <div class="stat"><div class="stat-val" id="s-quotes">—</div><div class="stat-lbl">Cotizaciones</div></div>
+        <div class="stat"><div class="stat-val" id="s-clients">—</div><div class="stat-lbl">Clientes</div></div>
+        <div class="stat"><div class="stat-val" id="s-total">—</div><div class="stat-lbl">Importe total</div><div class="stat-sub">sin IVA</div></div>
+        <div class="stat"><div class="stat-val" id="s-cat">—</div><div class="stat-lbl">Productos en catálogo</div></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><div><div class="card-title">Últimas cotizaciones</div><div class="card-sub">Las 10 más recientes</div></div></div>
+        <div class="tbl-wrap"><table id="dash-tbl"><thead><tr><th>Número</th><th>Cliente</th><th>Obra</th><th>Fecha</th><th class="r">Total</th></tr></thead><tbody id="dash-body"></tbody></table></div>
+      </div>
+    </div>
+
+    <!-- COTIZACIONES -->
+    <div class="panel" id="panel-cotizaciones">
+      <div class="search-bar">🔍 <input id="q-search" placeholder="Buscar por número, cliente, obra…" oninput="renderQuotes()"></div>
+      <div class="card">
+        <div class="card-head"><div class="card-title" id="q-count">Cotizaciones</div></div>
+        <div class="tbl-wrap"><table><thead><tr><th>Número</th><th>Cliente</th><th>Teléfono</th><th>Obra</th><th>Fecha</th><th class="r">Subtotal</th><th class="r">IVA</th><th class="r">Total</th><th></th></tr></thead><tbody id="quotes-body"></tbody></table></div>
+      </div>
+    </div>
+
+    <!-- CLIENTES -->
+    <div class="panel" id="panel-clientes">
+      <div class="search-bar">🔍 <input id="cl-search" placeholder="Buscar cliente…" oninput="renderClients()"></div>
+      <div class="card">
+        <div class="card-head"><div class="card-title" id="cl-count">Clientes</div></div>
+        <div class="tbl-wrap"><table><thead><tr><th>Nombre</th><th>Teléfono</th><th>RFC</th><th>Correo</th><th>Dirección</th><th>Registro</th></tr></thead><tbody id="clients-body"></tbody></table></div>
+      </div>
+    </div>
+
+    <!-- CATÁLOGO -->
+    <div class="panel" id="panel-catalogo">
+      <div class="cat-header">
+        <div style="font-size:.8rem;font-weight:700">Editar precios del catálogo</div>
+        <div class="cat-search">🔍 <input id="cat-s" placeholder="Buscar producto…" oninput="renderCatAdmin()"></div>
+      </div>
+      <div class="cat-grid-wrap" id="cat-admin-grid"></div>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+let token = localStorage.getItem('cvg-admin-token') || '';
+let allQuotes = [], allClients = [], allCat = [];
+
+const fmt = n => new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN'}).format(n||0);
+const date = s => s ? new Date(s).toLocaleDateString('es-MX') : '—';
+
+function toast(msg, type='ok') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = type === 'err' ? 'err' : '';
+  t.style.display = 'block';
+  setTimeout(() => t.style.display = 'none', 2800);
+}
+
+async function doLogin() {
+  const pw = document.getElementById('pw-input').value;
+  const errEl = document.getElementById('pw-err');
+  errEl.style.display = 'none';
+  if (!pw) return;
+  try {
+    const res = await fetch('/api/admin-auth', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({password: pw}) });
+    const data = await res.json();
+    if (!res.ok) { errEl.style.display = 'block'; return; }
+    token = data.token;
+    localStorage.setItem('cvg-admin-token', token);
+    showApp();
+  } catch(e) { errEl.style.display = 'block'; }
+}
+
+function logout() {
+  localStorage.removeItem('cvg-admin-token');
+  token = '';
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('login-wrap').style.display = 'flex';
+}
+
+function showApp() {
+  document.getElementById('login-wrap').style.display = 'none';
+  document.getElementById('app').style.display = 'flex';
+  loadAll();
+}
+
+async function loadAll() {
+  try {
+    const [adminRes, catRes] = await Promise.all([
+      fetch('/api/admin-quotes', { headers:{ Authorization: 'Bearer '+token } }),
+      fetch('/api/catalog'),
+    ]);
+    const adminData = await adminRes.json();
+    const catData = await catRes.json();
+    if (!adminRes.ok) { logout(); return; }
+    allQuotes = adminData.quotes || [];
+    allClients = adminData.clients || [];
+    allCat = catData.catalog || [];
+    renderDashboard();
+    renderQuotes();
+    renderClients();
+    renderCatAdmin();
+  } catch(e) { toast('Error cargando datos', 'err'); }
+}
+
+function goTab(id, el) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('on'));
+  el.classList.add('on');
+  document.getElementById('panel-'+id).classList.add('on');
+}
+
+function renderDashboard() {
+  document.getElementById('s-quotes').textContent = allQuotes.length;
+  document.getElementById('s-clients').textContent = allClients.length;
+  const total = allQuotes.reduce((s,q)=>s+(q.subtotal||0),0);
+  document.getElementById('s-total').textContent = fmt(total);
+  document.getElementById('s-cat').textContent = allCat.length;
+
+  const recent = allQuotes.slice(0,10);
+  document.getElementById('dash-body').innerHTML = recent.map(q => `
+    <tr>
+      <td><strong>${q.number||'—'}</strong></td>
+      <td>${q.client_name||'—'}</td>
+      <td>${q.obra||'—'}</td>
+      <td>${date(q.created_at)}</td>
+      <td class="r">${fmt(q.total)}</td>
+    </tr>`).join('') || '<tr><td colspan="5" style="text-align:center;color:#94a3b8;padding:1.5rem">Sin cotizaciones aún</td></tr>';
+}
+
+function renderQuotes() {
+  const q = (document.getElementById('q-search').value||'').toLowerCase();
+  const filtered = allQuotes.filter(r =>
+    !q || (r.number||'').toLowerCase().includes(q) ||
+    (r.client_name||'').toLowerCase().includes(q) ||
+    (r.obra||'').toLowerCase().includes(q) ||
+    (r.client_phone||'').includes(q)
+  );
+  document.getElementById('q-count').textContent = `Cotizaciones (${filtered.length})`;
+  document.getElementById('quotes-body').innerHTML = filtered.map(q => `
+    <tr onclick="toggleQ('${q.id}')" style="cursor:pointer">
+      <td><strong>${q.number||'—'}</strong></td>
+      <td>${q.client_name||'—'}</td>
+      <td>${q.client_phone||'—'}</td>
+      <td>${q.obra||'—'}</td>
+      <td>${date(q.created_at)}</td>
+      <td class="r">${fmt(q.subtotal)}</td>
+      <td class="r">${fmt(q.iva)}</td>
+      <td class="r"><strong>${fmt(q.total)}</strong></td>
+      <td><span style="font-size:.7rem;color:#94a3b8">▼</span></td>
+    </tr>
+    <tr id="qx-${q.id}"><td colspan="9" style="padding:0">
+      <div class="q-expand" id="qe-${q.id}">
+        <table><thead><tr><th>#</th><th>Material</th><th>Calibre</th><th class="r">Cant.</th><th class="r">P.Unit</th><th class="r">Importe</th></tr></thead>
+        <tbody>${((q.items)||[]).map((it,i)=>`<tr><td>${i+1}</td><td>${it.name||it.nombre||'—'}</td><td>${it.size||it.calibre||'—'}</td><td class="r">${it.qty||it.cantidad||1}</td><td class="r">${fmt(it.price||0)}</td><td class="r">${fmt((it.price||0)*(it.qty||it.cantidad||1))}</td></tr>`).join('')}</tbody>
+        </table>
+        ${q.notes?`<div style="margin-top:.5rem;font-size:.7rem;color:#64748b">📝 ${q.notes}</div>`:''}
+      </div>
+    </td></tr>`).join('') || '<tr><td colspan="9" style="text-align:center;color:#94a3b8;padding:1.5rem">Sin cotizaciones</td></tr>';
+}
+
+function toggleQ(id) {
+  const el = document.getElementById('qe-'+id);
+  if (el) el.classList.toggle('on');
+}
+
+function renderClients() {
+  const q = (document.getElementById('cl-search').value||'').toLowerCase();
+  const filtered = allClients.filter(c =>
+    !q || (c.name||'').toLowerCase().includes(q) || (c.phone||'').includes(q) || (c.rfc||'').toLowerCase().includes(q)
+  );
+  document.getElementById('cl-count').textContent = `Clientes (${filtered.length})`;
+  document.getElementById('clients-body').innerHTML = filtered.map(c => `
+    <tr>
+      <td><strong>${c.name||'—'}</strong></td>
+      <td>${c.phone||'—'}</td>
+      <td>${c.rfc||'—'}</td>
+      <td>${c.email||'—'}</td>
+      <td>${c.address||'—'}</td>
+      <td>${date(c.created_at)}</td>
+    </tr>`).join('') || '<tr><td colspan="6" style="text-align:center;color:#94a3b8;padding:1.5rem">Sin clientes registrados</td></tr>';
+}
+
+const CAT_LABELS = {tuberia:'🪈 Tubería',conexiones:'🔩 Conexiones',valvulas:'🔴 Válvulas',reguladores:'⚙️ Reguladores',mangueras:'🌀 Mangueras'};
+
+function renderCatAdmin() {
+  const q = (document.getElementById('cat-s').value||'').toLowerCase();
+  const items = allCat.filter(i => !q || (i.name||'').toLowerCase().includes(q) || (i.size||'').toLowerCase().includes(q));
+  const grid = document.getElementById('cat-admin-grid');
+  if (!items.length) { grid.innerHTML = '<div class="empty"><div class="empty-icon">🔧</div><div class="empty-t">Sin productos</div></div>'; return; }
+
+  // Group by category
+  const groups = {};
+  items.forEach(i => { if(!groups[i.cat]) groups[i.cat]=[]; groups[i.cat].push(i); });
+
+  grid.innerHTML = Object.entries(groups).map(([cat, list]) => `
+    <div style="grid-column:1/-1;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#64748b;margin-top:.5rem;padding-bottom:.3rem;border-bottom:1px solid #e8edf5">${CAT_LABELS[cat]||cat}</div>
+    ${list.map(item => `
+    <div class="cat-item">
+      <div class="ci-info">
+        <div class="ci-name" title="${item.name}">${item.name}</div>
+        <div class="ci-size">${item.size||''}</div>
+      </div>
+      <div class="ci-price">
+        <span>$</span>
+        <input type="number" id="p-${item.id}" value="${item.price}" min="0" step="0.5" onkeydown="if(event.key==='Enter')savePrice('${item.id}')">
+        <button class="btn-save" id="b-${item.id}" onclick="savePrice('${item.id}')">Guardar</button>
+      </div>
+    </div>`).join('')}
+  `).join('');
+}
+
+async function savePrice(id) {
+  const input = document.getElementById('p-'+id);
+  const btn = document.getElementById('b-'+id);
+  const price = parseFloat(input.value);
+  if (isNaN(price) || price < 0) { toast('Precio inválido','err'); return; }
+  btn.disabled = true;
+  btn.textContent = '...';
+  try {
+    const res = await fetch('/api/catalog', {
+      method: 'PUT',
+      headers: { 'Content-Type':'application/json', Authorization: 'Bearer '+token },
+      body: JSON.stringify({ id, price })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error);
+    const idx = allCat.findIndex(i => i.id === id);
+    if (idx >= 0) allCat[idx].price = price;
+    btn.textContent = '✓';
+    btn.classList.add('saved');
+    setTimeout(() => { btn.textContent='Guardar'; btn.classList.remove('saved'); btn.disabled=false; }, 1500);
+    toast('Precio actualizado');
+  } catch(e) { toast(e.message||'Error','err'); btn.textContent='Guardar'; btn.disabled=false; }
+}
+
+// Init
+if (token) showApp();
+else { document.getElementById('login-wrap').style.display='flex'; document.getElementById('app').style.display='none'; }
+</script>
+</body>
+</html>
