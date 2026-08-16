@@ -450,7 +450,7 @@ function renderQuotes() {
     const waPhone = phone.length === 10 ? '52'+phone : phone;
     const itemsLines = ((q.items)||[]).map(it=>`• ${it.name||it.nombre||''} x${it.qty||it.cantidad||1}`).join('\n');
     const totalFmt = (q.total||0).toLocaleString('es-MX',{minimumFractionDigits:2,maximumFractionDigits:2});
-    const waText = encodeURIComponent(`Hola ${q.client_name||''}! Respecto a tu cotización *${q.number||''}*:\n\n${itemsLines}\n\n💰 Total: $${totalFmt}\n\n— COENERVGAS · 464 109 2242`);
+    const waText = encodeURIComponent(`Hola ${q.client_name||''}! Respecto a tu cotización *${q.number||''}*:\n\n${itemsLines}\n\n💰 Total: $${totalFmt}\n\n— COENERVGAS · 462 188 1152`);
     const waLink = phone ? `https://wa.me/${waPhone}?text=${waText}` : '';
     const st = q.status || 'pending';
     return `

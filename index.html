@@ -273,9 +273,9 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:13px;li
   </div>
 
   <div class="s-bot">
-    <a href="https://wa.me/524641092242?text=Hola%2C%20me%20interesa%20cotizar%20materiales%20para%20gas%20L.P." target="_blank" rel="noopener" class="s-wa">
+    <a href="https://wa.me/524621881152?text=Hola%2C%20me%20interesa%20cotizar%20materiales%20para%20gas%20L.P." target="_blank" rel="noopener" class="s-wa">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
-      WhatsApp · 464 109 2242
+      WhatsApp · 462 188 1152
     </a>
     <div class="s-ver">COENERVGAS · Salamanca, Gto.</div>
   </div>
@@ -320,7 +320,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:13px;li
           <div style="font-size:.6rem;color:#475569;margin-top:.2rem">Gas L.P. · Instalaciones y Materiales · Salamanca, GTO</div>
           <div style="font-size:.6rem;color:#475569">RFC: GASE820515MB5</div>
           <div style="font-size:.6rem;color:#475569">Circuito Eucaliptos 262, Col. Las Arboledas, C.P. 36764</div>
-          <div style="font-size:.6rem;color:#475569">Tel: 464 109 2242 · Edgar Aaron Garcia</div>
+          <div style="font-size:.6rem;color:#475569">Tel: 462 188 1152 · Edgar Aaron Garcia</div>
         </div>
         <div style="text-align:right">
           <div style="font-size:.55rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.1em">Cotización</div>
@@ -335,8 +335,8 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:13px;li
           <div class="ib-sub">No somos un mostrador más. Asesoría real para proyectos residenciales, comerciales e industriales.</div>
         </div>
         <div class="ib-right">
-          <a href="https://wa.me/524641092242?text=Hola%2C%20me%20interesa%20cotizar%20materiales%20para%20gas%20L.P." target="_blank" rel="noopener" class="ib-btn ib-btn-wa">💬 WhatsApp</a>
-          <a href="tel:+524641092242" class="ib-btn ib-btn-ph">📞 464 109 2242</a>
+          <a href="https://wa.me/524621881152?text=Hola%2C%20me%20interesa%20cotizar%20materiales%20para%20gas%20L.P." target="_blank" rel="noopener" class="ib-btn ib-btn-wa">💬 WhatsApp</a>
+          <a href="tel:+524621881152" class="ib-btn ib-btn-ph">📞 462 188 1152</a>
         </div>
       </div>
       <div class="qb-wrap">
@@ -453,17 +453,24 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:13px;li
       <div class="ia-layout">
         <!-- Upload zone -->
         <div>
+          <!-- Mobile-friendly upload buttons -->
+          <div style="display:flex;gap:.6rem;margin-bottom:.75rem">
+            <button class="btn btn-acc" style="flex:1;justify-content:center;padding:.6rem" onclick="document.getElementById('file-pick-cam').click()">📷 Tomar foto</button>
+            <button class="btn btn-pri" style="flex:1;justify-content:center;padding:.6rem" onclick="document.getElementById('file-pick').click()">📁 Seleccionar archivo</button>
+          </div>
+          <input type="file" id="file-pick-cam" accept="image/*" capture="environment" style="display:none" onchange="handleFile(this.files[0])">
+          <input type="file" id="file-pick" accept="image/*,.pdf,.txt" style="display:none" onchange="handleFile(this.files[0])">
+
           <div class="drop" id="drop-zone" onclick="document.getElementById('file-pick').click()" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="handleDrop(event)">
             <div class="drop-icon">📂</div>
-            <div class="drop-t">Sube tu imagen o documento</div>
-            <div class="drop-s">Arrastra aquí, o haz clic para seleccionar.<br>También puedes tomar una foto desde tu celular.</div>
+            <div class="drop-t">O arrastra aquí tu archivo</div>
+            <div class="drop-s">JPG, PNG, PDF o texto — la IA detecta los materiales automáticamente.</div>
             <div class="drop-chips">
               <span class="dchip">📷 Foto / JPG / PNG</span>
               <span class="dchip">📄 PDF</span>
               <span class="dchip">📝 Lista de texto</span>
             </div>
           </div>
-          <input type="file" id="file-pick" accept="image/*,.pdf,.txt" style="display:none" onchange="handleFile(this.files[0])">
 
           <!-- Preview -->
           <div class="ia-file-preview" id="ia-preview">
@@ -593,14 +600,14 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:13px;li
           <div style="display:flex;flex-direction:column;gap:.05rem;margin-bottom:1rem">
             <div class="info-row"><span class="info-lbl">Empresa</span><span class="info-val" style="font-weight:700">COENERVGAS</span></div>
             <div class="info-row"><span class="info-lbl">Contacto</span><span class="info-val">Edgar Aaron Garcia</span></div>
-            <div class="info-row"><span class="info-lbl">Teléfono</span><span class="info-val"><a href="tel:+524641092242" style="color:var(--pri);font-weight:600">464 109 2242</a></span></div>
+            <div class="info-row"><span class="info-lbl">Teléfono</span><span class="info-val"><a href="tel:+524621881152" style="color:var(--pri);font-weight:600">462 188 1152</a></span></div>
             <div class="info-row"><span class="info-lbl">Ciudad</span><span class="info-val">Salamanca, Guanajuato</span></div>
             <div class="info-row"><span class="info-lbl">Dirección</span><span class="info-val">Circuito Eucaliptos 262<br><span style="color:var(--text2);font-size:.72rem">Col. Las Arboledas, C.P. 36764</span></span></div>
             <div class="info-row"><span class="info-lbl">RFC</span><span class="info-val" style="font-size:.72rem;font-family:monospace">GASE820515MB5</span></div>
           </div>
           <div style="display:flex;flex-direction:column;gap:.45rem">
-            <a href="https://wa.me/524641092242?text=Hola%2C%20me%20interesa%20cotizar%20materiales%20para%20gas%20L.P." target="_blank" rel="noopener" class="btn btn-acc" style="justify-content:center">💬 Enviar cotización por WhatsApp</a>
-            <a href="tel:+524641092242" class="btn btn-ghost" style="justify-content:center">📞 Llamar: 464 109 2242</a>
+            <a href="https://wa.me/524621881152?text=Hola%2C%20me%20interesa%20cotizar%20materiales%20para%20gas%20L.P." target="_blank" rel="noopener" class="btn btn-acc" style="justify-content:center">💬 Enviar cotización por WhatsApp</a>
+            <a href="tel:+524621881152" class="btn btn-ghost" style="justify-content:center">📞 Llamar: 462 188 1152</a>
             <a href="https://maps.app.goo.gl/DAGWgqJuzAcSJbm86" target="_blank" rel="noopener" class="btn btn-ghost btn-sm" style="justify-content:center">📍 Ver en Google Maps</a>
           </div>
         </div>
@@ -612,7 +619,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:13px;li
 </div><!-- /app -->
 
 <!-- WhatsApp Float -->
-<a href="https://wa.me/524641092242?text=Hola%2C%20me%20interesa%20cotizar%20materiales%20para%20gas%20L.P." target="_blank" rel="noopener" class="wa-float" title="WhatsApp">
+<a href="https://wa.me/524621881152?text=Hola%2C%20me%20interesa%20cotizar%20materiales%20para%20gas%20L.P." target="_blank" rel="noopener" class="wa-float" title="WhatsApp">
   <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
 </a>
 
@@ -955,7 +962,7 @@ async function requestQuote(){
   // Notify admin via WhatsApp
   const waItems=rec.items.map(i=>`• ${i.name}${i.size?' '+i.size:''} x${i.qty}`).join('\n');
   const waMsg=`🔔 *Nueva solicitud: ${rec.num}*\n\n👤 ${rec.emp}${rec.tel?' · '+rec.tel:''}\n📍 ${rec.obra||'Sin obra especificada'}\n\n${waItems}\n\n💰 Total: $${rec.total.toLocaleString('es-MX',{minimumFractionDigits:2})}`;
-  setTimeout(()=>window.open('https://wa.me/524641092242?text='+encodeURIComponent(waMsg),'_blank'),400);
+  setTimeout(()=>window.open('https://wa.me/524621881152?text='+encodeURIComponent(waMsg),'_blank'),400);
   toast('✓ Cotización '+rec.num+' guardada','ok');
   goSec('historial',null);
   renderHistory();
@@ -985,18 +992,24 @@ function renderHistory(){
   const empty=document.getElementById('hist-empty');
   if(!history.length){list.innerHTML='';empty.style.display='block';return;}
   empty.style.display='none';
-  list.innerHTML=history.map(h=>`
-    <div class="hi" onclick="viewQuote('${h.num}')">
-      <div>
+  list.innerHTML=history.map(h=>{
+    const waItems=h.items.map(i=>`• ${i.name}${i.size?' '+i.size:''} x${i.qty}`).join('\n');
+    const waMsg=`🔔 *Nueva solicitud: ${h.num}*\n\n👤 ${h.emp}${h.tel?' · '+h.tel:''}\n📍 ${h.obra||'Sin obra especificada'}\n\n${waItems}`;
+    const waUrl='https://wa.me/524621881152?text='+encodeURIComponent(waMsg);
+    return `
+    <div class="hi">
+      <div onclick="viewQuote('${h.num}')" style="flex:1;cursor:pointer">
         <div class="hi-num">${h.num}</div>
         <div class="hi-client">${h.emp}${h.rfc?' · '+h.rfc:''}</div>
         <div class="hi-date">${h.date}${h.obra?' · '+h.obra:''}</div>
       </div>
-      <div style="text-align:right">
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:.35rem">
         <div class="hi-total">${fmt(h.total)}</div>
         <div class="hi-items">${h.items.length} partidas</div>
+        <a href="${waUrl}" target="_blank" onclick="event.stopPropagation()" style="background:#25D366;color:#fff;font-size:.6rem;font-weight:700;padding:3px 8px;border-radius:5px;text-decoration:none">💬 WA</a>
       </div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
 }
 function clearHistory(){
   if(!history.length) return;

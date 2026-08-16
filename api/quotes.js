@@ -132,7 +132,7 @@ module.exports = async function handler(req, res) {
                   ${body.notes ? `<p style="margin-top:14px;font-size:13px;color:#475569">📝 ${body.notes}</p>` : ''}
                   <div style="margin-top:20px;background:#f0f9ff;border-radius:6px;padding:14px 16px;border-left:3px solid #f97316">
                     <p style="margin:0;font-size:13px;color:#1a2d5a"><strong>¿Dudas?</strong> Escríbenos directamente:</p>
-                    <p style="margin:6px 0 0;font-size:13px">📱 <a href="https://wa.me/524641092242" style="color:#f97316">464 109 2242</a> · WhatsApp</p>
+                    <p style="margin:6px 0 0;font-size:13px">📱 <a href="https://wa.me/524621881152" style="color:#f97316">462 188 1152</a> · WhatsApp</p>
                   </div>
                   <p style="margin-top:18px;font-size:11px;color:#94a3b8;text-align:center">
                     COENERVGAS · Salamanca, GTO · RFC: GASE820515MB5
