@@ -263,6 +263,23 @@ let allQuotes = [], allClients = [], allCat = [];
 const fmt = n => new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN'}).format(n||0);
 const date = s => s ? new Date(s).toLocaleDateString('es-MX') : '—';
 
+async function downloadPDF(id, num) {
+  try {
+    toast('Generando PDF…');
+    const res = await fetch(`/api/quote-pdf?id=${id}`, {
+      headers: { Authorization: 'Bearer ' + token }
+    });
+    if (!res.ok) { toast('Error al generar PDF','err'); return; }
+    const blob = await res.blob();
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href = url; a.download = `${num || id}-COENERVGAS.pdf`;
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+    toast('📄 PDF descargado','ok');
+  } catch(e) { toast('Error: ' + e.message,'err'); }
+}
+
 function toast(msg, type='ok') {
   const t = document.getElementById('toast');
   t.textContent = msg;
@@ -485,6 +502,10 @@ function renderQuotes() {
             <option value="cancelado" ${st==='cancelado'?'selected':''}>❌ Cancelado</option>
           </select>
           ${waLink?`<a href="${waLink}" target="_blank" rel="noopener" class="btn-wa-reply" onclick="event.stopPropagation()">💬 Responder por WA</a>`:''}
+          <button onclick="event.stopPropagation();downloadPDF('${q.id}','${q.number||''}')"
+             style="background:#1a2d5a;color:#fff;font-size:.65rem;font-weight:700;padding:.28rem .7rem;border-radius:6px;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:.3rem">
+            📄 Descargar PDF
+          </button>
         </div>
         <table><thead><tr><th>#</th><th>Material</th><th>Calibre</th><th class="r">Cant.</th><th class="r">P.Unit</th><th class="r">Importe</th></tr></thead>
         <tbody>${((q.items)||[]).map((it,i)=>`<tr><td>${i+1}</td><td>${it.name||it.nombre||'—'}</td><td>${it.size||it.calibre||'—'}</td><td class="r">${it.qty||it.cantidad||1}</td><td class="r">${fmt(it.price||0)}</td><td class="r">${fmt((it.price||0)*(it.qty||it.cantidad||1))}</td></tr>`).join('')}</tbody>

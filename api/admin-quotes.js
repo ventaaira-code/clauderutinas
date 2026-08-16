@@ -1,6 +1,5 @@
 const { createClient } = require('@supabase/supabase-js');
 const { Resend } = require('resend');
-const generateQuotePDF = require('./generate-pdf');
 
 function sb() {
   return createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
@@ -56,17 +55,21 @@ module.exports = async function handler(req, res) {
           const num    = data.number || '';
           const nombre = data.client_name || 'Cliente';
 
-          // Generate PDF attachment
-          const pdfBuffer = await generateQuotePDF(data);
+          // Generate PDF attachment (lazy require so module loads even if pdfkit missing)
+          let attachments = [];
+          try {
+            const generateQuotePDF = require('./generate-pdf');
+            const pdfBuffer = await generateQuotePDF(data);
+            attachments = [{ filename: `${num}-COENERVGAS.pdf`, content: pdfBuffer }];
+          } catch(pdfErr) {
+            console.error('PDF generation error:', pdfErr.message);
+          }
 
           await resend.emails.send({
             from: 'COENERVGAS <onboarding@resend.dev>',
             to:   [clientEmail],
             subject: `${num} — Tu cotización está lista, ${nombre}`,
-            attachments: [{
-              filename: `${num}-COENERVGAS.pdf`,
-              content:  pdfBuffer.toString('base64'),
-            }],
+            attachments,
             html: `
               <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto">
                 <div style="background:#1a2d5a;padding:20px 24px;border-radius:8px 8px 0 0">
