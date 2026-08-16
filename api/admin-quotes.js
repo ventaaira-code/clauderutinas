@@ -35,7 +35,7 @@ module.exports = async function handler(req, res) {
     if (!id) return res.status(400).json({ error: 'Se requiere id' });
     const valid = ['pending','cotizado','aceptado','entregado','cancelado'];
     if (status && !valid.includes(status)) return res.status(400).json({ error: 'Estado inválido' });
-    const update = { updated_at: new Date().toISOString() };
+    const update = {};
     if (status) update.status = status;
     const { data, error } = await db.from('quotes').update(update).eq('id', id).select().maybeSingle();
     if (error) return res.status(500).json({ error: error.message });
