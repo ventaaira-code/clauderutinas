@@ -22,13 +22,27 @@ module.exports = async function handler(req, res) {
     return res.status(200).json({ quotes: data || [] });
   }
 
-  // POST /api/quotes  →  save new quote + upsert client
+  // POST /api/quotes  →  auto-number + save quote + upsert client
   if (req.method === 'POST') {
     const body = req.body;
-    if (!body.number) return res.status(400).json({ error: 'Se requiere número de cotización' });
-    const { data, error } = await sb.from('quotes').insert(body).select().maybeSingle();
+    // Generate next number server-side (avoids duplicates across devices)
+    const { count } = await sb.from('quotes').select('*', { count: 'exact', head: true });
+    const num = 'COT-' + String((count || 0) + 501).padStart(3, '0');
+    // Only insert valid quote columns (client_rfc / client_email belong to clients table)
+    const quoteRow = {
+      number:       num,
+      client_phone: body.client_phone || null,
+      client_name:  body.client_name  || null,
+      obra:         body.obra         || null,
+      items:        body.items        || [],
+      subtotal:     body.subtotal     || 0,
+      iva:          body.iva          || 0,
+      total:        body.total        || 0,
+      notes:        body.notes        || null,
+    };
+    const { data, error } = await sb.from('quotes').insert(quoteRow).select().maybeSingle();
     if (error) return res.status(500).json({ error: error.message });
-    // Auto-register client if phone provided
+    // Auto-register / update client record
     if (body.client_phone) {
       const client = { phone: body.client_phone, updated_at: new Date().toISOString() };
       if (body.client_name)  client.name  = body.client_name;

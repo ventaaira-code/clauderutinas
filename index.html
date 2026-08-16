@@ -924,14 +924,12 @@ function renderProfile(){
 }
 
 // ── HISTORY ──
-function requestQuote(){
+async function requestQuote(){
   const emp=document.getElementById('q-emp').value;
   if(!emp){toast('Ingresa tu nombre o empresa para continuar');goSec('cotizar',null);document.getElementById('q-emp').focus();return;}
   if(!cart.length){toast('Agrega al menos un material');return;}
   const {sub,iva}=calcTotals2();
-  const n=history.length+501;
   const rec={
-    num:'COT-'+String(n).padStart(3,'0'),
     emp,
     rfc:document.getElementById('q-rfc').value,
     tel:document.getElementById('q-tel').value,
@@ -942,14 +940,20 @@ function requestQuote(){
     items:[...cart],
     sub,iva,total:sub+iva
   };
+  toast('Guardando cotización…');
+  try {
+    const res=await fetch('/api/quotes',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({client_phone:rec.tel,client_name:rec.emp,
+        client_rfc:rec.rfc,client_email:rec.email,
+        obra:rec.obra,items:rec.items,subtotal:rec.sub,iva:rec.iva,total:rec.total,notes:rec.notas})
+    });
+    const d=await res.json();
+    rec.num=d.quote?.number||('COT-'+String(history.length+501).padStart(3,'0'));
+  } catch(e){
+    rec.num='COT-'+String(history.length+501).padStart(3,'0');
+  }
   history.unshift(rec);
   saveState();
-  // Sync quote to cloud
-  fetch('/api/quotes',{method:'POST',headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({number:rec.num,client_phone:rec.tel,client_name:rec.emp,
-      client_rfc:rec.rfc,client_email:rec.email,
-      obra:rec.obra,items:rec.items,subtotal:rec.sub,iva:rec.iva,total:rec.total,notes:rec.notas})
-  }).catch(()=>{});
   // Notify admin via WhatsApp
   const waItems=rec.items.map(i=>`• ${i.name}${i.size?' '+i.size:''} x${i.qty}`).join('\n');
   const waMsg=`🔔 *Nueva solicitud: ${rec.num}*\n\n👤 ${rec.emp}${rec.tel?' · '+rec.tel:''}\n📍 ${rec.obra||'Sin obra especificada'}\n\n${waItems}\n\n💰 Total: $${rec.total.toLocaleString('es-MX',{minimumFractionDigits:2})}`;
@@ -957,7 +961,6 @@ function requestQuote(){
   toast('✓ Cotización '+rec.num+' guardada','ok');
   goSec('historial',null);
   renderHistory();
-  // Reset form for next quote
   newQuote();
 }
 function doPrint(){
