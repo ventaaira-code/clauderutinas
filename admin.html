@@ -122,6 +122,7 @@ tbody td.r{text-align:right;font-variant-numeric:tabular-nums}
 .search-bar input{border:none;outline:none;background:transparent;font-family:inherit;font-size:.78rem;flex:1}
 #toast{position:fixed;bottom:1.2rem;right:1.2rem;background:#10b981;color:#fff;padding:.5rem 1.1rem;border-radius:8px;font-size:.75rem;font-weight:700;box-shadow:0 4px 16px rgba(0,0,0,.2);display:none;z-index:999}
 #toast.err{background:#ef4444}
+#toast.warn{background:#d97706}
 </style>
 </head>
 <body>
@@ -265,9 +266,9 @@ const date = s => s ? new Date(s).toLocaleDateString('es-MX') : '—';
 function toast(msg, type='ok') {
   const t = document.getElementById('toast');
   t.textContent = msg;
-  t.className = type === 'err' ? 'err' : '';
+  t.className = type === 'err' ? 'err' : type === 'warn' ? 'warn' : '';
   t.style.display = 'block';
-  setTimeout(() => t.style.display = 'none', 2800);
+  setTimeout(() => t.style.display = 'none', 3500);
 }
 
 async function doLogin() {
@@ -430,7 +431,13 @@ async function updateStatus(id, newStatus) {
     const idx = allQuotes.findIndex(q => q.id === id);
     if (idx >= 0) allQuotes[idx].status = newStatus;
     renderQuotes();
-    toast('Estado actualizado');
+    if (newStatus === 'cotizado') {
+      if (data.emailSent) toast('📧 Cotización enviada al cliente por email','ok');
+      else if (data.noEmail) toast('⚠️ Estado actualizado — el cliente no tiene correo registrado','warn');
+      else toast('Estado actualizado');
+    } else {
+      toast('Estado actualizado');
+    }
   } catch(e) {
     toast(e.message || 'Error al actualizar','err');
   }
