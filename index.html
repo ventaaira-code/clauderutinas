@@ -191,6 +191,31 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:13px;li
   .main{margin-left:0}.qb-wrap{grid-template-columns:1fr}
   .card{box-shadow:none;border:1px solid #dde4ee}
 }
+
+/* ── NOSOTROS ADDITIONS ── */
+.s-exp{font-size:.45rem;color:rgba(249,115,22,.8);letter-spacing:.06em;margin-top:1px;text-transform:uppercase;font-weight:600}
+.s-wa{display:flex;align-items:center;gap:.45rem;padding:.38rem .9rem;color:#4ade80;font-size:.7rem;font-weight:600;cursor:pointer;text-decoration:none;transition:color .12s}
+.s-wa:hover{color:#86efac}
+.info-banner{background:linear-gradient(135deg,#0e1e3a 0%,#1a2d5a 100%);border-radius:var(--r);color:#fff;padding:1.1rem 1.25rem;margin-bottom:1rem;display:flex;gap:1.2rem;align-items:center;flex-wrap:wrap}
+.ib-left{flex:1;min-width:220px}
+.ib-badge{display:inline-flex;align-items:center;gap:.35rem;background:rgba(249,115,22,.2);color:#fb923c;padding:.2rem .65rem;border-radius:12px;font-size:.58rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:.55rem}
+.ib-title{font-size:.88rem;font-weight:800;line-height:1.25;margin-bottom:.3rem}
+.ib-sub{font-size:.68rem;opacity:.7;line-height:1.55}
+.ib-right{display:flex;flex-direction:column;gap:.4rem;flex-shrink:0}
+.ib-btn{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;padding:.38rem .9rem;border-radius:6px;font-size:.7rem;font-weight:600;text-decoration:none;font-family:inherit;border:none;cursor:pointer;white-space:nowrap}
+.ib-btn-wa{background:#25D366;color:#fff}
+.ib-btn-ph{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.2)}
+.ib-btn-wa:hover{background:#1db954}.ib-btn-ph:hover{background:rgba(255,255,255,.2)}
+.nos-svc{display:flex;gap:.65rem;align-items:flex-start;padding:.65rem 0;border-bottom:1px solid var(--border)}
+.nos-svc:last-child{border-bottom:none}
+.nos-icon{width:34px;height:34px;border-radius:6px;background:rgba(249,115,22,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.9rem}
+.nos-svc-t{font-size:.78rem;font-weight:600;margin-bottom:.15rem}
+.nos-svc-s{font-size:.68rem;color:var(--text2);line-height:1.5}
+.nos-big{font-size:2.8rem;font-weight:900;color:#f97316;line-height:1}
+.wa-float{position:fixed;bottom:1.5rem;right:1.4rem;width:52px;height:52px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 18px rgba(37,211,102,.5);z-index:997;cursor:pointer;text-decoration:none;transition:transform .15s}
+.wa-float:hover{transform:scale(1.08)}
+.wa-float svg{width:28px;height:28px;fill:#fff}
+@media(max-width:760px){.wa-float{bottom:70px;right:1rem}.info-banner{flex-direction:column;gap:.75rem}.ib-right{flex-direction:row;flex-wrap:wrap}}
 </style>
 
 <!-- APP -->
@@ -207,7 +232,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:13px;li
         <path d="M 48,57 C 40,50 39,42 44,33 C 46,43 51,38 49,29 C 55,37 58,47 58,53 C 56,50 52,48 51,51 C 54,54 54,57 48,57 Z" fill="#f97316"/>
       </svg>
     </div>
-    <div><div class="s-name">COENER<span>V</span>GAS</div><div class="s-sub">Cotizador en línea</div></div>
+    <div><div class="s-name">COENER<span>V</span>GAS</div><div class="s-sub">Cotizador en línea</div><div class="s-exp">+13 años en la industria</div></div>
   </div>
 
   <div class="n-lbl">Principal</div>
@@ -230,7 +255,18 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:13px;li
     <span class="ni-icon">👤</span> Mi perfil
   </div>
 
-  <div class="s-bot"><div class="s-ver">COENERVGAS · Salamanca, Gto. · 464 109 2242</div></div>
+  <div class="n-lbl">Empresa</div>
+  <div class="ni" data-sec="nosotros" onclick="goSec('nosotros',this)">
+    <span class="ni-icon">🏢</span> Nosotros
+  </div>
+
+  <div class="s-bot">
+    <a href="https://wa.me/524621881152?text=Hola%2C%20me%20interesa%20cotizar%20materiales%20para%20gas%20L.P." target="_blank" rel="noopener" class="s-wa">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+      WhatsApp · 462 188 1152
+    </a>
+    <div class="s-ver">COENERVGAS · Salamanca, Gto.</div>
+  </div>
 </nav>
 
 <!-- MOBILE NAV -->
@@ -240,6 +276,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:13px;li
   <div class="mn-i" onclick="goSec('ia',this)"><span class="mn-icon">🤖</span>IA</div>
   <div class="mn-i" onclick="goSec('historial',this)"><span class="mn-icon">🗂️</span>Historial</div>
   <div class="mn-i" onclick="goSec('perfil',this)"><span class="mn-icon">👤</span>Perfil</div>
+  <div class="mn-i" onclick="goSec('nosotros',this)"><span class="mn-icon">🏢</span>Nosotros</div>
 </div>
 
 <!-- MAIN -->
@@ -256,6 +293,17 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:13px;li
 
     <!-- ════ COTIZAR ════ -->
     <div id="sec-cotizar" class="sec on">
+      <div class="info-banner">
+        <div class="ib-left">
+          <div class="ib-badge">⚡ +13 años en la industria del gas</div>
+          <div class="ib-title">Materiales para Gas L.P. con respaldo técnico real</div>
+          <div class="ib-sub">No somos un mostrador más. Asesoría real para proyectos residenciales, comerciales e industriales.</div>
+        </div>
+        <div class="ib-right">
+          <a href="https://wa.me/524621881152?text=Hola%2C%20me%20interesa%20cotizar%20materiales%20para%20gas%20L.P." target="_blank" rel="noopener" class="ib-btn ib-btn-wa">💬 WhatsApp</a>
+          <a href="tel:+524621881152" class="ib-btn ib-btn-ph">📞 462 188 1152</a>
+        </div>
+      </div>
       <div class="qb-wrap">
         <!-- Left: client info + table -->
         <div class="qb-left">
@@ -463,9 +511,75 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:13px;li
       </div>
     </div>
 
+    <!-- ════ NOSOTROS ════ -->
+    <div id="sec-nosotros" class="sec">
+      <!-- Hero strip -->
+      <div style="background:linear-gradient(135deg,#0e1e3a 0%,#1a2d5a 100%);border-radius:var(--r);color:#fff;padding:1.4rem 1.5rem;margin-bottom:1rem;display:flex;gap:2rem;align-items:center;flex-wrap:wrap">
+        <div style="flex:1;min-width:200px">
+          <div class="nos-big">+13</div>
+          <div style="font-size:.72rem;opacity:.6;margin-bottom:.85rem;text-transform:uppercase;letter-spacing:.06em">Años en la industria del gas</div>
+          <div style="display:flex;gap:2rem">
+            <div><div style="font-size:1rem;font-weight:900">NOM</div><div style="font-size:.55rem;opacity:.5;text-transform:uppercase;letter-spacing:.06em">Normatividad</div></div>
+            <div><div style="font-size:1rem;font-weight:900">Bajío</div><div style="font-size:.55rem;opacity:.5;text-transform:uppercase;letter-spacing:.06em">Cobertura</div></div>
+            <div><div style="font-size:1rem;font-weight:900">13</div><div style="font-size:.55rem;opacity:.5;text-transform:uppercase;letter-spacing:.06em">Categorías</div></div>
+          </div>
+        </div>
+        <div style="flex:2;min-width:240px">
+          <div style="font-size:.82rem;font-weight:700;margin-bottom:.4rem">Conocemos la industria desde adentro</div>
+          <div style="font-size:.72rem;opacity:.75;line-height:1.65">COENERVGAS nace de más de una década de experiencia directa en la operación comercial de empresas gaseras. No aprendimos el negocio detrás de un mostrador: lo aprendimos en campo, en la gestión de proyectos y en el trato diario con instaladores, constructoras y operadores industriales.</div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+        <!-- Por qué COENERVGAS -->
+        <div class="card cp">
+          <div class="ct">Por qué COENERVGAS</div>
+          <div class="nos-svc">
+            <div class="nos-icon">🎓</div>
+            <div><div class="nos-svc-t">Asesoría con criterio técnico</div><div class="nos-svc-s">Sabemos cuándo una cédula 40 no es suficiente, por qué una conexión soldable conviene más que una roscada, y qué regulador necesitas según la carga térmica.</div></div>
+          </div>
+          <div class="nos-svc">
+            <div class="nos-icon">🔧</div>
+            <div><div class="nos-svc-t">Material para proyectos reales</div><div class="nos-svc-s">Tubería cobre tipo L/K/M, galvanizada, acero carbón Sch.40 y Sch.80. Conexiones, reguladores y válvulas con normatividad vigente.</div></div>
+          </div>
+          <div class="nos-svc">
+            <div class="nos-icon">⚡</div>
+            <div><div class="nos-svc-t">Respuesta el mismo día</div><div class="nos-svc-s">Arma tu lista aquí, envíala por WhatsApp y recibe cotización en horas. Sin intermediarios, atención directa.</div></div>
+          </div>
+          <div class="nos-svc">
+            <div class="nos-icon">🤝</div>
+            <div><div class="nos-svc-t">Aliado de gaseras y constructoras</div><div class="nos-svc-s">Entendemos volúmenes, tiempos de obra y la presión de un proyecto con fecha de entrega. Hablamos tu idioma.</div></div>
+          </div>
+        </div>
+
+        <!-- Contacto -->
+        <div class="card cp">
+          <div class="ct">Contacto directo</div>
+          <div style="display:flex;flex-direction:column;gap:.05rem;margin-bottom:1rem">
+            <div class="info-row"><span class="info-lbl">Empresa</span><span class="info-val" style="font-weight:700">COENERVGAS</span></div>
+            <div class="info-row"><span class="info-lbl">Contacto</span><span class="info-val">Edgar Aaron Garcia</span></div>
+            <div class="info-row"><span class="info-lbl">Teléfono</span><span class="info-val"><a href="tel:+524621881152" style="color:var(--pri);font-weight:600">462 188 1152</a></span></div>
+            <div class="info-row"><span class="info-lbl">Ciudad</span><span class="info-val">Salamanca, Guanajuato</span></div>
+            <div class="info-row"><span class="info-lbl">Dirección</span><span class="info-val">Circuito Eucaliptos 262<br><span style="color:var(--text2);font-size:.72rem">Col. Las Arboledas, C.P. 36764</span></span></div>
+            <div class="info-row"><span class="info-lbl">RFC</span><span class="info-val" style="font-size:.72rem;font-family:monospace">GASE820515MB5</span></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:.45rem">
+            <a href="https://wa.me/524621881152?text=Hola%2C%20me%20interesa%20cotizar%20materiales%20para%20gas%20L.P." target="_blank" rel="noopener" class="btn btn-acc" style="justify-content:center">💬 Enviar cotización por WhatsApp</a>
+            <a href="tel:+524621881152" class="btn btn-ghost" style="justify-content:center">📞 Llamar: 462 188 1152</a>
+            <a href="https://maps.app.goo.gl/DAGWgqJuzAcSJbm86" target="_blank" rel="noopener" class="btn btn-ghost btn-sm" style="justify-content:center">📍 Ver en Google Maps</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div><!-- /content -->
 </div><!-- /main -->
 </div><!-- /app -->
+
+<!-- WhatsApp Float -->
+<a href="https://wa.me/524621881152?text=Hola%2C%20me%20interesa%20cotizar%20materiales%20para%20gas%20L.P." target="_blank" rel="noopener" class="wa-float" title="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+</a>
 
 <!-- TOAST -->
 <div class="toast" id="toast">✓ Listo</div>
@@ -603,7 +717,8 @@ const TB={
   catalogo:{title:'Catálogo de materiales',sub:'Tubería, conexiones, válvulas y reguladores para Gas LP'},
   ia:{title:'Analizar con IA',sub:'Sube un plano, lista a mano o PDF — la IA extrae los materiales'},
   historial:{title:'Mis cotizaciones',sub:'Historial guardado en este dispositivo'},
-  perfil:{title:'Mi perfil',sub:'Tus datos se cargan automáticamente al cotizar'}
+  perfil:{title:'Mi perfil',sub:'Tus datos se cargan automáticamente al cotizar'},
+  nosotros:{title:'COENERVGAS',sub:'+13 años de experiencia en la industria del gas LP · Salamanca, GTO'}
 };
 function goSec(id,el){
   document.querySelectorAll('.sec').forEach(s=>s.classList.remove('on'));
@@ -614,7 +729,7 @@ function goSec(id,el){
   }
   document.querySelectorAll('.mob-nav .mn-i').forEach(n=>n.classList.remove('active'));
   const mob=document.querySelectorAll('.mob-nav .mn-i');
-  const order=['cotizar','catalogo','ia','historial','perfil'];
+  const order=['cotizar','catalogo','ia','historial','perfil','nosotros'];
   const idx=order.indexOf(id);
   if(mob[idx]) mob[idx].classList.add('active');
   document.getElementById('tb-title').textContent=TB[id].title;
