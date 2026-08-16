@@ -194,9 +194,14 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:13px;li
 }
 @media(min-width:761px){.mob-nav{display:none}}
 @media print{
-  .sidebar,.topbar,.mob-nav,.tot-panel .btn,.btn-acc,.btn-ghost,.drop,.ia-panel{display:none!important}
+  .sidebar,.topbar,.mob-nav,.tot-panel,.drop,.ia-panel,.info-banner,.wa-float,.sec:not(#sec-cotizar){display:none!important}
+  #sec-cotizar{display:block!important}
+  #print-header{display:flex!important}
   .main{margin-left:0}.qb-wrap{grid-template-columns:1fr}
-  .card{box-shadow:none;border:1px solid #dde4ee}
+  .card{box-shadow:none;border:1px solid #cdd5e0}
+  body{background:#fff;font-size:11px}
+  .content{padding:.5rem}
+  @page{margin:1.5cm}
 }
 
 /* ── NOSOTROS ADDITIONS ── */
@@ -308,6 +313,21 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:13px;li
 
     <!-- ════ COTIZAR ════ -->
     <div id="sec-cotizar" class="sec on">
+      <!-- Print letterhead (hidden on screen, shown @media print) -->
+      <div id="print-header" style="display:none;justify-content:space-between;align-items:flex-start;padding-bottom:.9rem;margin-bottom:1rem;border-bottom:3px solid #1a2d5a">
+        <div>
+          <div style="font-size:1.4rem;font-weight:900;color:#1a2d5a;letter-spacing:.04em;line-height:1">COENER<span style="color:#f97316">V</span>GAS</div>
+          <div style="font-size:.6rem;color:#475569;margin-top:.2rem">Gas L.P. · Instalaciones y Materiales · Salamanca, GTO</div>
+          <div style="font-size:.6rem;color:#475569">RFC: GASE820515MB5</div>
+          <div style="font-size:.6rem;color:#475569">Circuito Eucaliptos 262, Col. Las Arboledas, C.P. 36764</div>
+          <div style="font-size:.6rem;color:#475569">Tel: 462 188 1152 · Edgar Aaron Garcia</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:.55rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.1em">Cotización</div>
+          <div style="font-size:.95rem;font-weight:900;color:#1a2d5a" id="ph-num">BORRADOR</div>
+          <div style="font-size:.62rem;color:#64748b;margin-top:.2rem" id="ph-date"></div>
+        </div>
+      </div>
       <div class="info-banner">
         <div class="ib-left">
           <div class="ib-badge">⚡ +13 años en la industria del gas</div>
@@ -398,8 +418,8 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:13px;li
           <button class="btn btn-acc" style="width:100%;justify-content:center;padding:.55rem" onclick="requestQuote()">
             📄 Solicitar cotización formal
           </button>
-          <button class="btn btn-ghost" style="width:100%;justify-content:center;padding:.45rem;margin-top:.4rem" onclick="window.print()">
-            🖨 Imprimir borrador
+          <button class="btn btn-ghost" style="width:100%;justify-content:center;padding:.45rem;margin-top:.4rem" onclick="doPrint()">
+            🖨 Imprimir / PDF
           </button>
         </div>
       </div>
@@ -929,11 +949,21 @@ function requestQuote(){
     body:JSON.stringify({number:rec.num,client_phone:rec.tel,client_name:rec.emp,
       obra:rec.obra,items:rec.items,subtotal:rec.sub,iva:rec.iva,total:rec.total,notes:rec.notas})
   }).catch(()=>{});
+  // Notify admin via WhatsApp
+  const waItems=rec.items.map(i=>`• ${i.name}${i.size?' '+i.size:''} x${i.qty}`).join('\n');
+  const waMsg=`🔔 *Nueva solicitud: ${rec.num}*\n\n👤 ${rec.emp}${rec.tel?' · '+rec.tel:''}\n📍 ${rec.obra||'Sin obra especificada'}\n\n${waItems}\n\n💰 Total: $${rec.total.toLocaleString('es-MX',{minimumFractionDigits:2})}`;
+  setTimeout(()=>window.open('https://wa.me/524621881152?text='+encodeURIComponent(waMsg),'_blank'),400);
   toast('✓ Cotización '+rec.num+' guardada','ok');
   goSec('historial',null);
   renderHistory();
   // Reset form for next quote
   newQuote();
+}
+function doPrint(){
+  const num=history.length?history[0].num:'BORRADOR';
+  document.getElementById('ph-num').textContent=num;
+  document.getElementById('ph-date').textContent=new Date().toLocaleDateString('es-MX',{day:'2-digit',month:'long',year:'numeric'});
+  window.print();
 }
 function newQuote(){
   cart=[];

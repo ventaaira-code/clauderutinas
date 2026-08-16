@@ -98,6 +98,17 @@ tbody td.r{text-align:right;font-variant-numeric:tabular-nums}
 .q-expand table{font-size:.72rem}
 .q-expand thead th{background:#edf1f7}
 
+/* STATUS BADGES */
+.badge-pending{background:#fef3c7;color:#d97706}
+.badge-cotizado{background:#dbeafe;color:#1d4ed8}
+.badge-aceptado{background:#dcfce7;color:#16a34a}
+.badge-entregado{background:#ede9fe;color:#7c3aed}
+.badge-cancelado{background:#fee2e2;color:#dc2626}
+.status-sel{border:1.5px solid #dde4ee;border-radius:6px;padding:.22rem .4rem;font-family:inherit;font-size:.65rem;font-weight:600;color:#1a2d5a;background:#fff;cursor:pointer;outline:none}
+.status-sel:focus{border-color:#f97316}
+.btn-wa-reply{display:inline-flex;align-items:center;gap:.35rem;padding:.26rem .65rem;border-radius:6px;background:#25D366;color:#fff;border:none;font-family:inherit;font-size:.65rem;font-weight:700;cursor:pointer;text-decoration:none;transition:background .12s}
+.btn-wa-reply:hover{background:#1db954}
+
 /* UTIL */
 .btn-sm{padding:.28rem .65rem;border-radius:6px;border:1.5px solid #dde4ee;background:#fff;font-family:inherit;font-size:.65rem;font-weight:600;color:#475569;cursor:pointer}
 .btn-sm:hover{border-color:#1a2d5a;color:#1a2d5a}
@@ -167,7 +178,7 @@ tbody td.r{text-align:right;font-variant-numeric:tabular-nums}
       <div class="search-bar">🔍 <input id="q-search" placeholder="Buscar por número, cliente, obra…" oninput="renderQuotes()"></div>
       <div class="card">
         <div class="card-head"><div class="card-title" id="q-count">Cotizaciones</div></div>
-        <div class="tbl-wrap"><table><thead><tr><th>Número</th><th>Cliente</th><th>Teléfono</th><th>Obra</th><th>Fecha</th><th class="r">Subtotal</th><th class="r">IVA</th><th class="r">Total</th><th></th></tr></thead><tbody id="quotes-body"></tbody></table></div>
+        <div class="tbl-wrap"><table><thead><tr><th>Número</th><th>Cliente</th><th>Teléfono</th><th>Obra</th><th>Fecha</th><th class="r">Subtotal</th><th class="r">IVA</th><th class="r">Total</th><th>Estado</th><th></th></tr></thead><tbody id="quotes-body"></tbody></table></div>
       </div>
     </div>
 
@@ -280,6 +291,36 @@ function renderDashboard() {
     </tr>`).join('') || '<tr><td colspan="5" style="text-align:center;color:#94a3b8;padding:1.5rem">Sin cotizaciones aún</td></tr>';
 }
 
+function statusBadge(st) {
+  const map = {
+    pending:   ['badge-pending',  '⏳ Pendiente'],
+    cotizado:  ['badge-cotizado', '📋 Cotizado'],
+    aceptado:  ['badge-aceptado', '✅ Aceptado'],
+    entregado: ['badge-entregado','📦 Entregado'],
+    cancelado: ['badge-cancelado','❌ Cancelado']
+  };
+  const [cls, lbl] = map[st] || map.pending;
+  return `<span class="badge ${cls}">${lbl}</span>`;
+}
+
+async function updateStatus(id, newStatus) {
+  try {
+    const res = await fetch('/api/admin-quotes', {
+      method: 'PUT',
+      headers: {'Content-Type':'application/json', Authorization:'Bearer '+token},
+      body: JSON.stringify({id, status: newStatus})
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error);
+    const idx = allQuotes.findIndex(q => q.id === id);
+    if (idx >= 0) allQuotes[idx].status = newStatus;
+    renderQuotes();
+    toast('Estado actualizado');
+  } catch(e) {
+    toast(e.message || 'Error al actualizar','err');
+  }
+}
+
 function renderQuotes() {
   const q = (document.getElementById('q-search').value||'').toLowerCase();
   const filtered = allQuotes.filter(r =>
@@ -289,7 +330,15 @@ function renderQuotes() {
     (r.client_phone||'').includes(q)
   );
   document.getElementById('q-count').textContent = `Cotizaciones (${filtered.length})`;
-  document.getElementById('quotes-body').innerHTML = filtered.map(q => `
+  document.getElementById('quotes-body').innerHTML = filtered.map(q => {
+    const phone = (q.client_phone||'').replace(/\D/g,'');
+    const waPhone = phone.length === 10 ? '52'+phone : phone;
+    const itemsLines = ((q.items)||[]).map(it=>`• ${it.name||it.nombre||''} x${it.qty||it.cantidad||1}`).join('\n');
+    const totalFmt = (q.total||0).toLocaleString('es-MX',{minimumFractionDigits:2,maximumFractionDigits:2});
+    const waText = encodeURIComponent(`Hola ${q.client_name||''}! Respecto a tu cotización *${q.number||''}*:\n\n${itemsLines}\n\n💰 Total: $${totalFmt}\n\n— COENERVGAS · 462 188 1152`);
+    const waLink = phone ? `https://wa.me/${waPhone}?text=${waText}` : '';
+    const st = q.status || 'pending';
+    return `
     <tr onclick="toggleQ('${q.id}')" style="cursor:pointer">
       <td><strong>${q.number||'—'}</strong></td>
       <td>${q.client_name||'—'}</td>
@@ -299,16 +348,29 @@ function renderQuotes() {
       <td class="r">${fmt(q.subtotal)}</td>
       <td class="r">${fmt(q.iva)}</td>
       <td class="r"><strong>${fmt(q.total)}</strong></td>
+      <td>${statusBadge(st)}</td>
       <td><span style="font-size:.7rem;color:#94a3b8">▼</span></td>
     </tr>
-    <tr id="qx-${q.id}"><td colspan="9" style="padding:0">
+    <tr id="qx-${q.id}"><td colspan="10" style="padding:0">
       <div class="q-expand" id="qe-${q.id}">
+        <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.55rem;flex-wrap:wrap">
+          <label style="font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#64748b">Estado:</label>
+          <select class="status-sel" onchange="updateStatus('${q.id}',this.value)" onclick="event.stopPropagation()">
+            <option value="pending" ${st==='pending'?'selected':''}>⏳ Pendiente</option>
+            <option value="cotizado" ${st==='cotizado'?'selected':''}>📋 Cotizado</option>
+            <option value="aceptado" ${st==='aceptado'?'selected':''}>✅ Aceptado</option>
+            <option value="entregado" ${st==='entregado'?'selected':''}>📦 Entregado</option>
+            <option value="cancelado" ${st==='cancelado'?'selected':''}>❌ Cancelado</option>
+          </select>
+          ${waLink?`<a href="${waLink}" target="_blank" rel="noopener" class="btn-wa-reply" onclick="event.stopPropagation()">💬 Responder por WA</a>`:''}
+        </div>
         <table><thead><tr><th>#</th><th>Material</th><th>Calibre</th><th class="r">Cant.</th><th class="r">P.Unit</th><th class="r">Importe</th></tr></thead>
         <tbody>${((q.items)||[]).map((it,i)=>`<tr><td>${i+1}</td><td>${it.name||it.nombre||'—'}</td><td>${it.size||it.calibre||'—'}</td><td class="r">${it.qty||it.cantidad||1}</td><td class="r">${fmt(it.price||0)}</td><td class="r">${fmt((it.price||0)*(it.qty||it.cantidad||1))}</td></tr>`).join('')}</tbody>
         </table>
         ${q.notes?`<div style="margin-top:.5rem;font-size:.7rem;color:#64748b">📝 ${q.notes}</div>`:''}
       </div>
-    </td></tr>`).join('') || '<tr><td colspan="9" style="text-align:center;color:#94a3b8;padding:1.5rem">Sin cotizaciones</td></tr>';
+    </td></tr>`;
+  }).join('') || '<tr><td colspan="10" style="text-align:center;color:#94a3b8;padding:1.5rem">Sin cotizaciones</td></tr>';
 }
 
 function toggleQ(id) {
