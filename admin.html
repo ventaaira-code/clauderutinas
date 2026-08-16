@@ -355,7 +355,7 @@ function renderCatAdmin() {
       </div>
       <div class="ci-price">
         <span>$</span>
-        <input type="number" id="p-${item.id}" value="${item.price}" min="0" step="1" onkeydown="if(event.key==='Enter')savePrice('${item.id}')">
+        <input type="number" id="p-${item.id}" value="${item.price}" min="0" step="0.01" onkeydown="if(event.key==='Enter')savePrice('${item.id}')">
         <button class="btn-save" id="b-${item.id}" onclick="savePrice('${item.id}')">Guardar</button>
       </div>
     </div>`).join('')}
