@@ -119,7 +119,8 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:13px;li
 
 /* ── IA ── */
 .ia-layout{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
-.drop{border:2px dashed var(--border);border-radius:12px;padding:2.5rem 1.5rem;text-align:center;background:var(--surf);cursor:pointer;transition:all .18s}
+.drop{border:2px dashed var(--border);border-radius:12px;padding:1.5rem 1rem;text-align:center;background:var(--surf);cursor:pointer;transition:all .18s}
+@media(max-width:760px){.drop{padding:.85rem .75rem}.drop-icon{font-size:1.5rem!important;margin-bottom:.3rem!important}.drop-s{display:none}.ia-tips{display:none}}
 .drop:hover,.drop.drag-over{border-color:var(--acc);background:rgba(249,115,22,.04)}
 .drop-icon{font-size:2.2rem;margin-bottom:.6rem}
 .drop-t{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:.25rem}
@@ -482,8 +483,8 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:13px;li
             </div>
           </div>
 
-          <!-- Tips -->
-          <div style="margin-top:.9rem;background:#f0f9f4;border:1px solid #a7f3d0;border-radius:8px;padding:.75rem 1rem;font-size:.68rem;color:#065f46;line-height:1.6">
+          <!-- Tips (hidden on mobile to save space) -->
+          <div class="ia-tips" style="margin-top:.9rem;background:#f0f9f4;border:1px solid #a7f3d0;border-radius:8px;padding:.75rem 1rem;font-size:.68rem;color:#065f46;line-height:1.6">
             <strong>🤖 IA activa — Claude Vision</strong><br>
             Sube una foto clara del plano o lista. Funciona mejor con imágenes bien iluminadas, sin desenfoque y con texto legible.
           </div>
@@ -507,7 +508,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:13px;li
           <div class="ia-results" id="ia-results">
             <div id="ia-list"></div>
             <div style="margin-top:.85rem;display:flex;flex-direction:column;gap:.4rem">
-              <button class="btn btn-acc" style="width:100%;justify-content:center" onclick="addIAToCart()">+ Agregar todo a cotización</button>
+              <button class="btn btn-acc" style="width:100%;justify-content:center;padding:.6rem" onclick="addIAToCart()">✅ Agregar todo y cotizar</button>
               <button class="btn btn-ghost btn-sm" style="width:100%;justify-content:center" onclick="clearIA()">Analizar otro archivo</button>
             </div>
           </div>
@@ -617,6 +618,34 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:13px;li
   </div><!-- /content -->
 </div><!-- /main -->
 </div><!-- /app -->
+
+<!-- Quote Success Modal -->
+<div id="quote-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;align-items:center;justify-content:center;padding:1rem">
+  <div style="background:#fff;border-radius:14px;max-width:400px;width:100%;padding:1.6rem;box-shadow:0 20px 60px rgba(0,0,0,.25)">
+    <div style="text-align:center;margin-bottom:1.1rem">
+      <div style="font-size:2.4rem;margin-bottom:.4rem">✅</div>
+      <div style="font-size:1rem;font-weight:900;color:#1a2d5a">¡Cotización generada!</div>
+      <div id="qm-num" style="font-size:.75rem;color:#f97316;font-weight:700;margin-top:.2rem"></div>
+    </div>
+    <p style="font-size:.78rem;color:#475569;text-align:center;margin-bottom:1.2rem;line-height:1.5">
+      Tu solicitud está lista. Envíala por WhatsApp o descarga el PDF con precios.
+    </p>
+    <div style="display:flex;flex-direction:column;gap:.6rem">
+      <a id="qm-wa" href="#" target="_blank" rel="noopener"
+         style="background:#25D366;color:#fff;padding:.65rem;border-radius:8px;text-decoration:none;font-size:.8rem;font-weight:700;text-align:center;display:block">
+        💬 Enviar por WhatsApp
+      </a>
+      <button id="qm-pdf"
+         style="background:#1a2d5a;color:#fff;padding:.65rem;border-radius:8px;border:none;cursor:pointer;font-size:.8rem;font-weight:700;font-family:inherit">
+        📄 Descargar / Compartir PDF
+      </button>
+      <button onclick="document.getElementById('quote-modal').style.display='none';goSec('historial',null);renderHistory();"
+         style="background:transparent;color:#94a3b8;border:none;cursor:pointer;font-size:.75rem;font-family:inherit;padding:.3rem">
+        Ver historial de cotizaciones →
+      </button>
+    </div>
+  </div>
+</div>
 
 <!-- WhatsApp Float -->
 <a href="https://wa.me/524621881152?text=Hola%2C%20me%20interesa%20cotizar%20materiales%20para%20gas%20L.P." target="_blank" rel="noopener" class="wa-float" title="WhatsApp">
@@ -954,19 +983,49 @@ async function requestQuote(){
     });
     const d=await res.json();
     rec.num=d.quote?.number||('COT-'+String(history.length+501).padStart(3,'0'));
+    rec.id=d.quote?.id||null;
   } catch(e){
     rec.num='COT-'+String(history.length+501).padStart(3,'0');
   }
   history.unshift(rec);
   saveState();
-  // Notify admin via WhatsApp
-  const waItems=rec.items.map(i=>`• ${i.name}${i.size?' '+i.size:''} x${i.qty}`).join('\n');
-  const waMsg=`🔔 *Nueva solicitud: ${rec.num}*\n\n👤 ${rec.emp}${rec.tel?' · '+rec.tel:''}\n📍 ${rec.obra||'Sin obra especificada'}\n\n${waItems}\n\n💰 Total: $${rec.total.toLocaleString('es-MX',{minimumFractionDigits:2})}`;
-  setTimeout(()=>window.open('https://wa.me/524621881152?text='+encodeURIComponent(waMsg),'_blank'),400);
-  toast('✓ Cotización '+rec.num+' guardada','ok');
-  goSec('historial',null);
-  renderHistory();
   newQuote();
+  showQuoteModal(rec);
+}
+
+function showQuoteModal(rec){
+  const waItems=rec.items.map(i=>`• ${i.name}${i.size?' '+i.size:''} x${i.qty}`).join('\n');
+  const waMsg=`🔔 *Nueva solicitud: ${rec.num}*\n\n👤 ${rec.emp}${rec.tel?' · '+rec.tel:''}\n📍 ${rec.obra||'Sin obra especificada'}\n\n${waItems}`;
+  const waUrl='https://wa.me/524621881152?text='+encodeURIComponent(waMsg);
+
+  // Use rec.id from server response
+  const quoteId=rec.id||history[0]?.id||'';
+  const pdfUrl=quoteId?`/api/request-pdf?id=${quoteId}`:'';
+
+  const modal=document.getElementById('quote-modal');
+  document.getElementById('qm-num').textContent=rec.num;
+  document.getElementById('qm-wa').href=waUrl;
+  document.getElementById('qm-pdf').onclick=async function(){
+    if(!pdfUrl){toast('ID no disponible, refresca el historial');return;}
+    try{
+      toast('Generando PDF…');
+      const r=await fetch(pdfUrl);
+      if(!r.ok) throw new Error('Error');
+      const blob=await r.blob();
+      const file=new File([blob],`${rec.num}-COENERVGAS.pdf`,{type:'application/pdf'});
+      if(navigator.canShare&&navigator.canShare({files:[file]})){
+        await navigator.share({files:[file],title:`Solicitud ${rec.num} — COENERVGAS`});
+      } else {
+        const url=URL.createObjectURL(blob);
+        const a=document.createElement('a');
+        a.href=url;a.download=`${rec.num}-COENERVGAS.pdf`;
+        document.body.appendChild(a);a.click();
+        document.body.removeChild(a);URL.revokeObjectURL(url);
+        toast('📄 PDF descargado','ok');
+      }
+    }catch(e){toast(e.name==='AbortError'?'Compartir cancelado':'Error al generar PDF','err');}
+  };
+  modal.style.display='flex';
 }
 function doPrint(){
   const num=history.length?history[0].num:'BORRADOR';
