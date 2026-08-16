@@ -1,29 +1,6 @@
 const { createClient } = require('@supabase/supabase-js');
 const { Resend } = require('resend');
-
-const money = n => new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN'}).format(n||0);
-
-function itemsTableWithPrices(items) {
-  const rows = (items||[]).map(i => {
-    const precio = i.price || 0;
-    const importe = precio * (i.qty || 1);
-    return `<tr>
-      <td style="padding:7px 10px;border-bottom:1px solid #eee">${i.name||''} ${i.size||''}</td>
-      <td style="padding:7px 10px;border-bottom:1px solid #eee;text-align:center">${i.qty||1}</td>
-      <td style="padding:7px 10px;border-bottom:1px solid #eee">${i.unit||''}</td>
-      <td style="padding:7px 10px;border-bottom:1px solid #eee;text-align:right;font-variant-numeric:tabular-nums">${money(precio)}</td>
-      <td style="padding:7px 10px;border-bottom:1px solid #eee;text-align:right;font-variant-numeric:tabular-nums">${money(importe)}</td>
-    </tr>`;
-  }).join('');
-  return `<table style="width:100%;border-collapse:collapse;font-size:13px">
-    <thead><tr style="background:#1a2d5a;color:#fff">
-      <th style="padding:7px 10px;text-align:left">Material</th>
-      <th style="padding:7px 10px;text-align:center">Cant.</th>
-      <th style="padding:7px 10px;text-align:left">Unidad</th>
-      <th style="padding:7px 10px;text-align:right">P. Unit.</th>
-      <th style="padding:7px 10px;text-align:right">Importe</th>
-    </tr></thead><tbody>${rows}</tbody></table>`;
-}
+const generateQuotePDF = require('./generate-pdf');
 
 function sb() {
   return createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
@@ -78,16 +55,18 @@ module.exports = async function handler(req, res) {
           const resend = new Resend(process.env.RESEND_API_KEY);
           const num    = data.number || '';
           const nombre = data.client_name || 'Cliente';
-          const obra   = data.obra || 'No especificada';
-          const table  = itemsTableWithPrices(data.items);
-          const sub    = data.subtotal || 0;
-          const iva    = data.iva || 0;
-          const total  = data.total || 0;
+
+          // Generate PDF attachment
+          const pdfBuffer = await generateQuotePDF(data);
 
           await resend.emails.send({
             from: 'COENERVGAS <onboarding@resend.dev>',
             to:   [clientEmail],
             subject: `${num} — Tu cotización está lista, ${nombre}`,
+            attachments: [{
+              filename: `${num}-COENERVGAS.pdf`,
+              content:  pdfBuffer.toString('base64'),
+            }],
             html: `
               <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto">
                 <div style="background:#1a2d5a;padding:20px 24px;border-radius:8px 8px 0 0">
@@ -97,30 +76,19 @@ module.exports = async function handler(req, res) {
                 <div style="background:#fff;border:1px solid #e8edf5;padding:24px;border-radius:0 0 8px 8px">
                   <p style="font-size:14px;color:#0f172a">Hola <strong>${nombre}</strong>,</p>
                   <p style="font-size:13px;color:#475569;line-height:1.6">
-                    Tu cotización <strong>${num}</strong> está lista. Aquí tienes el desglose de precios:
+                    Tu cotización <strong>${num}</strong> está lista. Encuéntrala adjunta como PDF en este correo.
                   </p>
 
-                  <div style="background:#f8fafd;border-radius:6px;padding:12px 16px;margin-bottom:18px;font-size:13px">
-                    <strong>Folio:</strong> ${num} &nbsp;·&nbsp; <strong>Obra:</strong> ${obra}
+                  <div style="margin:20px 0;background:#f0f9f4;border:1px solid #a7f3d0;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px">
+                    <span style="font-size:28px">📄</span>
+                    <div>
+                      <div style="font-size:13px;font-weight:700;color:#065f46">${num}-COENERVGAS.pdf</div>
+                      <div style="font-size:12px;color:#047857;margin-top:2px">Cotización formal adjunta · incluye precios y totales</div>
+                    </div>
                   </div>
 
-                  ${table}
-
-                  <div style="margin-top:14px;border-top:2px solid #1a2d5a;padding-top:10px">
-                    <table style="width:100%;font-size:13px">
-                      <tr><td style="padding:3px 10px;color:#475569">Subtotal</td><td style="padding:3px 10px;text-align:right;font-variant-numeric:tabular-nums">${money(sub)}</td></tr>
-                      <tr><td style="padding:3px 10px;color:#475569">IVA 16%</td><td style="padding:3px 10px;text-align:right;font-variant-numeric:tabular-nums">${money(iva)}</td></tr>
-                      <tr style="font-weight:700;font-size:14px">
-                        <td style="padding:6px 10px;color:#1a2d5a">TOTAL</td>
-                        <td style="padding:6px 10px;text-align:right;color:#f97316;font-variant-numeric:tabular-nums">${money(total)}</td>
-                      </tr>
-                    </table>
-                  </div>
-
-                  ${data.notes ? `<p style="margin-top:14px;font-size:13px;color:#475569;background:#f8fafd;padding:10px 14px;border-radius:6px">📝 ${data.notes}</p>` : ''}
-
-                  <div style="margin-top:20px;background:#f0f9ff;border-radius:6px;padding:14px 16px;border-left:3px solid #f97316">
-                    <p style="margin:0;font-size:13px;color:#1a2d5a"><strong>¿Tienes dudas o quieres confirmar tu pedido?</strong></p>
+                  <div style="margin-top:18px;background:#f0f9ff;border-radius:6px;padding:14px 16px;border-left:3px solid #f97316">
+                    <p style="margin:0;font-size:13px;color:#1a2d5a"><strong>¿Listo para confirmar tu pedido?</strong></p>
                     <p style="margin:6px 0 0;font-size:13px">📱 <a href="https://wa.me/524621881152" style="color:#f97316;font-weight:700">462 188 1152</a> · WhatsApp disponible</p>
                   </div>
 
