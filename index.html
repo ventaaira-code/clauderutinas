@@ -1,5 +1,14 @@
 <title>COENERVGAS · Plataforma</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#1a2d5a">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="COENERVGAS">
+<link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" href="/icons/icon-180.png">
+<link rel="apple-touch-icon" sizes="167x167" href="/icons/icon-167.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/icons/icon-152.png">
 <style>
 :root{
   --pri:#1a2d5a;--pri-l:#243d76;--pri-d:#0e1e3a;
@@ -1295,4 +1304,9 @@ renderCart();
 renderCat();
 renderProfile();
 // Hide TB actions on non-cotizar sections by default (already shown)
+
+// ── SERVICE WORKER (PWA) ──
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js').catch(() => {});
+}
 </script>
