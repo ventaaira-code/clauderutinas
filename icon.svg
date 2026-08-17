@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#1a2d5a" rx="76"/>
+  <!-- C arc centered at (248,256) radius 150, gap opens right -->
+  <path d="M 354,150 A 150,150 0 1,0 354,362" stroke="#ffffff" stroke-width="70" fill="none" stroke-linecap="square"/>
+  <!-- Tick top -->
+  <line x1="334" y1="143" x2="376" y2="168" stroke="#ffffff" stroke-width="26" stroke-linecap="round"/>
+  <!-- Tick bottom -->
+  <line x1="334" y1="369" x2="376" y2="344" stroke="#ffffff" stroke-width="26" stroke-linecap="round"/>
+  <!-- Flame -->
+  <path d="M 242,318 C 196,286 190,242 214,190 C 221,220 242,208 238,180 C 266,208 282,252 282,280 C 273,265 253,260 251,276 C 267,290 267,318 242,318 Z" fill="#f97316"/>
+</svg>
