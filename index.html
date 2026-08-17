@@ -34,6 +34,13 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:13px;li
 .topbar{background:var(--surf);border-bottom:1px solid var(--border);padding:.6rem 1.4rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;box-shadow:var(--sh-sm)}
 .tb-title{font-size:.95rem;font-weight:700}.tb-sub{font-size:.65rem;color:var(--text3);margin-top:1px}
 .tb-actions{display:flex;gap:.45rem;align-items:center}
+.tb-brand{display:none;align-items:center;gap:.5rem;cursor:pointer;margin-right:.85rem;flex-shrink:0;padding:.2rem .3rem;border-radius:6px;transition:background .12s}
+.tb-brand:hover{background:var(--surf2)}
+.tb-bmark{width:30px;height:30px;flex-shrink:0}
+.tb-bname{font-size:.82rem;font-weight:900;letter-spacing:.04em;color:var(--pri);line-height:1.1}
+.tb-bname span{color:var(--acc)}
+.tb-bsub{font-size:.42rem;letter-spacing:.09em;text-transform:uppercase;color:var(--text3)}
+@media(max-width:760px){.tb-brand{display:flex}}
 .content{padding:1.3rem;flex:1}
 .sec{display:none}.sec.on{display:block}
 
@@ -112,7 +119,8 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:13px;li
 
 /* ── IA ── */
 .ia-layout{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
-.drop{border:2px dashed var(--border);border-radius:12px;padding:2.5rem 1.5rem;text-align:center;background:var(--surf);cursor:pointer;transition:all .18s}
+.drop{border:2px dashed var(--border);border-radius:12px;padding:1.5rem 1rem;text-align:center;background:var(--surf);cursor:pointer;transition:all .18s}
+@media(max-width:760px){.drop{padding:.85rem .75rem}.drop-icon{font-size:1.5rem!important;margin-bottom:.3rem!important}.drop-s{display:none}.ia-tips{display:none}}
 .drop:hover,.drop.drag-over{border-color:var(--acc);background:rgba(249,115,22,.04)}
 .drop-icon{font-size:2.2rem;margin-bottom:.6rem}
 .drop-t{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:.25rem}
@@ -187,10 +195,40 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:13px;li
 }
 @media(min-width:761px){.mob-nav{display:none}}
 @media print{
-  .sidebar,.topbar,.mob-nav,.tot-panel .btn,.btn-acc,.btn-ghost,.drop,.ia-panel{display:none!important}
+  .sidebar,.topbar,.mob-nav,.tot-panel,.drop,.ia-panel,.info-banner,.wa-float,.sec:not(#sec-cotizar){display:none!important}
+  #sec-cotizar{display:block!important}
+  #print-header{display:flex!important}
   .main{margin-left:0}.qb-wrap{grid-template-columns:1fr}
-  .card{box-shadow:none;border:1px solid #dde4ee}
+  .card{box-shadow:none;border:1px solid #cdd5e0}
+  body{background:#fff;font-size:11px}
+  .content{padding:.5rem}
+  @page{margin:1.5cm}
 }
+
+/* ── NOSOTROS ADDITIONS ── */
+.s-exp{font-size:.45rem;color:rgba(249,115,22,.8);letter-spacing:.06em;margin-top:1px;text-transform:uppercase;font-weight:600}
+.s-wa{display:flex;align-items:center;gap:.45rem;padding:.38rem .9rem;color:#4ade80;font-size:.7rem;font-weight:600;cursor:pointer;text-decoration:none;transition:color .12s}
+.s-wa:hover{color:#86efac}
+.info-banner{background:linear-gradient(135deg,#0e1e3a 0%,#1a2d5a 100%);border-radius:var(--r);color:#fff;padding:1.1rem 1.25rem;margin-bottom:1rem;display:flex;gap:1.2rem;align-items:center;flex-wrap:wrap}
+.ib-left{flex:1;min-width:220px}
+.ib-badge{display:inline-flex;align-items:center;gap:.35rem;background:rgba(249,115,22,.2);color:#fb923c;padding:.2rem .65rem;border-radius:12px;font-size:.58rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:.55rem}
+.ib-title{font-size:.88rem;font-weight:800;line-height:1.25;margin-bottom:.3rem}
+.ib-sub{font-size:.68rem;opacity:.7;line-height:1.55}
+.ib-right{display:flex;flex-direction:column;gap:.4rem;flex-shrink:0}
+.ib-btn{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;padding:.38rem .9rem;border-radius:6px;font-size:.7rem;font-weight:600;text-decoration:none;font-family:inherit;border:none;cursor:pointer;white-space:nowrap}
+.ib-btn-wa{background:#25D366;color:#fff}
+.ib-btn-ph{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.2)}
+.ib-btn-wa:hover{background:#1db954}.ib-btn-ph:hover{background:rgba(255,255,255,.2)}
+.nos-svc{display:flex;gap:.65rem;align-items:flex-start;padding:.65rem 0;border-bottom:1px solid var(--border)}
+.nos-svc:last-child{border-bottom:none}
+.nos-icon{width:34px;height:34px;border-radius:6px;background:rgba(249,115,22,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.9rem}
+.nos-svc-t{font-size:.78rem;font-weight:600;margin-bottom:.15rem}
+.nos-svc-s{font-size:.68rem;color:var(--text2);line-height:1.5}
+.nos-big{font-size:2.8rem;font-weight:900;color:#f97316;line-height:1}
+.wa-float{position:fixed;bottom:1.5rem;right:1.4rem;width:52px;height:52px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 18px rgba(37,211,102,.5);z-index:997;cursor:pointer;text-decoration:none;transition:transform .15s}
+.wa-float:hover{transform:scale(1.08)}
+.wa-float svg{width:28px;height:28px;fill:#fff}
+@media(max-width:760px){.wa-float{bottom:70px;right:1rem}.info-banner{flex-direction:column;gap:.75rem}.ib-right{flex-direction:row;flex-wrap:wrap}}
 </style>
 
 <!-- APP -->
@@ -207,7 +245,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:13px;li
         <path d="M 48,57 C 40,50 39,42 44,33 C 46,43 51,38 49,29 C 55,37 58,47 58,53 C 56,50 52,48 51,51 C 54,54 54,57 48,57 Z" fill="#f97316"/>
       </svg>
     </div>
-    <div><div class="s-name">COENER<span>V</span>GAS</div><div class="s-sub">Cotizador en línea</div></div>
+    <div><div class="s-name">COENER<span>V</span>GAS</div><div class="s-sub">Cotizador en línea</div><div class="s-exp">+13 años en la industria</div></div>
   </div>
 
   <div class="n-lbl">Principal</div>
@@ -230,7 +268,18 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:13px;li
     <span class="ni-icon">👤</span> Mi perfil
   </div>
 
-  <div class="s-bot"><div class="s-ver">COENERVGAS · Salamanca, Gto. · 464 109 2242</div></div>
+  <div class="n-lbl">Empresa</div>
+  <div class="ni" data-sec="nosotros" onclick="goSec('nosotros',this)">
+    <span class="ni-icon">🏢</span> Nosotros
+  </div>
+
+  <div class="s-bot">
+    <a href="https://wa.me/524621881152?text=Hola%2C%20me%20interesa%20cotizar%20materiales%20para%20gas%20L.P." target="_blank" rel="noopener" class="s-wa">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+      WhatsApp · 462 188 1152
+    </a>
+    <div class="s-ver">COENERVGAS · Salamanca, Gto.</div>
+  </div>
 </nav>
 
 <!-- MOBILE NAV -->
@@ -239,15 +288,24 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:13px;li
   <div class="mn-i" onclick="goSec('catalogo',this)"><span class="mn-icon">📚</span>Catálogo</div>
   <div class="mn-i" onclick="goSec('ia',this)"><span class="mn-icon">🤖</span>IA</div>
   <div class="mn-i" onclick="goSec('historial',this)"><span class="mn-icon">🗂️</span>Historial</div>
-  <div class="mn-i" onclick="goSec('perfil',this)"><span class="mn-icon">👤</span>Perfil</div>
+  <div class="mn-i" onclick="goSec('nosotros',this)"><span class="mn-icon">🏢</span>Nosotros</div>
 </div>
 
 <!-- MAIN -->
 <div class="main">
   <div class="topbar">
+    <div class="tb-brand" onclick="goSec('cotizar',null)" title="Inicio">
+      <svg class="tb-bmark" viewBox="20 12 56 66" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 62.9,23.7 A 26,26 0 1,0 62.9,66.3" stroke="#1a2d5a" stroke-width="11" fill="none" stroke-linecap="butt"/>
+        <line x1="58" y1="20.3" x2="67.8" y2="27.1" stroke="#1a2d5a" stroke-width="3.5" stroke-linecap="round"/>
+        <line x1="58" y1="69.7" x2="67.8" y2="62.9" stroke="#1a2d5a" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M 48,57 C 40,50 39,42 44,33 C 46,43 51,38 49,29 C 55,37 58,47 58,53 C 56,50 52,48 51,51 C 54,54 54,57 48,57 Z" fill="#f97316"/>
+      </svg>
+      <div><div class="tb-bname">COENER<span>V</span>GAS</div><div class="tb-bsub">+13 años · Gas LP</div></div>
+    </div>
     <div><div class="tb-title" id="tb-title">Nueva cotización</div><div class="tb-sub" id="tb-sub">Agrega materiales desde el catálogo o sube una imagen</div></div>
     <div class="tb-actions">
-      <button class="btn btn-ghost btn-sm" onclick="clearCart()">🗑 Limpiar</button>
+      <button class="btn btn-ghost btn-sm" onclick="clearCart()">🆕 Nueva cotización</button>
       <button class="btn btn-pri btn-sm" onclick="requestQuote()">📄 Solicitar cotización</button>
     </div>
   </div>
@@ -256,6 +314,32 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:13px;li
 
     <!-- ════ COTIZAR ════ -->
     <div id="sec-cotizar" class="sec on">
+      <!-- Print letterhead (hidden on screen, shown @media print) -->
+      <div id="print-header" style="display:none;justify-content:space-between;align-items:flex-start;padding-bottom:.9rem;margin-bottom:1rem;border-bottom:3px solid #1a2d5a">
+        <div>
+          <div style="font-size:1.4rem;font-weight:900;color:#1a2d5a;letter-spacing:.04em;line-height:1">COENER<span style="color:#f97316">V</span>GAS</div>
+          <div style="font-size:.6rem;color:#475569;margin-top:.2rem">Gas L.P. · Instalaciones y Materiales · Salamanca, GTO</div>
+          <div style="font-size:.6rem;color:#475569">RFC: GASE820515MB5</div>
+          <div style="font-size:.6rem;color:#475569">Circuito Eucaliptos 262, Col. Las Arboledas, C.P. 36764</div>
+          <div style="font-size:.6rem;color:#475569">Tel: 462 188 1152 · Edgar Aaron Garcia</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:.55rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.1em">Cotización</div>
+          <div style="font-size:.95rem;font-weight:900;color:#1a2d5a" id="ph-num">BORRADOR</div>
+          <div style="font-size:.62rem;color:#64748b;margin-top:.2rem" id="ph-date"></div>
+        </div>
+      </div>
+      <div class="info-banner">
+        <div class="ib-left">
+          <div class="ib-badge">⚡ +13 años en la industria del gas</div>
+          <div class="ib-title">Materiales para Gas L.P. con respaldo técnico real</div>
+          <div class="ib-sub">No somos un mostrador más. Asesoría real para proyectos residenciales, comerciales e industriales.</div>
+        </div>
+        <div class="ib-right">
+          <a href="https://wa.me/524621881152?text=Hola%2C%20me%20interesa%20cotizar%20materiales%20para%20gas%20L.P." target="_blank" rel="noopener" class="ib-btn ib-btn-wa">💬 WhatsApp</a>
+          <a href="tel:+524621881152" class="ib-btn ib-btn-ph">📞 462 188 1152</a>
+        </div>
+      </div>
       <div class="qb-wrap">
         <!-- Left: client info + table -->
         <div class="qb-left">
@@ -293,8 +377,6 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:13px;li
                     <th>Material</th>
                     <th class="c" style="width:60px">Unidad</th>
                     <th class="c" style="width:65px">Cant.</th>
-                    <th class="r" style="width:95px">P. Unitario</th>
-                    <th class="r" style="width:100px">Importe</th>
                     <th style="width:24px"></th>
                   </tr></thead>
                   <tbody id="cart-body"></tbody>
@@ -321,22 +403,24 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:13px;li
         <div class="tot-panel">
           <div class="card cp" style="margin-bottom:.75rem">
             <div class="ct">Resumen</div>
-            <div class="t-row"><span class="tl">Partidas</span><span class="tv" id="tot-items">0</span></div>
-            <div class="t-row"><span class="tl">Subtotal</span><span class="tv" id="tot-sub">$0.00</span></div>
-            <div class="t-row"><span class="tl">IVA 16%</span><span class="tv" id="tot-iva">$0.00</span></div>
-            <div class="grand-box" style="margin-top:.75rem">
-              <div><div class="gb-lbl">Total estimado</div></div>
-              <div class="gb-amt" id="tot-total">$0.00</div>
+            <div class="t-row"><span class="tl">Partidas agregadas</span><span class="tv" id="tot-items">0</span></div>
+            <!-- Valores internos ocultos (usados al guardar en Supabase y WA al admin) -->
+            <span id="tot-sub" style="display:none"></span>
+            <span id="tot-iva" style="display:none"></span>
+            <span id="tot-total" style="display:none"></span>
+            <div style="background:#f0f9ff;border-radius:8px;padding:.85rem 1rem;margin-top:.65rem;border:1px solid #bae6fd">
+              <div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.09em;color:#0369a1;font-weight:700;margin-bottom:.25rem">Precio</div>
+              <div style="font-size:.78rem;font-weight:700;color:#1a2d5a;line-height:1.4">Se confirmará en tu cotización formal</div>
             </div>
-            <div style="margin-top:.75rem;font-size:.62rem;color:var(--text3);line-height:1.5">
-              Precios sujetos a vigencia de 15 días. COENERVGAS confirmará disponibilidad.
+            <div style="margin-top:.65rem;font-size:.6rem;color:var(--text3);line-height:1.55">
+              COENERVGAS te enviará precio y disponibilidad directamente por WhatsApp o correo.
             </div>
           </div>
           <button class="btn btn-acc" style="width:100%;justify-content:center;padding:.55rem" onclick="requestQuote()">
             📄 Solicitar cotización formal
           </button>
-          <button class="btn btn-ghost" style="width:100%;justify-content:center;padding:.45rem;margin-top:.4rem" onclick="window.print()">
-            🖨 Imprimir borrador
+          <button class="btn btn-ghost" style="width:100%;justify-content:center;padding:.45rem;margin-top:.4rem" onclick="doPrint()">
+            🖨 Imprimir / PDF
           </button>
         </div>
       </div>
@@ -370,17 +454,24 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:13px;li
       <div class="ia-layout">
         <!-- Upload zone -->
         <div>
+          <!-- Mobile-friendly upload buttons -->
+          <div style="display:flex;gap:.6rem;margin-bottom:.75rem">
+            <button class="btn btn-acc" style="flex:1;justify-content:center;padding:.6rem" onclick="document.getElementById('file-pick-cam').click()">📷 Tomar foto</button>
+            <button class="btn btn-pri" style="flex:1;justify-content:center;padding:.6rem" onclick="document.getElementById('file-pick').click()">📁 Seleccionar archivo</button>
+          </div>
+          <input type="file" id="file-pick-cam" accept="image/*" capture="environment" style="display:none" onchange="handleFile(this.files[0])">
+          <input type="file" id="file-pick" accept="image/*,.pdf,.txt" style="display:none" onchange="handleFile(this.files[0])">
+
           <div class="drop" id="drop-zone" onclick="document.getElementById('file-pick').click()" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="handleDrop(event)">
             <div class="drop-icon">📂</div>
-            <div class="drop-t">Sube tu imagen o documento</div>
-            <div class="drop-s">Arrastra aquí, o haz clic para seleccionar.<br>También puedes tomar una foto desde tu celular.</div>
+            <div class="drop-t">O arrastra aquí tu archivo</div>
+            <div class="drop-s">JPG, PNG, PDF o texto — la IA detecta los materiales automáticamente.</div>
             <div class="drop-chips">
               <span class="dchip">📷 Foto / JPG / PNG</span>
               <span class="dchip">📄 PDF</span>
               <span class="dchip">📝 Lista de texto</span>
             </div>
           </div>
-          <input type="file" id="file-pick" accept="image/*,.pdf,.txt" style="display:none" onchange="handleFile(this.files[0])">
 
           <!-- Preview -->
           <div class="ia-file-preview" id="ia-preview">
@@ -392,8 +483,8 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:13px;li
             </div>
           </div>
 
-          <!-- Tips -->
-          <div style="margin-top:.9rem;background:#f0f9f4;border:1px solid #a7f3d0;border-radius:8px;padding:.75rem 1rem;font-size:.68rem;color:#065f46;line-height:1.6">
+          <!-- Tips (hidden on mobile to save space) -->
+          <div class="ia-tips" style="margin-top:.9rem;background:#f0f9f4;border:1px solid #a7f3d0;border-radius:8px;padding:.75rem 1rem;font-size:.68rem;color:#065f46;line-height:1.6">
             <strong>🤖 IA activa — Claude Vision</strong><br>
             Sube una foto clara del plano o lista. Funciona mejor con imágenes bien iluminadas, sin desenfoque y con texto legible.
           </div>
@@ -417,7 +508,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:13px;li
           <div class="ia-results" id="ia-results">
             <div id="ia-list"></div>
             <div style="margin-top:.85rem;display:flex;flex-direction:column;gap:.4rem">
-              <button class="btn btn-acc" style="width:100%;justify-content:center" onclick="addIAToCart()">+ Agregar todo a cotización</button>
+              <button class="btn btn-acc" style="width:100%;justify-content:center;padding:.6rem" onclick="addIAToCart()">✅ Agregar todo y cotizar</button>
               <button class="btn btn-ghost btn-sm" style="width:100%;justify-content:center" onclick="clearIA()">Analizar otro archivo</button>
             </div>
           </div>
@@ -427,15 +518,19 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:13px;li
 
     <!-- ════ HISTORIAL ════ -->
     <div id="sec-historial" class="sec">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
-        <div style="font-size:.88rem;font-weight:700">Mis cotizaciones guardadas</div>
-        <button class="btn btn-ghost btn-sm" onclick="clearHistory()">🗑 Borrar todo</button>
+      <div style="margin-bottom:1rem">
+        <div style="font-size:.88rem;font-weight:700;margin-bottom:.35rem">Mis cotizaciones</div>
+        <p style="font-size:.73rem;color:var(--text2);margin-bottom:.75rem">Ingresa tu número de teléfono para ver tus cotizaciones.</p>
+        <div style="display:flex;gap:.5rem;max-width:420px">
+          <input class="fi" id="hist-phone" type="tel" placeholder="Teléfono (10 dígitos)" style="flex:1" onkeydown="if(event.key==='Enter')searchHistory()">
+          <button class="btn btn-pri" onclick="searchHistory()">🔍 Buscar</button>
+        </div>
       </div>
       <div class="hist-list" id="hist-list"></div>
       <div id="hist-empty" style="display:none" class="empty-cart">
         <div class="ec-icon">🗂️</div>
-        <div class="ec-t">Sin cotizaciones guardadas</div>
-        <div class="ec-s">Al solicitar una cotización se guardará aquí automáticamente.</div>
+        <div class="ec-t">Sin cotizaciones encontradas</div>
+        <div class="ec-s">Verifica el número de teléfono e intenta de nuevo.</div>
       </div>
     </div>
 
@@ -463,9 +558,103 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:13px;li
       </div>
     </div>
 
+    <!-- ════ NOSOTROS ════ -->
+    <div id="sec-nosotros" class="sec">
+      <!-- Hero strip -->
+      <div style="background:linear-gradient(135deg,#0e1e3a 0%,#1a2d5a 100%);border-radius:var(--r);color:#fff;padding:1.4rem 1.5rem;margin-bottom:1rem;display:flex;gap:2rem;align-items:center;flex-wrap:wrap">
+        <div style="flex:1;min-width:200px">
+          <div class="nos-big">+13</div>
+          <div style="font-size:.72rem;opacity:.6;margin-bottom:.85rem;text-transform:uppercase;letter-spacing:.06em">Años en la industria del gas</div>
+          <div style="display:flex;gap:2rem">
+            <div><div style="font-size:1rem;font-weight:900">NOM</div><div style="font-size:.55rem;opacity:.5;text-transform:uppercase;letter-spacing:.06em">Normatividad</div></div>
+            <div><div style="font-size:1rem;font-weight:900">Bajío</div><div style="font-size:.55rem;opacity:.5;text-transform:uppercase;letter-spacing:.06em">Cobertura</div></div>
+            <div><div style="font-size:1rem;font-weight:900">13</div><div style="font-size:.55rem;opacity:.5;text-transform:uppercase;letter-spacing:.06em">Categorías</div></div>
+          </div>
+        </div>
+        <div style="flex:2;min-width:240px">
+          <div style="font-size:.82rem;font-weight:700;margin-bottom:.4rem">Conocemos la industria desde adentro</div>
+          <div style="font-size:.72rem;opacity:.75;line-height:1.65">COENERVGAS nace de más de una década de experiencia directa en la operación comercial de empresas gaseras. No aprendimos el negocio detrás de un mostrador: lo aprendimos en campo, en la gestión de proyectos y en el trato diario con instaladores, constructoras y operadores industriales.</div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+        <!-- Por qué COENERVGAS -->
+        <div class="card cp">
+          <div class="ct">Por qué COENERVGAS</div>
+          <div class="nos-svc">
+            <div class="nos-icon">🎓</div>
+            <div><div class="nos-svc-t">Asesoría con criterio técnico</div><div class="nos-svc-s">Sabemos cuándo una cédula 40 no es suficiente, por qué una conexión soldable conviene más que una roscada, y qué regulador necesitas según la carga térmica.</div></div>
+          </div>
+          <div class="nos-svc">
+            <div class="nos-icon">🔧</div>
+            <div><div class="nos-svc-t">Material para proyectos reales</div><div class="nos-svc-s">Tubería cobre tipo L/K/M, galvanizada, acero carbón Sch.40 y Sch.80. Conexiones, reguladores y válvulas con normatividad vigente.</div></div>
+          </div>
+          <div class="nos-svc">
+            <div class="nos-icon">⚡</div>
+            <div><div class="nos-svc-t">Respuesta el mismo día</div><div class="nos-svc-s">Arma tu lista aquí, envíala por WhatsApp y recibe cotización en horas. Sin intermediarios, atención directa.</div></div>
+          </div>
+          <div class="nos-svc">
+            <div class="nos-icon">🤝</div>
+            <div><div class="nos-svc-t">Aliado de gaseras y constructoras</div><div class="nos-svc-s">Entendemos volúmenes, tiempos de obra y la presión de un proyecto con fecha de entrega. Hablamos tu idioma.</div></div>
+          </div>
+        </div>
+
+        <!-- Contacto -->
+        <div class="card cp">
+          <div class="ct">Contacto directo</div>
+          <div style="display:flex;flex-direction:column;gap:.05rem;margin-bottom:1rem">
+            <div class="info-row"><span class="info-lbl">Empresa</span><span class="info-val" style="font-weight:700">COENERVGAS</span></div>
+            <div class="info-row"><span class="info-lbl">Contacto</span><span class="info-val">Edgar Aaron Garcia</span></div>
+            <div class="info-row"><span class="info-lbl">Teléfono</span><span class="info-val"><a href="tel:+524621881152" style="color:var(--pri);font-weight:600">462 188 1152</a></span></div>
+            <div class="info-row"><span class="info-lbl">Ciudad</span><span class="info-val">Salamanca, Guanajuato</span></div>
+            <div class="info-row"><span class="info-lbl">Dirección</span><span class="info-val">Circuito Eucaliptos 262<br><span style="color:var(--text2);font-size:.72rem">Col. Las Arboledas, C.P. 36764</span></span></div>
+            <div class="info-row"><span class="info-lbl">RFC</span><span class="info-val" style="font-size:.72rem;font-family:monospace">GASE820515MB5</span></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:.45rem">
+            <a href="https://wa.me/524621881152?text=Hola%2C%20me%20interesa%20cotizar%20materiales%20para%20gas%20L.P." target="_blank" rel="noopener" class="btn btn-acc" style="justify-content:center">💬 Enviar cotización por WhatsApp</a>
+            <a href="tel:+524621881152" class="btn btn-ghost" style="justify-content:center">📞 Llamar: 462 188 1152</a>
+            <a href="https://maps.app.goo.gl/DAGWgqJuzAcSJbm86" target="_blank" rel="noopener" class="btn btn-ghost btn-sm" style="justify-content:center">📍 Ver en Google Maps</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div><!-- /content -->
 </div><!-- /main -->
 </div><!-- /app -->
+
+<!-- Quote Success Modal -->
+<div id="quote-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;align-items:center;justify-content:center;padding:1rem">
+  <div style="background:#fff;border-radius:14px;max-width:400px;width:100%;padding:1.6rem;box-shadow:0 20px 60px rgba(0,0,0,.25)">
+    <div style="text-align:center;margin-bottom:1.1rem">
+      <div style="font-size:2.4rem;margin-bottom:.4rem">✅</div>
+      <div style="font-size:1rem;font-weight:900;color:#1a2d5a">¡Cotización generada!</div>
+      <div id="qm-num" style="font-size:.75rem;color:#f97316;font-weight:700;margin-top:.2rem"></div>
+    </div>
+    <p style="font-size:.78rem;color:#475569;text-align:center;margin-bottom:1.2rem;line-height:1.5">
+      Tu solicitud está lista. Envíala por WhatsApp o descarga el PDF con precios.
+    </p>
+    <div style="display:flex;flex-direction:column;gap:.6rem">
+      <a id="qm-wa" href="#" target="_blank" rel="noopener"
+         style="background:#25D366;color:#fff;padding:.65rem;border-radius:8px;text-decoration:none;font-size:.8rem;font-weight:700;text-align:center;display:block">
+        💬 Enviar por WhatsApp
+      </a>
+      <button id="qm-pdf"
+         style="background:#1a2d5a;color:#fff;padding:.65rem;border-radius:8px;border:none;cursor:pointer;font-size:.8rem;font-weight:700;font-family:inherit">
+        📄 Descargar / Compartir PDF
+      </button>
+      <button id="qm-hist"
+         style="background:transparent;color:#94a3b8;border:none;cursor:pointer;font-size:.75rem;font-family:inherit;padding:.3rem">
+        Ver mis cotizaciones →
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- WhatsApp Float -->
+<a href="https://wa.me/524621881152?text=Hola%2C%20me%20interesa%20cotizar%20materiales%20para%20gas%20L.P." target="_blank" rel="noopener" class="wa-float" title="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+</a>
 
 <!-- TOAST -->
 <div class="toast" id="toast">✓ Listo</div>
@@ -579,18 +768,15 @@ const CAT_MAP={};
 CAT.forEach(i=>{CAT_MAP[i.id]=i});
 
 // ── STATE ──
-let cart=[], profile={}, history=[];
+let cart=[], profile={};
 let activeCat='all', iaItems=[];
+let serverQuotes=[];
 
 function loadState(){
-  cart=JSON.parse(localStorage.getItem('cvg-cart')||'[]');
   profile=JSON.parse(localStorage.getItem('cvg-profile')||'{}');
-  history=JSON.parse(localStorage.getItem('cvg-history')||'[]');
 }
 function saveState(){
-  localStorage.setItem('cvg-cart',JSON.stringify(cart));
   localStorage.setItem('cvg-profile',JSON.stringify(profile));
-  localStorage.setItem('cvg-history',JSON.stringify(history));
 }
 
 // ── FORMAT ──
@@ -603,7 +789,8 @@ const TB={
   catalogo:{title:'Catálogo de materiales',sub:'Tubería, conexiones, válvulas y reguladores para Gas LP'},
   ia:{title:'Analizar con IA',sub:'Sube un plano, lista a mano o PDF — la IA extrae los materiales'},
   historial:{title:'Mis cotizaciones',sub:'Historial guardado en este dispositivo'},
-  perfil:{title:'Mi perfil',sub:'Tus datos se cargan automáticamente al cotizar'}
+  perfil:{title:'Mi perfil',sub:'Tus datos se cargan automáticamente al cotizar'},
+  nosotros:{title:'COENERVGAS',sub:'+13 años de experiencia en la industria del gas LP · Salamanca, GTO'}
 };
 function goSec(id,el){
   document.querySelectorAll('.sec').forEach(s=>s.classList.remove('on'));
@@ -614,7 +801,7 @@ function goSec(id,el){
   }
   document.querySelectorAll('.mob-nav .mn-i').forEach(n=>n.classList.remove('active'));
   const mob=document.querySelectorAll('.mob-nav .mn-i');
-  const order=['cotizar','catalogo','ia','historial','perfil'];
+  const order=['cotizar','catalogo','ia','historial','nosotros'];
   const idx=order.indexOf(id);
   if(mob[idx]) mob[idx].classList.add('active');
   document.getElementById('tb-title').textContent=TB[id].title;
@@ -630,11 +817,11 @@ function goSec(id,el){
 function addToCart(item){
   const ex=cart.find(c=>c.id===item.id);
   if(ex){ex.qty++;} else{cart.push({...item,qty:1});}
-  saveState();renderCart();toast('+ '+item.name+' '+item.size,'ok');
+  renderCart();toast('+ '+item.name+' '+item.size,'ok');
 }
 function removeFromCart(id){
   cart=cart.filter(c=>c.id!==id);
-  saveState();renderCart();
+  renderCart();
 }
 function updateQty(id,v){
   const item=cart.find(c=>c.id===id);
@@ -642,12 +829,12 @@ function updateQty(id,v){
   const q=parseInt(v)||0;
   if(q<=0){removeFromCart(id);return;}
   item.qty=q;
-  saveState();renderTotals();
+  renderTotals();
 }
 function clearCart(){
   if(!cart.length) return;
-  if(!confirm('¿Limpiar toda la lista de materiales?')) return;
-  cart=[];saveState();renderCart();
+  if(!confirm('¿Iniciar nueva cotización? Se borrará la lista actual y los datos del solicitante.')) return;
+  newQuote();
 }
 
 function renderCart(){
@@ -668,8 +855,6 @@ function renderCart(){
       <td><div style="font-weight:600;font-size:.78rem">${item.name}</div><div style="font-size:.62rem;color:var(--text3)">${item.size} · ${SPECS[item.spec]||''}</div></td>
       <td class="c">${item.unit}</td>
       <td class="c"><input class="qty-i" type="number" min="1" value="${item.qty}" onchange="updateQty('${item.id}',this.value)"></td>
-      <td class="r">${fmt(item.price)}</td>
-      <td class="r">${fmt(item.price*item.qty)}</td>
       <td><button class="btn-del" onclick="removeFromCart('${item.id}')">×</button></td>
     </tr>`).join('');
   renderTotals();
@@ -699,7 +884,7 @@ function renderCat(){
       <div class="ci-size">${item.size}</div>
       <div class="ci-desc">${item.desc}</div>
       <div class="ci-foot">
-        <div><div class="ci-price">${fmt(item.price)}</div><div class="ci-unit">por ${item.unit}</div></div>
+        <div><div class="ci-unit" style="font-size:.68rem;color:var(--text3)">por ${item.unit} · precio a confirmar</div></div>
         <button class="btn btn-acc btn-sm" onclick="addToCart(CAT_MAP['${item.id}'])">+ Agregar</button>
       </div>
     </div>`).join('');
@@ -774,14 +959,12 @@ function renderProfile(){
 }
 
 // ── HISTORY ──
-function requestQuote(){
+async function requestQuote(){
   const emp=document.getElementById('q-emp').value;
   if(!emp){toast('Ingresa tu nombre o empresa para continuar');goSec('cotizar',null);document.getElementById('q-emp').focus();return;}
   if(!cart.length){toast('Agrega al menos un material');return;}
   const {sub,iva}=calcTotals2();
-  const n=history.length+501;
   const rec={
-    num:'COT-'+String(n).padStart(3,'0'),
     emp,
     rfc:document.getElementById('q-rfc').value,
     tel:document.getElementById('q-tel').value,
@@ -792,56 +975,154 @@ function requestQuote(){
     items:[...cart],
     sub,iva,total:sub+iva
   };
-  history.unshift(rec);
-  saveState();
-  // Sync quote to cloud
-  fetch('/api/quotes',{method:'POST',headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({number:rec.num,client_phone:rec.tel,client_name:rec.emp,
-      obra:rec.obra,items:rec.items,subtotal:rec.sub,iva:rec.iva,total:rec.total,notes:rec.notas})
-  }).catch(()=>{});
-  toast('✓ Cotización '+rec.num+' guardada','ok');
-  goSec('historial',null);
-  renderHistory();
+  toast('Guardando cotización…');
+  try {
+    const res=await fetch('/api/quotes',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({client_phone:rec.tel,client_name:rec.emp,
+        client_rfc:rec.rfc,client_email:rec.email,
+        obra:rec.obra,items:rec.items,subtotal:rec.sub,iva:rec.iva,total:rec.total,notes:rec.notas})
+    });
+    const d=await res.json();
+    rec.num=d.quote?.number||('COT-'+Date.now());
+    rec.id=d.quote?.id||null;
+  } catch(e){
+    rec.num='COT-'+Date.now();
+  }
+  newQuote();
+  showQuoteModal(rec);
+}
+
+function showQuoteModal(rec){
+  const waItems=rec.items.map(i=>`• ${i.name}${i.size?' '+i.size:''} x${i.qty}`).join('\n');
+  const waMsg=`🔔 *Nueva solicitud: ${rec.num}*\n\n👤 ${rec.emp}${rec.tel?' · '+rec.tel:''}\n📍 ${rec.obra||'Sin obra especificada'}\n\n${waItems}`;
+  const waUrl='https://wa.me/524621881152?text='+encodeURIComponent(waMsg);
+  const quoteId=rec.id||'';
+  const pdfUrl=quoteId?`/api/request-pdf?id=${quoteId}`:'';
+
+  const modal=document.getElementById('quote-modal');
+  document.getElementById('qm-num').textContent=rec.num;
+  document.getElementById('qm-wa').href=waUrl;
+  document.getElementById('qm-hist').onclick=function(){
+    modal.style.display='none';
+    goSec('historial',null);
+    if(rec.tel){searchHistory(rec.tel);}
+  };
+  document.getElementById('qm-pdf').onclick=async function(){
+    if(!pdfUrl){toast('ID no disponible, intenta de nuevo en un momento');return;}
+    try{
+      toast('Generando PDF…');
+      const r=await fetch(pdfUrl);
+      if(!r.ok) throw new Error('Error');
+      const blob=await r.blob();
+      const file=new File([blob],`${rec.num}-COENERVGAS.pdf`,{type:'application/pdf'});
+      if(navigator.canShare&&navigator.canShare({files:[file]})){
+        await navigator.share({files:[file],title:`Solicitud ${rec.num} — COENERVGAS`});
+      } else {
+        const url=URL.createObjectURL(blob);
+        const a=document.createElement('a');
+        a.href=url;a.download=`${rec.num}-COENERVGAS.pdf`;
+        document.body.appendChild(a);a.click();
+        document.body.removeChild(a);URL.revokeObjectURL(url);
+        toast('📄 PDF descargado','ok');
+      }
+    }catch(e){toast(e.name==='AbortError'?'Compartir cancelado':'Error al generar PDF','err');}
+  };
+  modal.style.display='flex';
+}
+function doPrint(){
+  document.getElementById('ph-num').textContent='BORRADOR';
+  document.getElementById('ph-date').textContent=new Date().toLocaleDateString('es-MX',{day:'2-digit',month:'long',year:'numeric'});
+  window.print();
+}
+function newQuote(){
+  cart=[];
+  renderCart();
+  ['q-emp','q-rfc','q-tel','q-email','q-obra','q-contacto','q-ref','q-notas'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.value='';
+  });
 }
 function calcTotals2(){
   const sub=cart.reduce((s,i)=>s+i.price*i.qty,0);
   return{sub,iva:sub*0.16};
 }
-function renderHistory(){
+function renderHistory(){ /* phone lookup replaces localStorage history */ }
+async function searchHistory(phone){
+  const tel=(phone||document.getElementById('hist-phone').value).trim().replace(/\D/g,'');
+  if(tel.length<10){toast('Ingresa un número de teléfono de 10 dígitos');return;}
+  document.getElementById('hist-phone').value=tel;
   const list=document.getElementById('hist-list');
   const empty=document.getElementById('hist-empty');
-  if(!history.length){list.innerHTML='';empty.style.display='block';return;}
+  list.innerHTML='<div style="text-align:center;padding:1.5rem;color:var(--text3);font-size:.78rem">Buscando…</div>';
   empty.style.display='none';
-  list.innerHTML=history.map(h=>`
-    <div class="hi" onclick="viewQuote('${h.num}')">
-      <div>
-        <div class="hi-num">${h.num}</div>
-        <div class="hi-client">${h.emp}${h.rfc?' · '+h.rfc:''}</div>
-        <div class="hi-date">${h.date}${h.obra?' · '+h.obra:''}</div>
+  try{
+    const r=await fetch('/api/quotes?phone='+encodeURIComponent(tel));
+    const d=await r.json();
+    serverQuotes=d.quotes||[];
+    renderServerHistory();
+  }catch(e){
+    list.innerHTML='<div style="text-align:center;padding:1.5rem;color:var(--err);font-size:.78rem">Error al buscar. Intenta de nuevo.</div>';
+  }
+}
+function renderServerHistory(){
+  const list=document.getElementById('hist-list');
+  const empty=document.getElementById('hist-empty');
+  if(!serverQuotes.length){list.innerHTML='';empty.style.display='block';return;}
+  empty.style.display='none';
+  const statusMap={pending:'⏳ Pendiente',cotizado:'📋 Cotizado',aceptado:'✅ Aceptado',entregado:'📦 Entregado',cancelado:'❌ Cancelado'};
+  list.innerHTML=serverQuotes.map((h,idx)=>{
+    const waItems=(h.items||[]).map(i=>`• ${i.name}${i.size?' '+i.size:''} x${i.qty}`).join('\n');
+    const waMsg=`🔔 *Cotización: ${h.number}*\n\n👤 ${h.client_name||''}${h.client_phone?' · '+h.client_phone:''}\n📍 ${h.obra||'Sin obra especificada'}\n\n${waItems}`;
+    const waUrl='https://wa.me/524621881152?text='+encodeURIComponent(waMsg);
+    const statusLabel=statusMap[h.status]||'⏳ Pendiente';
+    const dateStr=h.created_at?new Date(h.created_at).toLocaleDateString('es-MX',{day:'2-digit',month:'short',year:'numeric'}):'';
+    return `
+    <div class="hi">
+      <div onclick="viewServerQuote(${idx})" style="flex:1;cursor:pointer">
+        <div class="hi-num">${h.number}</div>
+        <div class="hi-client">${h.client_name||''}</div>
+        <div class="hi-date">${dateStr}${h.obra?' · '+h.obra:''} · <span style="color:var(--acc);font-weight:700">${statusLabel}</span></div>
       </div>
-      <div style="text-align:right">
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:.35rem">
         <div class="hi-total">${fmt(h.total)}</div>
-        <div class="hi-items">${h.items.length} partidas</div>
+        <div class="hi-items">${(h.items||[]).length} partidas</div>
+        <div style="display:flex;gap:.3rem">
+          <a href="${waUrl}" target="_blank" onclick="event.stopPropagation()" style="background:#25D366;color:#fff;font-size:.6rem;font-weight:700;padding:3px 8px;border-radius:5px;text-decoration:none">💬 WA</a>
+          <button onclick="event.stopPropagation();downloadClientPDF('${h.id}','${h.number}')" style="background:var(--pri);color:#fff;font-size:.6rem;font-weight:700;padding:3px 8px;border-radius:5px;border:none;cursor:pointer;font-family:inherit">📄 PDF</button>
+        </div>
       </div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
 }
-function clearHistory(){
-  if(!history.length) return;
-  if(!confirm('¿Borrar todo el historial?')) return;
-  history=[];saveState();renderHistory();
-}
-function viewQuote(num){
-  const h=history.find(q=>q.num===num);
+function viewServerQuote(idx){
+  const h=serverQuotes[idx];
   if(!h) return;
-  cart=[...h.items];
-  document.getElementById('q-emp').value=h.emp||'';
-  document.getElementById('q-rfc').value=h.rfc||'';
-  document.getElementById('q-tel').value=h.tel||'';
-  document.getElementById('q-email').value=h.email||'';
+  cart=[...(h.items||[])];
+  document.getElementById('q-emp').value=h.client_name||'';
+  document.getElementById('q-tel').value=h.client_phone||'';
   document.getElementById('q-obra').value=h.obra||'';
-  document.getElementById('q-notas').value=h.notas||'';
-  saveState();renderCart();goSec('cotizar',null);
-  toast('Cotización '+num+' restaurada','ok');
+  document.getElementById('q-notas').value=h.notes||'';
+  renderCart();goSec('cotizar',null);
+  toast('Cotización '+h.number+' restaurada','ok');
+}
+async function downloadClientPDF(id,num){
+  try{
+    toast('Generando PDF…');
+    const r=await fetch('/api/request-pdf?id='+id);
+    if(!r.ok) throw new Error('Error');
+    const blob=await r.blob();
+    const file=new File([blob],`${num}-COENERVGAS.pdf`,{type:'application/pdf'});
+    if(navigator.canShare&&navigator.canShare({files:[file]})){
+      await navigator.share({files:[file],title:`Cotización ${num} — COENERVGAS`});
+    } else {
+      const url=URL.createObjectURL(blob);
+      const a=document.createElement('a');
+      a.href=url;a.download=`${num}-COENERVGAS.pdf`;
+      document.body.appendChild(a);a.click();
+      document.body.removeChild(a);URL.revokeObjectURL(url);
+      toast('📄 PDF descargado','ok');
+    }
+  }catch(e){toast(e.name==='AbortError'?'Compartir cancelado':'Error al generar PDF','err');}
 }
 
 // ── IA (REAL) ──
@@ -991,7 +1272,7 @@ function addIAToCart(){
     const ex=cart.find(c=>c.id===item.id);
     if(ex){ex.qty+=item.qty}else{cart.push({...item})}
   });
-  saveState();renderCart();
+  renderCart();
   goSec('cotizar',null);
   toast(iaItems.length+' materiales agregados a la cotización','ok');
 }
@@ -1007,11 +1288,11 @@ function toast(msg,type=''){
 }
 
 // ── INIT ──
+localStorage.removeItem('cvg-cart');
+localStorage.removeItem('cvg-history');
 loadState();
 renderCart();
 renderCat();
 renderProfile();
-// Auto-load profile into quote form
-if(profile.emp) loadProfile();
 // Hide TB actions on non-cotizar sections by default (already shown)
 </script>
