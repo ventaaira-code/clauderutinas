@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Navy background -->
+  <rect width="512" height="512" fill="#1a2d5a" rx="80"/>
+  <!-- C arc (white, thick stroke) -->
+  <path d="M 340,140 A 120,120 0 1,0 340,372" stroke="#ffffff" stroke-width="58" fill="none" stroke-linecap="square"/>
+  <!-- Tick marks at gap ends -->
+  <line x1="320" y1="136" x2="358" y2="158" stroke="#ffffff" stroke-width="22" stroke-linecap="round"/>
+  <line x1="320" y1="376" x2="358" y2="354" stroke="#ffffff" stroke-width="22" stroke-linecap="round"/>
+  <!-- Flame inside the C -->
+  <path d="M 246,310 C 206,282 200,244 220,198 C 226,226 244,214 240,188 C 264,212 278,252 278,278 C 270,264 252,258 250,272 C 264,284 264,310 246,310 Z" fill="#f97316"/>
+</svg>
