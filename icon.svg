@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <!-- Navy background -->
-  <rect width="512" height="512" fill="#1a2d5a" rx="80"/>
-  <!-- C arc (white, thick stroke) -->
-  <path d="M 340,140 A 120,120 0 1,0 340,372" stroke="#ffffff" stroke-width="58" fill="none" stroke-linecap="square"/>
-  <!-- Tick marks at gap ends -->
-  <line x1="320" y1="136" x2="358" y2="158" stroke="#ffffff" stroke-width="22" stroke-linecap="round"/>
-  <line x1="320" y1="376" x2="358" y2="354" stroke="#ffffff" stroke-width="22" stroke-linecap="round"/>
-  <!-- Flame inside the C -->
-  <path d="M 246,310 C 206,282 200,244 220,198 C 226,226 244,214 240,188 C 264,212 278,252 278,278 C 270,264 252,258 250,272 C 264,284 264,310 246,310 Z" fill="#f97316"/>
+  <rect width="512" height="512" fill="#1a2d5a" rx="76"/>
+  <!-- C arc centered at (248,256) radius 150, gap opens right -->
+  <path d="M 354,150 A 150,150 0 1,0 354,362" stroke="#ffffff" stroke-width="70" fill="none" stroke-linecap="square"/>
+  <!-- Tick top -->
+  <line x1="334" y1="143" x2="376" y2="168" stroke="#ffffff" stroke-width="26" stroke-linecap="round"/>
+  <!-- Tick bottom -->
+  <line x1="334" y1="369" x2="376" y2="344" stroke="#ffffff" stroke-width="26" stroke-linecap="round"/>
+  <!-- Flame -->
+  <path d="M 242,318 C 196,286 190,242 214,190 C 221,220 242,208 238,180 C 266,208 282,252 282,280 C 273,265 253,260 251,276 C 267,290 267,318 242,318 Z" fill="#f97316"/>
 </svg>
