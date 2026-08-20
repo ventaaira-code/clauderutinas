@@ -1,0 +1,2307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>COENERVGAS — Catálogo de Materiales para Gas L.P.</title>
+</head>
+<body>
+<style>
+  :root {
+    --color-primary: #1a2d5a;
+    --color-accent: #f97316;
+    --color-accent-hover: #e5690f;
+    --color-surface: #F7F5F2;
+    --color-surface-raised: #FFFFFF;
+    --color-text: #2C2C2E;
+    --color-text-secondary: #5A5752;
+    --color-border: #D4CFC7;
+    --color-border-light: #E8E4DE;
+    --color-header-bg: #1a2d5a;
+    --color-header-text: #F7F5F2;
+    --color-category-bg: #FFFFFF;
+    --color-subcategory-bg: #F2EFEB;
+    --color-search-bg: #FFFFFF;
+    --color-search-border: #D4CFC7;
+    --color-badge-bg: #f9731620;
+    --color-badge-text: #b84e0a;
+    --color-icon-pipe: #c45a0a;
+    --color-cart-bg: #FFFFFF;
+    --color-cart-border: #D4CFC7;
+    --color-success: #2E7D4F;
+    --color-success-bg: #2E7D4F18;
+    --color-danger: #C0392B;
+    --shadow-card: 0 1px 3px rgba(26,45,90,0.08);
+    --shadow-card-hover: 0 2px 8px rgba(26,45,90,0.12);
+    --shadow-fab: 0 4px 20px rgba(26,45,90,0.35);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-primary: #3A7CA5;
+      --color-accent: #fb923c;
+      --color-accent-hover: #f97316;
+      --color-surface: #141619;
+      --color-surface-raised: #1E2128;
+      --color-text: #E2DFD9;
+      --color-text-secondary: #9A9590;
+      --color-border: #33373F;
+      --color-border-light: #292D35;
+      --color-header-bg: #0f1e3d;
+      --color-header-text: #E2DFD9;
+      --color-category-bg: #1E2128;
+      --color-subcategory-bg: #252930;
+      --color-search-bg: #1E2128;
+      --color-search-border: #33373F;
+      --color-badge-bg: #f9731618;
+      --color-badge-text: #fb923c;
+      --color-icon-pipe: #fb923c;
+      --color-cart-bg: #1E2128;
+      --color-cart-border: #33373F;
+      --color-success: #4CAF6A;
+      --color-success-bg: #4CAF6A18;
+      --color-danger: #E74C3C;
+      --shadow-card: 0 1px 3px rgba(0,0,0,0.3);
+      --shadow-card-hover: 0 2px 8px rgba(0,0,0,0.4);
+      --shadow-fab: 0 4px 20px rgba(0,0,0,0.5);
+    }
+  }
+  :root[data-theme="dark"] {
+    --color-primary: #3A7CA5; --color-accent: #fb923c; --color-accent-hover: #f97316;
+    --color-surface: #141619; --color-surface-raised: #1E2128; --color-text: #E2DFD9;
+    --color-text-secondary: #9A9590; --color-border: #33373F; --color-border-light: #292D35;
+    --color-header-bg: #0f1e3d; --color-header-text: #E2DFD9; --color-category-bg: #1E2128;
+    --color-subcategory-bg: #252930; --color-search-bg: #1E2128; --color-search-border: #33373F;
+    --color-badge-bg: #f9731618; --color-badge-text: #fb923c; --color-icon-pipe: #fb923c;
+    --color-cart-bg: #1E2128; --color-cart-border: #33373F; --color-success: #4CAF6A;
+    --color-success-bg: #4CAF6A18; --color-danger: #E74C3C;
+  }
+  :root[data-theme="light"] {
+    --color-primary: #1a2d5a; --color-accent: #f97316; --color-accent-hover: #e5690f;
+    --color-surface: #F7F5F2; --color-surface-raised: #FFFFFF; --color-text: #2C2C2E;
+    --color-text-secondary: #5A5752; --color-border: #D4CFC7; --color-border-light: #E8E4DE;
+    --color-header-bg: #1a2d5a; --color-header-text: #F7F5F2; --color-category-bg: #FFFFFF;
+    --color-subcategory-bg: #F2EFEB; --color-search-bg: #FFFFFF; --color-search-border: #D4CFC7;
+    --color-badge-bg: #f9731620; --color-badge-text: #b84e0a; --color-icon-pipe: #c45a0a;
+    --color-cart-bg: #FFFFFF; --color-cart-border: #D4CFC7; --color-success: #2E7D4F;
+    --color-success-bg: #2E7D4F18; --color-danger: #C0392B;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── HEADER ── */
+  .header { background: var(--color-header-bg); color: var(--color-header-text); padding: 1.5rem 1.25rem; }
+  .header-inner { max-width: 960px; margin: 0 auto; display: flex; align-items: center; gap: 1rem; }
+  .header-logo { width: 40px; height: 44px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .header-logo svg { width: 40px; height: 44px; }
+  .header h1 { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.01em; line-height: 1.2; }
+  .header-subtitle { font-size: 0.85rem; opacity: 0.75; margin-top: 0.15rem; letter-spacing: 0.04em; text-transform: uppercase; }
+
+  /* ── MAIN ── */
+  .main { max-width: 960px; margin: 0 auto; padding: 1.25rem; padding-bottom: 7rem; }
+
+  /* ── SLOGAN BANNER ── */
+  .slogan-bar {
+    background: var(--color-surface-raised);
+    border-bottom: 1px solid var(--color-border-light);
+    padding: 0.875rem 1.25rem;
+  }
+  .slogan-inner {
+    max-width: 960px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem; flex-wrap: wrap;
+  }
+  .slogan-text {
+    font-size: 0.9375rem; color: var(--color-text-secondary);
+    line-height: 1.5;
+  }
+  .slogan-text strong { color: var(--color-primary); }
+  .slogan-badge {
+    display: inline-flex; align-items: center; gap: 0.375rem;
+    background: var(--color-badge-bg); color: var(--color-badge-text);
+    font-size: 0.8125rem; font-weight: 700;
+    padding: 0.3rem 0.75rem; border-radius: 20px;
+    white-space: nowrap; flex-shrink: 0;
+  }
+
+  /* ── SEARCH ── */
+  .search-wrap { position: relative; margin-bottom: 1.25rem; margin-top: 1rem; }
+  .search-icon { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; color: var(--color-text-secondary); pointer-events: none; }
+  .search-input {
+    width: 100%; padding: 0.875rem 1rem 0.875rem 3rem;
+    border: 1.5px solid var(--color-search-border); border-radius: 8px;
+    background: var(--color-search-bg); color: var(--color-text);
+    font-size: 1rem; font-family: inherit; outline: none; transition: border-color 0.15s;
+  }
+  .search-input::placeholder { color: var(--color-text-secondary); }
+  .search-input:focus { border-color: var(--color-primary); }
+
+  /* ── STATS BAR ── */
+  .stats-bar { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1.25rem; font-size: 0.875rem; color: var(--color-text-secondary); }
+  .stat { display: flex; align-items: center; gap: 0.375rem; }
+  .stat-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--color-accent); }
+
+  /* ── TABS ── */
+  .tab-bar { display: flex; gap: 0; margin-bottom: 1.25rem; border-bottom: 2px solid var(--color-border-light); }
+  .tab-btn {
+    padding: 0.7rem 1.375rem; border: none; background: none;
+    font-family: inherit; font-size: 0.9375rem; font-weight: 600;
+    color: var(--color-text-secondary); cursor: pointer;
+    border-bottom: 3px solid transparent; margin-bottom: -2px;
+    transition: color 0.15s, border-color 0.15s;
+    display: flex; align-items: center; gap: 0.4rem;
+  }
+  .tab-btn:hover { color: var(--color-text); }
+  .tab-btn.active { color: var(--color-primary); border-bottom-color: var(--color-primary); }
+  .tab-btn svg { width: 17px; height: 17px; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ── CATEGORIES ── */
+  .categories { display: flex; flex-direction: column; gap: 0.625rem; }
+  .category { background: var(--color-category-bg); border: 1px solid var(--color-border-light); border-radius: 8px; box-shadow: var(--shadow-card); overflow: hidden; transition: box-shadow 0.15s; }
+  .category:hover { box-shadow: var(--shadow-card-hover); }
+  .category.hidden { display: none; }
+  .category-header {
+    display: flex; align-items: center; gap: 0.875rem;
+    padding: 1rem 1.125rem; cursor: pointer; user-select: none;
+    border: none; background: none; width: 100%; text-align: left;
+    color: var(--color-text); font-family: inherit;
+  }
+  .category-header:focus-visible { outline: 2px solid var(--color-primary); outline-offset: -2px; border-radius: 8px; }
+  .pipe-icon { width: 36px; height: 36px; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: var(--color-badge-bg); }
+  .pipe-icon svg { width: 20px; height: 20px; color: var(--color-icon-pipe); }
+  .category-info { flex: 1; min-width: 0; }
+  .category-name { font-family: Georgia, 'Times New Roman', serif; font-size: 1.1rem; font-weight: 600; line-height: 1.3; }
+  .category-count { font-size: 0.8rem; color: var(--color-text-secondary); margin-top: 0.1rem; }
+  .chevron { width: 22px; height: 22px; color: var(--color-text-secondary); transition: transform 0.2s ease; flex-shrink: 0; }
+  .category.open .chevron { transform: rotate(180deg); }
+  .category-body { display: none; border-top: 1px solid var(--color-border-light); }
+  .category.open .category-body { display: block; }
+
+  /* ── SUBCATEGORIES ── */
+  .subcategory { border-bottom: 1px solid var(--color-border-light); }
+  .subcategory:last-child { border-bottom: none; }
+  .subcategory-header {
+    display: flex; align-items: center; gap: 0.5rem;
+    padding: 0.75rem 1.125rem 0.75rem 3.5rem;
+    cursor: pointer; user-select: none; border: none;
+    background: none; width: 100%; text-align: left;
+    color: var(--color-text); font-family: inherit;
+    font-size: 0.9375rem; font-weight: 600;
+  }
+  .subcategory-header:hover { background: var(--color-subcategory-bg); }
+  .sub-chevron { width: 17px; height: 17px; color: var(--color-text-secondary); transition: transform 0.2s ease; flex-shrink: 0; margin-left: auto; }
+  .subcategory.open .sub-chevron { transform: rotate(180deg); }
+  .subcategory-body { display: none; background: var(--color-subcategory-bg); padding: 0.625rem 1.125rem 0.875rem 3.5rem; }
+  .subcategory.open .subcategory-body { display: block; }
+
+  /* ── PRODUCT TABLE ── */
+  .product-table-wrap { overflow-x: auto; }
+  .product-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  .product-table th {
+    text-align: left; font-weight: 700; font-size: 0.75rem;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--color-text-secondary); padding: 0.5rem 0.625rem;
+    border-bottom: 1.5px solid var(--color-border);
+  }
+  .product-table td { padding: 0.5rem 0.625rem; border-bottom: 1px solid var(--color-border-light); font-variant-numeric: tabular-nums; }
+  .product-table tr:last-child td { border-bottom: none; }
+  .product-table .measure { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.9rem; color: var(--color-primary); font-weight: 600; }
+
+  /* ── PRODUCT CHIPS ── */
+  .product-list { list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .product-chip {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.35rem 0.625rem; border-radius: 5px;
+    background: var(--color-badge-bg); color: var(--color-badge-text);
+    font-size: 0.875rem; font-weight: 500; font-variant-numeric: tabular-nums;
+  }
+
+  /* ── ADD / QTY CONTROLS ── */
+  .btn-add {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 0.375rem 0.875rem; border-radius: 5px;
+    border: 1.5px solid var(--color-primary); background: var(--color-surface-raised);
+    color: var(--color-primary); cursor: pointer;
+    font-size: 0.85rem; font-weight: 700; font-family: inherit;
+    transition: background 0.12s, color 0.12s;
+    white-space: nowrap;
+  }
+  .btn-add:hover { background: var(--color-primary); color: #fff; }
+
+  .qty-control { display: inline-flex; align-items: center; gap: 0.25rem; }
+  .qty-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 30px; height: 30px; border-radius: 5px;
+    border: 1.5px solid var(--color-border); background: var(--color-surface-raised);
+    color: var(--color-text); cursor: pointer; font-size: 1rem;
+    font-weight: 700; line-height: 1; padding: 0;
+  }
+  .qty-btn:hover { background: var(--color-primary); color: #fff; border-color: var(--color-primary); }
+  .qty-btn.remove:hover { background: var(--color-danger); border-color: var(--color-danger); }
+  .qty-val { min-width: 28px; text-align: center; font-size: 0.9rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+  /* ── LIST SECTION (inline, below catalog) ── */
+  .list-section {
+    margin-top: 2rem;
+    background: var(--color-surface-raised);
+    border: 2px solid var(--color-primary);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .list-section-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 1.25rem;
+    background: var(--color-primary);
+    color: #fff;
+  }
+  .list-title { font-size: 1.125rem; font-weight: 800; display: flex; align-items: center; gap: 0.5rem; }
+  .list-count-badge {
+    background: var(--color-accent); color: #1B4965;
+    font-size: 0.8rem; font-weight: 700;
+    border-radius: 50px; padding: 0.1rem 0.6rem;
+    display: none;
+  }
+  .list-count-badge.visible { display: inline-block; }
+  .btn-clear-list {
+    background: rgba(255,255,255,0.15); color: #fff;
+    border: 1.5px solid rgba(255,255,255,0.4);
+    border-radius: 5px; padding: 0.35rem 0.875rem;
+    font-family: inherit; font-size: 0.85rem; font-weight: 600;
+    cursor: pointer; transition: background 0.12s;
+    display: none;
+  }
+  .btn-clear-list.visible { display: block; }
+  .btn-clear-list:hover { background: rgba(255,255,255,0.25); }
+
+  .list-body { padding: 1rem 1.25rem; }
+
+  .list-empty { text-align: center; padding: 2.5rem 1rem; color: var(--color-text-secondary); }
+  .list-empty-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+  .list-empty p { font-size: 0.9375rem; }
+  .list-empty .hint { font-size: 0.8rem; margin-top: 0.25rem; }
+
+  .list-group-label {
+    font-size: 0.75rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.07em;
+    color: var(--color-text-secondary);
+    padding: 0.625rem 0 0.3rem;
+    border-bottom: 1px solid var(--color-border-light);
+    margin-bottom: 0.25rem;
+  }
+  .list-item {
+    display: flex; align-items: center; gap: 0.75rem;
+    padding: 0.625rem 0;
+    border-bottom: 1px solid var(--color-border-light);
+    font-size: 0.9375rem;
+  }
+  .list-item:last-child { border-bottom: none; }
+  .list-item-name { flex: 1; line-height: 1.35; }
+  .list-item-name strong { display: block; }
+  .list-item-sub { font-size: 0.8rem; color: var(--color-text-secondary); }
+  .list-item-price { font-size: 0.85rem; color: var(--color-accent); white-space: nowrap; font-variant-numeric: tabular-nums; text-align: right; }
+  .list-item-remove { border: none; background: none; cursor: pointer; color: var(--color-danger); font-size: 1.1rem; padding: 0.25rem; line-height: 1; }
+
+  .list-total-row {
+    margin-top: 1rem; padding: 0.875rem 1rem;
+    background: var(--color-badge-bg);
+    border-left: 4px solid var(--color-accent);
+    border-radius: 0 6px 6px 0;
+    font-size: 1rem; font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .btn-send-email {
+    display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+    width: 100%; padding: 1rem;
+    margin-top: 1rem;
+    background: var(--color-accent); color: #fff;
+    border: none; border-radius: 8px;
+    cursor: pointer; font-family: inherit;
+    font-size: 1.0625rem; font-weight: 800;
+    transition: opacity 0.15s;
+    letter-spacing: 0.01em;
+  }
+  .btn-send-email:hover { opacity: 0.9; }
+  .btn-download-pdf {
+    display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+    width: 100%; padding: 1rem;
+    margin-top: 0.5rem;
+    background: #fff; color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+    border-radius: 10px; font-size: 1rem; font-weight: 700;
+    cursor: pointer; transition: background 0.15s, color 0.15s;
+    letter-spacing: 0.01em;
+  }
+  .btn-download-pdf:hover { background: var(--color-primary); color: #fff; }
+
+  /* ── FLOATING ACTION BUTTON ── */
+  .fab {
+    position: fixed; bottom: 1.5rem; right: 1.5rem;
+    z-index: 200;
+    display: none;
+    align-items: center; gap: 0.5rem;
+    background: var(--color-primary); color: #fff;
+    border: none; border-radius: 50px;
+    padding: 0.875rem 1.5rem;
+    font-family: inherit; font-size: 0.9375rem; font-weight: 800;
+    cursor: pointer;
+    box-shadow: var(--shadow-fab);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .fab.visible { display: flex; }
+  .fab:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(26,45,90,0.5); }
+  .fab-badge {
+    background: var(--color-accent); color: #1B4965;
+    font-weight: 700; font-size: 0.8rem;
+    border-radius: 50px; padding: 0.1rem 0.55rem;
+    min-width: 22px; text-align: center;
+  }
+
+  /* ── CHECKER TOOL ── */
+  .checker-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; min-height: 400px; }
+  .checker-input-side, .checker-result-side { display: flex; flex-direction: column; gap: 0.75rem; }
+  .checker-label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-text-secondary); }
+  .checker-textarea {
+    flex: 1; min-height: 200px; padding: 0.875rem;
+    border: 1.5px solid var(--color-border); border-radius: 8px;
+    background: var(--color-search-bg); color: var(--color-text);
+    font-family: inherit; font-size: 0.9rem; line-height: 1.7; resize: vertical; outline: none;
+  }
+  .checker-textarea:focus { border-color: var(--color-primary); }
+  .checker-textarea::placeholder { color: var(--color-text-secondary); }
+  .upload-zone {
+    border: 2px dashed var(--color-border); border-radius: 8px; padding: 1.25rem;
+    text-align: center; cursor: pointer; transition: border-color 0.15s, background 0.15s; position: relative;
+  }
+  .upload-zone:hover, .upload-zone.dragover { border-color: var(--color-primary); background: var(--color-badge-bg); }
+  .upload-zone input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+  .upload-zone svg { width: 28px; height: 28px; color: var(--color-text-secondary); margin: 0 auto 0.5rem; display: block; }
+  .upload-zone p { font-size: 0.875rem; color: var(--color-text-secondary); }
+  .upload-zone .upload-hint { font-size: 0.75rem; margin-top: 0.25rem; }
+  .preview-img { max-width: 100%; max-height: 200px; border-radius: 6px; border: 1px solid var(--color-border-light); object-fit: contain; background: var(--color-subcategory-bg); margin-bottom: 0.5rem; }
+  .preview-bar { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: var(--color-text-secondary); padding: 0.375rem 0; }
+  .preview-bar button { border: none; background: none; color: var(--color-danger); cursor: pointer; font-size: 0.75rem; font-weight: 600; }
+  .btn-check {
+    padding: 0.75rem 1.25rem; border-radius: 8px; border: none; cursor: pointer;
+    font-family: inherit; font-size: 0.9375rem; font-weight: 700;
+    background: var(--color-primary); color: #fff; transition: opacity 0.15s; width: 100%;
+  }
+  .btn-check:hover { opacity: 0.9; }
+  .btn-check:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  /* ── CHECKER RESULTS ── */
+  .result-summary { display: flex; gap: 0.75rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
+  .result-pill { display: inline-flex; align-items: center; gap: 0.375rem; padding: 0.3125rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 700; }
+  .result-pill.found { background: var(--color-success-bg); color: var(--color-success); }
+  .result-pill.missing { background: #C0392B18; color: var(--color-danger); }
+  .result-pill .pill-dot { width: 6px; height: 6px; border-radius: 50%; }
+  .result-pill.found .pill-dot { background: var(--color-success); }
+  .result-pill.missing .pill-dot { background: var(--color-danger); }
+  .result-group { margin-bottom: 1rem; }
+  .result-group-title { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.375rem; display: flex; align-items: center; gap: 0.375rem; }
+  .result-group-title.found-title { color: var(--color-success); }
+  .result-group-title.missing-title { color: var(--color-danger); }
+  .result-group-title svg { width: 14px; height: 14px; }
+  .result-item { display: flex; align-items: flex-start; gap: 0.5rem; padding: 0.375rem 0; border-bottom: 1px solid var(--color-border-light); font-size: 0.875rem; }
+  .result-item:last-child { border-bottom: none; }
+  .result-icon { width: 18px; height: 18px; flex-shrink: 0; margin-top: 0.0625rem; }
+  .result-icon.ok { color: var(--color-success); }
+  .result-icon.no { color: var(--color-danger); }
+  .result-item-text { flex: 1; }
+  .result-item-match { font-size: 0.75rem; color: var(--color-text-secondary); }
+  .result-export { margin-top: 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .btn-export { padding: 0.5rem 1rem; border-radius: 6px; border: none; cursor: pointer; font-family: inherit; font-size: 0.875rem; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 0.375rem; }
+  .btn-export-copy { background: var(--color-primary); color: #fff; }
+  .btn-export-email { background: var(--color-accent); color: #fff; }
+  .result-textarea { width: 100%; min-height: 120px; padding: 0.75rem; border: 1px solid var(--color-border); border-radius: 6px; background: var(--color-subcategory-bg); color: var(--color-text); font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.75rem; line-height: 1.6; resize: vertical; margin-top: 0.5rem; display: none; }
+  .result-textarea.visible { display: block; }
+  .empty-result { text-align: center; padding: 3rem 1rem; color: var(--color-text-secondary); }
+  .empty-result svg { width: 40px; height: 40px; margin: 0 auto 0.75rem; opacity: 0.3; }
+  .empty-result p { font-size: 0.9375rem; }
+  .empty-result .hint { font-size: 0.8rem; margin-top: 0.25rem; }
+
+  /* ── NO RESULTS ── */
+  .no-results { text-align: center; padding: 3rem 1rem; color: var(--color-text-secondary); display: none; font-size: 0.9375rem; }
+  .no-results.visible { display: block; }
+
+  /* ── TOAST ── */
+  .toast {
+    position: fixed; bottom: 5.5rem; left: 50%; transform: translateX(-50%);
+    background: var(--color-success); color: #fff;
+    padding: 0.625rem 1.25rem; border-radius: 8px;
+    font-size: 0.9rem; font-weight: 500;
+    z-index: 300; opacity: 0; transition: opacity 0.2s;
+    pointer-events: none; white-space: nowrap;
+  }
+  .toast.visible { opacity: 1; }
+
+  /* ── FOOTER ── */
+  .footer {
+    max-width: 960px; margin: 2rem auto 1rem;
+    padding: 1.25rem 1.25rem; text-align: center;
+    font-size: 0.85rem; color: var(--color-text-secondary);
+    border-top: 1.5px solid var(--color-border-light);
+    line-height: 1.8;
+  }
+  .footer a { color: var(--color-primary); text-decoration: none; }
+  .footer a:hover { text-decoration: underline; }
+  .footer strong { color: var(--color-text); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    body { font-size: 16px; }
+    .header { padding: 1.25rem 1rem; }
+    .header h1 { font-size: 1.35rem; }
+    .main { padding: 1rem; padding-bottom: 6rem; }
+    .subcategory-body { padding-left: 1.25rem; }
+    .subcategory-header { padding-left: 1.25rem; }
+    .checker-layout { grid-template-columns: 1fr; }
+    .fab { bottom: 1rem; right: 1rem; padding: 0.75rem 1.25rem; font-size: 0.875rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .chevron, .sub-chevron, .fab { transition: none; }
+  }
+
+  /* ── PROYECCIÓN DE CONSUMO ── */
+  .proy-intro {
+    background: linear-gradient(135deg, var(--color-primary) 0%, #2a4a8a 100%);
+    color: #fff; padding: 1.25rem 1.375rem; border-radius: 10px;
+    margin-bottom: 1.25rem;
+  }
+  .proy-intro h2 { font-size: 1.0625rem; font-weight: 800; margin-bottom: 0.375rem; }
+  .proy-intro p { font-size: 0.875rem; opacity: 0.88; line-height: 1.55; }
+
+  .proy-card {
+    background: var(--color-category-bg);
+    border: 1px solid var(--color-border-light);
+    border-radius: 8px; padding: 1.125rem;
+    margin-bottom: 1rem; box-shadow: var(--shadow-card);
+  }
+  .proy-card-title {
+    font-size: 0.9375rem; font-weight: 700;
+    color: var(--color-primary); margin-bottom: 1rem;
+    padding-bottom: 0.625rem;
+    border-bottom: 1px solid var(--color-border-light);
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+
+  .equip-row {
+    display: grid;
+    grid-template-columns: 1fr 100px 80px 36px;
+    gap: 0.5rem; align-items: end;
+    padding: 0.625rem 0;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+  .equip-row:last-child { border-bottom: none; }
+  .equip-field { display: flex; flex-direction: column; gap: 0.25rem; }
+  .equip-label { font-size: 0.72rem; font-weight: 700; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; }
+  .equip-select, .equip-input {
+    padding: 0.5rem 0.625rem;
+    border: 1.5px solid var(--color-border); border-radius: 6px;
+    background: var(--color-search-bg); color: var(--color-text);
+    font-family: inherit; font-size: 0.875rem; outline: none; width: 100%;
+  }
+  .equip-select:focus, .equip-input:focus { border-color: var(--color-primary); }
+  .equip-input { text-align: center; }
+  .equip-remove {
+    border: none; background: none; cursor: pointer;
+    color: var(--color-danger); font-size: 1.25rem; padding: 0.25rem;
+    align-self: flex-end; line-height: 1; height: 36px;
+  }
+  .equip-btu-display {
+    font-size: 0.75rem; color: var(--color-text-secondary);
+    margin-top: 0.2rem; font-variant-numeric: tabular-nums;
+  }
+
+  .btn-add-equip {
+    display: flex; align-items: center; gap: 0.375rem;
+    padding: 0.625rem 1rem; border-radius: 6px;
+    border: 2px dashed var(--color-border);
+    background: none; color: var(--color-text-secondary);
+    font-family: inherit; font-size: 0.9rem; font-weight: 600;
+    cursor: pointer; width: 100%; justify-content: center;
+    margin-top: 0.875rem; transition: border-color 0.15s, color 0.15s;
+  }
+  .btn-add-equip:hover { border-color: var(--color-primary); color: var(--color-primary); }
+
+  .btn-calc {
+    width: 100%; padding: 0.9375rem;
+    background: var(--color-primary); color: #fff;
+    border: none; border-radius: 8px; cursor: pointer;
+    font-family: inherit; font-size: 1.0625rem; font-weight: 800;
+    transition: opacity 0.15s; margin-top: 0.625rem;
+  }
+  .btn-calc:hover { opacity: 0.9; }
+
+  .result-stat-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 0.75rem; margin-bottom: 1rem;
+  }
+  .result-stat {
+    background: var(--color-subcategory-bg); border-radius: 8px;
+    padding: 0.875rem; text-align: center;
+  }
+  .result-stat-value {
+    font-size: 1.3rem; font-weight: 800;
+    color: var(--color-primary); line-height: 1.2;
+    font-variant-numeric: tabular-nums;
+  }
+  .result-stat-unit { font-size: 0.8rem; font-weight: 600; color: var(--color-accent); }
+  .result-stat-label { font-size: 0.75rem; color: var(--color-text-secondary); margin-top: 0.25rem; line-height: 1.3; }
+
+  .autonomy-section { margin-bottom: 0.875rem; }
+  .autonomy-title { font-size: 0.8rem; font-weight: 700; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+
+  .tank-option {
+    display: flex; align-items: center; gap: 0.75rem;
+    padding: 0.75rem; border: 1.5px solid var(--color-border-light);
+    border-radius: 6px; margin-bottom: 0.5rem;
+  }
+  .tank-option.recommended { border-color: var(--color-accent); background: var(--color-badge-bg); }
+  .tank-icon { font-size: 1.6rem; flex-shrink: 0; }
+  .tank-info { flex: 1; }
+  .tank-name { font-weight: 700; font-size: 0.9375rem; color: var(--color-text); }
+  .tank-detail { font-size: 0.8rem; color: var(--color-text-secondary); margin-top: 0.15rem; line-height: 1.4; }
+  .tank-badge { font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.65rem; border-radius: 20px; background: var(--color-accent); color: #1B4965; white-space: nowrap; }
+
+  .reg-item {
+    display: flex; gap: 0.75rem; align-items: flex-start;
+    padding: 0.625rem 0; border-bottom: 1px solid var(--color-border-light);
+  }
+  .reg-item:last-child { border-bottom: none; }
+  .reg-bullet { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+  .reg-text { flex: 1; font-size: 0.9rem; line-height: 1.45; }
+  .reg-label { font-weight: 700; color: var(--color-primary); display: block; }
+  .reg-spec { color: var(--color-text-secondary); font-size: 0.825rem; }
+
+  .nom-refs {
+    background: var(--color-subcategory-bg);
+    border-radius: 6px; border-left: 3px solid var(--color-primary);
+    padding: 0.875rem 1rem; margin-top: 1rem;
+    font-size: 0.8rem; color: var(--color-text-secondary); line-height: 1.9;
+  }
+  .nom-refs strong { color: var(--color-text); }
+
+  .proy-disclaimer {
+    background: #fffbeb; border: 1px solid #fcd34d;
+    border-radius: 6px; padding: 0.75rem 0.875rem;
+    font-size: 0.8125rem; color: #92400e; line-height: 1.55;
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 640px) {
+    .equip-row { grid-template-columns: 1fr 80px 70px 36px; }
+    .result-stat-value { font-size: 1.1rem; }
+  }
+</style>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="header-logo">
+      <svg width="40" height="44" viewBox="20 12 56 66" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 62.9,23.7 A 26,26 0 1,0 62.9,66.3" stroke="white" stroke-width="11" fill="none" stroke-linecap="butt"/>
+        <line x1="58" y1="20.3" x2="67.8" y2="27.1" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+        <line x1="58" y1="69.7" x2="67.8" y2="62.9" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+        <circle cx="58.5" cy="20.5" r="1.5" fill="white"/>
+        <circle cx="67.3" cy="27" r="1.5" fill="white"/>
+        <circle cx="58.5" cy="69.5" r="1.5" fill="white"/>
+        <circle cx="67.3" cy="63" r="1.5" fill="white"/>
+        <path d="M 48,57 C 40,50 39,42 44,33 C 46,43 51,38 49,29 C 55,37 58,47 58,53 C 56,50 52,48 51,51 C 54,54 54,57 48,57 Z" fill="#f97316"/>
+        <path d="M 48,54 C 44,50 43,45 46,39 C 47,46 49,43 48,38 C 51,43 52,49 48,54 Z" fill="#fdba74" opacity="0.5"/>
+      </svg>
+    </div>
+    <div>
+      <h1>COENERVGAS</h1>
+      <div class="header-subtitle">Catálogo de Materiales para Gas L.P.</div>
+    </div>
+  </div>
+</header>
+
+<div class="slogan-bar">
+  <div class="slogan-inner">
+    <div class="slogan-text">
+      <strong>Especialistas en materiales para Gas L.P.</strong> &mdash;
+      Tubería, conexiones, reguladores, válvulas y soportería.
+      Atención directa, asesoría técnica real y entregas a tiempo evitando retrasos en sus proyectos.
+    </div>
+    <span class="slogan-badge">⚡ 15 años de experiencia en la industria</span>
+  </div>
+</div>
+
+<main class="main">
+  <div class="search-wrap">
+    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+    </svg>
+    <input type="text" class="search-input" placeholder="Buscar producto, medida o material..." id="searchInput" autocomplete="off">
+  </div>
+
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('catalog')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h7"/></svg>
+      Catálogo
+    </button>
+    <button class="tab-btn" onclick="switchTab('checker')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 14l2 2 4-4"/></svg>
+      Revisar lista
+    </button>
+    <button class="tab-btn" onclick="switchTab('proy')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 3v18h18"/><path d="M18 9l-5 5-4-4-3 3"/></svg>
+      Proyectar consumo
+    </button>
+  </div>
+
+  <!-- TAB: CATÁLOGO -->
+  <div class="tab-panel active" id="tab-catalog">
+    <div class="stats-bar">
+      <span class="stat"><span class="stat-dot"></span>13 categorías</span>
+      <span class="stat"><span class="stat-dot"></span>Selecciona productos y arma tu lista de pedido abajo</span>
+    </div>
+    <div class="categories" id="categories"></div>
+    <div class="no-results" id="noResults">
+      <p>No se encontraron productos con ese término.</p>
+    </div>
+
+    <!-- LISTA DE PEDIDO (inline, misma página) -->
+    <div class="list-section" id="listSection">
+      <div class="list-section-header">
+        <div class="list-title">
+          📋 Tu Lista de Pedido
+          <span class="list-count-badge" id="listCountBadge">0</span>
+        </div>
+        <button class="btn-clear-list" id="btnClearList" onclick="clearCart()">Limpiar lista</button>
+      </div>
+      <div class="list-body">
+        <div class="list-empty" id="listEmpty">
+          <div class="list-empty-icon">📦</div>
+          <p>Tu lista de pedido está vacía</p>
+          <p class="hint">Elige materiales del catálogo de arriba y aparecerán aquí</p>
+        </div>
+        <div id="listItems"></div>
+        <div id="listFooter" style="display:none">
+          <div class="list-total-row" id="listTotal"></div>
+          <button class="btn-download-pdf" onclick="downloadPDF()">
+            📄&nbsp; Descargar cotización PDF
+          </button>
+          <button class="btn-send-email" onclick="sendByEmail()">
+            ✉&nbsp; Enviar cotización por correo
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: REVISAR LISTA -->
+  <div class="tab-panel" id="tab-checker">
+    <div class="stats-bar">
+      <span class="stat"><span class="stat-dot"></span>Pega la lista de materiales del cliente y cruza contra el catálogo</span>
+    </div>
+    <div class="checker-layout">
+      <div class="checker-input-side">
+        <div class="checker-label">Lista del cliente</div>
+        <div class="upload-zone" id="uploadZone">
+          <input type="file" accept="image/*,.pdf,.txt,.csv" id="fileInput" onchange="handleFile(this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <p>Sube imagen o archivo de la lista</p>
+          <p class="upload-hint">Imagen, PDF, TXT o CSV</p>
+        </div>
+        <div id="previewArea"></div>
+        <textarea class="checker-textarea" id="checkerInput" placeholder="Escribe o pega la lista de materiales aquí, un producto por línea.
+
+Ejemplos:
+  5 tubo cobre 1/2
+  10 codo galvanizado 3/4
+  3 regulador 2da etapa
+  2 válvula esfera 1&quot;
+  8 abrazadera 1&quot;"></textarea>
+        <button class="btn-check" onclick="checkList()" id="btnCheck">Revisar disponibilidad</button>
+      </div>
+      <div class="checker-result-side">
+        <div class="checker-label">Resultado</div>
+        <div id="checkerResults">
+          <div class="empty-result">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg>
+            <p>Pega una lista de materiales a la izquierda</p>
+            <p class="hint">El sistema cruza cada línea contra las 13 categorías del catálogo</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: PROYECTAR CONSUMO -->
+  <div class="tab-panel" id="tab-proy">
+    <div class="proy-intro">
+      <h2>🔥 Proyección de consumo de Gas L.P.</h2>
+      <p>Ingresa tus equipos y horas de trabajo para calcular el consumo diario, la capacidad de almacenamiento y los reguladores que necesitas, de acuerdo a las NOMs mexicanas vigentes.</p>
+    </div>
+
+    <div class="proy-card">
+      <div class="proy-card-title">⚙️ Mis equipos consumidores</div>
+      <div style="display:grid;grid-template-columns:1fr 100px 80px 36px;gap:0.5rem;margin-bottom:0.5rem">
+        <div style="font-size:0.72rem;font-weight:700;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.05em">Equipo</div>
+        <div style="font-size:0.72rem;font-weight:700;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.05em">Cantidad</div>
+        <div style="font-size:0.72rem;font-weight:700;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.05em">Hrs/día</div>
+        <div></div>
+      </div>
+      <div id="equipList"></div>
+      <button class="btn-add-equip" onclick="addEquip()">+ Agregar equipo</button>
+      <button class="btn-calc" onclick="calcProy()">📊 Calcular capacidad requerida</button>
+    </div>
+
+    <div id="proyResults" style="display:none">
+      <div class="proy-card">
+        <div class="proy-card-title">📈 Consumo calculado</div>
+        <div class="result-stat-grid" id="statGrid"></div>
+      </div>
+
+      <div class="proy-card">
+        <div class="proy-card-title">🛢️ Capacidad de almacenamiento recomendada</div>
+        <div id="tankResults"></div>
+      </div>
+
+      <div class="proy-card">
+        <div class="proy-card-title">🔧 Reguladores recomendados</div>
+        <div id="regResults"></div>
+        <div class="nom-refs" id="nomRefs"></div>
+      </div>
+
+      <div class="proy-disclaimer">
+        ⚠️ <strong>Nota:</strong> Estos cálculos son orientativos basados en valores típicos de la industria y las NOMs mexicanas vigentes. Los valores reales dependen del rendimiento específico de cada equipo, condiciones de operación y altitud. Se recomienda verificar con un técnico certificado por SENER/ASEA antes de la instalación.
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- BOTÓN FLOTANTE: TERMINAR Y COTIZAR -->
+<button class="fab" id="fab" onclick="scrollToList()">
+  ✓ Terminar y Cotizar
+  <span class="fab-badge" id="fabBadge">0</span>
+</button>
+
+<div class="toast" id="toast">Copiado al portapapeles</div>
+
+<footer class="footer">
+  <strong>COENERVGAS</strong> &mdash; Compra y venta de materiales para Gas L.P.<br>
+  <strong>COENERVGAS</strong> &nbsp;&middot;&nbsp; Edgar Aaron Garcia Sanchez &nbsp;&middot;&nbsp; <strong>RFC:</strong> GASE820515MB5<br>
+  Circuito Eucaliptos 262, Col. Las Arboledas, C.P. 36764 &mdash; Salamanca, Guanajuato<br>
+  <strong>Correo:</strong> <a href="mailto:coenervgas@outlook.com">coenervgas@outlook.com</a>
+</footer>
+
+<script>
+const CATALOG = [
+  {
+    name: "Tubería de Cobre Tipo L",
+    icon: "pipe",
+    subcategories: [
+      {
+        name: "Rollo (tramo flexible)",
+        items: [
+          { medida: '1/4"', presentacion: "Rollo 15 m" },
+          { medida: '3/8"', presentacion: "Rollo 15 m" },
+          { medida: '1/2"', presentacion: "Rollo 15 m" },
+          { medida: '5/8"', presentacion: "Rollo 15 m" },
+          { medida: '3/4"', presentacion: "Rollo 15 m" },
+          { medida: '1"', presentacion: "Rollo 15 m" },
+          { medida: '1-1/4"', presentacion: "Rollo 15 m" },
+          { medida: '1-1/2"', presentacion: "Rollo 15 m" },
+          { medida: '2"', presentacion: "Rollo 15 m" }
+        ]
+      },
+      {
+        name: "Tramo rígido",
+        items: [
+          { medida: '1/4"', presentacion: "Tramo 6.10 m" },
+          { medida: '3/8"', presentacion: "Tramo 6.10 m" },
+          { medida: '1/2"', presentacion: "Tramo 6.10 m" },
+          { medida: '5/8"', presentacion: "Tramo 6.10 m" },
+          { medida: '3/4"', presentacion: "Tramo 6.10 m" },
+          { medida: '1"', presentacion: "Tramo 6.10 m" },
+          { medida: '1-1/4"', presentacion: "Tramo 6.10 m" },
+          { medida: '1-1/2"', presentacion: "Tramo 6.10 m" },
+          { medida: '2"', presentacion: "Tramo 6.10 m" }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Tubería Galvanizada",
+    icon: "pipe",
+    subcategories: [
+      {
+        name: "Cédula 40 (con cuerda)",
+        items: [
+          { medida: '1/2"', presentacion: "Tramo 6.40 m" },
+          { medida: '3/4"', presentacion: "Tramo 6.40 m" },
+          { medida: '1"', presentacion: "Tramo 6.40 m" },
+          { medida: '1-1/4"', presentacion: "Tramo 6.40 m" },
+          { medida: '1-1/2"', presentacion: "Tramo 6.40 m" },
+          { medida: '2"', presentacion: "Tramo 6.40 m" }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Tubería de Acero al Carbón",
+    icon: "pipe",
+    subcategories: [
+      {
+        name: "Con cuerda — Cédula 40",
+        items: [
+          { medida: '1/2"', presentacion: "Tramo 6.40 m", precio: 620 },
+          { medida: '3/4"', presentacion: "Tramo 6.40 m", precio: 920 },
+          { medida: '1"', presentacion: "Tramo 6.40 m", precio: 1290 },
+          { medida: '1-1/4"', presentacion: "Tramo 6.40 m", precio: 2100 },
+          { medida: '1-1/2"', presentacion: "Tramo 6.40 m", precio: 2050 },
+          { medida: '2"', presentacion: "Tramo 6.40 m", precio: 2380 }
+        ]
+      },
+      {
+        name: "Sin cuerda — Cédula 40",
+        items: [
+          { medida: '1/2"', presentacion: "Tramo 6.40 m", precio: 590 },
+          { medida: '3/4"', presentacion: "Tramo 6.40 m", precio: 880 },
+          { medida: '1"', presentacion: "Tramo 6.40 m", precio: 1230 },
+          { medida: '1-1/4"', presentacion: "Tramo 6.40 m", precio: 1990 },
+          { medida: '1-1/2"', presentacion: "Tramo 6.40 m", precio: 1960 },
+          { medida: '2"', presentacion: "Tramo 6.40 m", precio: 2260 }
+        ]
+      },
+      {
+        name: "Cédula 80",
+        items: [
+          { medida: '1/2"', presentacion: "Tramo 6.10 m", precio: 920 },
+          { medida: '3/4"', presentacion: "Tramo 6.10 m", precio: 1290 },
+          { medida: '1"', presentacion: "Tramo 6.10 m", precio: 1750 },
+          { medida: '1-1/4"', presentacion: "Tramo 6.10 m", precio: 2490 },
+          { medida: '1-1/2"', presentacion: "Tramo 6.10 m", precio: 3040 },
+          { medida: '2"', presentacion: "Tramo 6.10 m", precio: 3680 }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Tubo CPVC — Ventilación",
+    icon: "vent",
+    subcategories: [
+      {
+        name: "Para ventilación de reguladores",
+        items: [
+          { medida: '1/2"', presentacion: "Tramo 3 m" },
+          { medida: '3/4"', presentacion: "Tramo 3 m" },
+          { medida: '1"', presentacion: "Tramo 3 m" },
+          { medida: '1-1/4"', presentacion: "Tramo 3 m" },
+          { medida: '1-1/2"', presentacion: "Tramo 3 m" },
+          { medida: '2"', presentacion: "Tramo 3 m" }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Conexiones de Cobre",
+    icon: "fitting",
+    subcategories: [
+      { name: "Codos 90°", type: "chips", items: ['1/4"','3/8"','1/2"','5/8"','3/4"','1"','1-1/4"','1-1/2"','2"'] },
+      { name: "Codos 45°", type: "chips", items: ['1/4"','3/8"','1/2"','3/4"','1"','1-1/4"','1-1/2"','2"'] },
+      { name: "Tees", type: "chips", items: ['1/4"','3/8"','1/2"','5/8"','3/4"','1"','1-1/4"','1-1/2"','2"'] },
+      { name: "Coples", type: "chips", items: ['1/4"','3/8"','1/2"','5/8"','3/4"','1"','1-1/4"','1-1/2"','2"'] },
+      { name: "Reducciones (campana)", type: "chips", items: ['3/8"×1/4"','1/2"×3/8"','1/2"×1/4"','3/4"×1/2"','3/4"×3/8"','1"×3/4"','1"×1/2"','1-1/4"×1"','1-1/4"×3/4"','1-1/2"×1"','1-1/2"×1-1/4"','2"×1-1/2"','2"×1"','2"×3/4"'] },
+      { name: "Conectores macho / tuerca cónica", type: "chips", items: ['1/4"','3/8"','1/2"','5/8"','3/4"','1"','1-1/4"','1-1/2"','2"'] }
+    ]
+  },
+  {
+    name: "Conexiones Galvanizadas",
+    icon: "fitting",
+    subcategories: [
+      { name: "Codos 90°", type: "chips", items: ['1/2"','3/4"','1"','1-1/4"','1-1/2"','2"'] },
+      { name: "Codos 45°", type: "chips", items: ['1/2"','3/4"','1"','1-1/4"','1-1/2"','2"'] },
+      { name: "Tees", type: "chips", items: ['1/2"','3/4"','1"','1-1/4"','1-1/2"','2"'] },
+      { name: "Coples", type: "chips", items: ['1/2"','3/4"','1"','1-1/4"','1-1/2"','2"'] },
+      { name: "Niples (corridos y estándar)", type: "chips", items: ['1/2"','3/4"','1"','1-1/4"','1-1/2"','2"'] },
+      { name: "Reducciones (campana)", type: "chips", items: ['3/4"×1/2"','1"×3/4"','1"×1/2"','1-1/4"×1"','1-1/4"×3/4"','1-1/2"×1"','1-1/2"×1-1/4"','2"×1-1/2"','2"×1"','2"×3/4"'] },
+      { name: "Tapones (macho y hembra)", type: "chips", items: ['1/2"','3/4"','1"','1-1/4"','1-1/2"','2"'] },
+      { name: "Uniones universales", type: "chips", items: ['1/2"','3/4"','1"','1-1/4"','1-1/2"','2"'] }
+    ]
+  },
+  {
+    name: "Conexiones de Acero al Carbón",
+    icon: "fitting",
+    subcategories: [
+      /* ── CÉDULA 80 · NPT 3000# (precios 5% bajo el más caro: TUMINOX/VALTUCON/FLAMMA) ── */
+      { name: "Codos 90° NPT Ced.80", items: [
+        { medida: '1/2"',   presentacion: "Pieza", precio: 65   },
+        { medida: '3/4"',   presentacion: "Pieza", precio: 99   },
+        { medida: '1"',     presentacion: "Pieza", precio: 179  },
+        { medida: '1-1/4"', presentacion: "Pieza", precio: 255  },
+        { medida: '1-1/2"', presentacion: "Pieza", precio: 360  },
+        { medida: '2"',     presentacion: "Pieza", precio: 580  },
+        { medida: '2-1/2"', presentacion: "Pieza", precio: 1090 },
+        { medida: '3"',     presentacion: "Pieza", precio: 1780 },
+        { medida: '4"',     presentacion: "Pieza", precio: 3170 },
+      ]},
+      { name: "Codos 45° NPT Ced.80", items: [
+        { medida: '1/2"',   presentacion: "Pieza", precio: 55   },
+        { medida: '3/4"',   presentacion: "Pieza", precio: 84   },
+        { medida: '1"',     presentacion: "Pieza", precio: 150  },
+        { medida: '1-1/4"', presentacion: "Pieza", precio: 215  },
+        { medida: '1-1/2"', presentacion: "Pieza", precio: 305  },
+        { medida: '2"',     presentacion: "Pieza", precio: 495  },
+        { medida: '3"',     presentacion: "Pieza", precio: 1515 },
+        { medida: '4"',     presentacion: "Pieza", precio: 2695 },
+      ]},
+      { name: "Tees NPT Ced.80", items: [
+        { medida: '1/2"',   presentacion: "Pieza", precio: 85   },
+        { medida: '3/4"',   presentacion: "Pieza", precio: 128  },
+        { medida: '1"',     presentacion: "Pieza", precio: 227  },
+        { medida: '1-1/4"', presentacion: "Pieza", precio: 330  },
+        { medida: '1-1/2"', presentacion: "Pieza", precio: 472  },
+        { medida: '2"',     presentacion: "Pieza", precio: 749  },
+        { medida: '2-1/2"', presentacion: "Pieza", precio: 1405 },
+        { medida: '3"',     presentacion: "Pieza", precio: 2295 },
+        { medida: '4"',     presentacion: "Pieza", precio: 4090 },
+      ]},
+      { name: "Coples NPT Ced.80", items: [
+        { medida: '1/2"',   presentacion: "Pieza", precio: 55   },
+        { medida: '3/4"',   presentacion: "Pieza", precio: 84   },
+        { medida: '1"',     presentacion: "Pieza", precio: 152  },
+        { medida: '1-1/4"', presentacion: "Pieza", precio: 217  },
+        { medida: '1-1/2"', presentacion: "Pieza", precio: 305  },
+        { medida: '2"',     presentacion: "Pieza", precio: 493  },
+        { medida: '2-1/2"', presentacion: "Pieza", precio: 925  },
+        { medida: '3"',     presentacion: "Pieza", precio: 1515 },
+        { medida: '4"',     presentacion: "Pieza", precio: 2695 },
+      ]},
+      { name: "Niples corridos NPT Ced.80", items: [
+        { medida: '1/2"',   presentacion: "Pieza", precio: 50   },
+        { medida: '3/4"',   presentacion: "Pieza", precio: 70   },
+        { medida: '1"',     presentacion: "Pieza", precio: 120  },
+        { medida: '1-1/4"', presentacion: "Pieza", precio: 155  },
+        { medida: '1-1/2"', presentacion: "Pieza", precio: 195  },
+        { medida: '2"',     presentacion: "Pieza", precio: 280  },
+        { medida: '2-1/2"', presentacion: "Pieza", precio: 450  },
+        { medida: '3"',     presentacion: "Pieza", precio: 680  },
+        { medida: '4"',     presentacion: "Pieza", precio: 1050 },
+      ]},
+      { name: "Reducciones bushing NPT Ced.80", items: [
+        { medida: '3/4"×1/2"',   presentacion: "Pieza", precio: 48   },
+        { medida: '1"×3/4"',     presentacion: "Pieza", precio: 75   },
+        { medida: '1"×1/2"',     presentacion: "Pieza", precio: 80   },
+        { medida: '1-1/4"×1"',   presentacion: "Pieza", precio: 115  },
+        { medida: '1-1/4"×3/4"', presentacion: "Pieza", precio: 120  },
+        { medida: '1-1/2"×1"',   presentacion: "Pieza", precio: 165  },
+        { medida: '1-1/2"×3/4"', presentacion: "Pieza", precio: 207  },
+        { medida: '2"×1-1/2"',   presentacion: "Pieza", precio: 270  },
+        { medida: '2"×1"',       presentacion: "Pieza", precio: 290  },
+        { medida: '2"×3/4"',     presentacion: "Pieza", precio: 305  },
+        { medida: '3"×2"',       presentacion: "Pieza", precio: 740  },
+        { medida: '3"×1-1/2"',   presentacion: "Pieza", precio: 785  },
+        { medida: '4"×3"',       presentacion: "Pieza", precio: 1575 },
+        { medida: '4"×2"',       presentacion: "Pieza", precio: 1680 },
+      ]},
+      { name: "Tees reducidas NPT Ced.80", items: [
+        { medida: '1"×3/4"×1"',     presentacion: "Pieza", precio: 180 },
+        { medida: '1"×1/2"×1"',     presentacion: "Pieza", precio: 195 },
+        { medida: '1-1/4"×1"×1-1/4"', presentacion: "Pieza", precio: 265 },
+        { medida: '1-1/2"×1"×1-1/2"', presentacion: "Pieza", precio: 380 },
+        { medida: '2"×1-1/2"×2"',   presentacion: "Pieza", precio: 640 },
+        { medida: '2"×1"×2"',       presentacion: "Pieza", precio: 680 },
+      ]},
+      { name: "Tapones macho NPT Ced.80", items: [
+        { medida: '1/4"',   presentacion: "Pieza", precio: 25   },
+        { medida: '1/2"',   presentacion: "Pieza", precio: 35   },
+        { medida: '3/4"',   presentacion: "Pieza", precio: 55   },
+        { medida: '1"',     presentacion: "Pieza", precio: 89   },
+        { medida: '1-1/4"', presentacion: "Pieza", precio: 130  },
+        { medida: '1-1/2"', presentacion: "Pieza", precio: 185  },
+        { medida: '2"',     presentacion: "Pieza", precio: 295  },
+        { medida: '2-1/2"', presentacion: "Pieza", precio: 550  },
+        { medida: '3"',     presentacion: "Pieza", precio: 890  },
+        { medida: '4"',     presentacion: "Pieza", precio: 1570 },
+      ]},
+      { name: "Tapones hembra NPT Ced.80", items: [
+        { medida: '1/2"',   presentacion: "Pieza", precio: 38   },
+        { medida: '3/4"',   presentacion: "Pieza", precio: 58   },
+        { medida: '1"',     presentacion: "Pieza", precio: 94   },
+        { medida: '1-1/4"', presentacion: "Pieza", precio: 138  },
+        { medida: '1-1/2"', presentacion: "Pieza", precio: 195  },
+        { medida: '2"',     presentacion: "Pieza", precio: 310  },
+        { medida: '3"',     presentacion: "Pieza", precio: 940  },
+        { medida: '4"',     presentacion: "Pieza", precio: 1650 },
+      ]},
+      { name: "Uniones universales NPT Ced.80", items: [
+        { medida: '1/2"',   presentacion: "Pieza", precio: 75  },
+        { medida: '3/4"',   presentacion: "Pieza", precio: 115 },
+        { medida: '1"',     presentacion: "Pieza", precio: 210 },
+        { medida: '1-1/4"', presentacion: "Pieza", precio: 298 },
+        { medida: '1-1/2"', presentacion: "Pieza", precio: 420 },
+        { medida: '2"',     presentacion: "Pieza", precio: 679 },
+      ]},
+      { name: "Codos 90° macho-hembra NPT Ced.80", items: [
+        { medida: '1/2"',   presentacion: "Pieza", precio: 58  },
+        { medida: '3/4"',   presentacion: "Pieza", precio: 88  },
+        { medida: '1"',     presentacion: "Pieza", precio: 160 },
+        { medida: '1-1/4"', presentacion: "Pieza", precio: 230 },
+        { medida: '1-1/2"', presentacion: "Pieza", precio: 325 },
+        { medida: '2"',     presentacion: "Pieza", precio: 520 },
+      ]},
+      /* ── CÉDULA 40 · NPT (65% del precio Ced.80) ── */
+      { name: "Codos 90° NPT Ced.40", items: [
+        { medida: '1/2"',   presentacion: "Pieza", precio: 42   },
+        { medida: '3/4"',   presentacion: "Pieza", precio: 64   },
+        { medida: '1"',     presentacion: "Pieza", precio: 116  },
+        { medida: '1-1/4"', presentacion: "Pieza", precio: 165  },
+        { medida: '1-1/2"', presentacion: "Pieza", precio: 234  },
+        { medida: '2"',     presentacion: "Pieza", precio: 375  },
+        { medida: '2-1/2"', presentacion: "Pieza", precio: 709  },
+        { medida: '3"',     presentacion: "Pieza", precio: 1155 },
+        { medida: '4"',     presentacion: "Pieza", precio: 2060 },
+      ]},
+      { name: "Codos 45° NPT Ced.40", items: [
+        { medida: '1/2"',   presentacion: "Pieza", precio: 36   },
+        { medida: '3/4"',   presentacion: "Pieza", precio: 55   },
+        { medida: '1"',     presentacion: "Pieza", precio: 98   },
+        { medida: '1-1/4"', presentacion: "Pieza", precio: 140  },
+        { medida: '1-1/2"', presentacion: "Pieza", precio: 198  },
+        { medida: '2"',     presentacion: "Pieza", precio: 322  },
+        { medida: '3"',     presentacion: "Pieza", precio: 985  },
+        { medida: '4"',     presentacion: "Pieza", precio: 1752 },
+      ]},
+      { name: "Tees NPT Ced.40", items: [
+        { medida: '1/2"',   presentacion: "Pieza", precio: 55   },
+        { medida: '3/4"',   presentacion: "Pieza", precio: 83   },
+        { medida: '1"',     presentacion: "Pieza", precio: 148  },
+        { medida: '1-1/4"', presentacion: "Pieza", precio: 215  },
+        { medida: '1-1/2"', presentacion: "Pieza", precio: 307  },
+        { medida: '2"',     presentacion: "Pieza", precio: 487  },
+        { medida: '2-1/2"', presentacion: "Pieza", precio: 913  },
+        { medida: '3"',     presentacion: "Pieza", precio: 1492 },
+        { medida: '4"',     presentacion: "Pieza", precio: 2659 },
+      ]},
+      { name: "Coples NPT Ced.40", items: [
+        { medida: '1/2"',   presentacion: "Pieza", precio: 36   },
+        { medida: '3/4"',   presentacion: "Pieza", precio: 55   },
+        { medida: '1"',     presentacion: "Pieza", precio: 99   },
+        { medida: '1-1/4"', presentacion: "Pieza", precio: 141  },
+        { medida: '1-1/2"', presentacion: "Pieza", precio: 198  },
+        { medida: '2"',     presentacion: "Pieza", precio: 320  },
+        { medida: '2-1/2"', presentacion: "Pieza", precio: 601  },
+        { medida: '3"',     presentacion: "Pieza", precio: 985  },
+        { medida: '4"',     presentacion: "Pieza", precio: 1752 },
+      ]},
+      { name: "Niples corridos NPT Ced.40", items: [
+        { medida: '1/2"',   presentacion: "Pieza", precio: 33  },
+        { medida: '3/4"',   presentacion: "Pieza", precio: 46  },
+        { medida: '1"',     presentacion: "Pieza", precio: 78  },
+        { medida: '1-1/4"', presentacion: "Pieza", precio: 101 },
+        { medida: '1-1/2"', presentacion: "Pieza", precio: 127 },
+        { medida: '2"',     presentacion: "Pieza", precio: 182 },
+        { medida: '2-1/2"', presentacion: "Pieza", precio: 293 },
+        { medida: '3"',     presentacion: "Pieza", precio: 442 },
+        { medida: '4"',     presentacion: "Pieza", precio: 683 },
+      ]},
+      { name: "Reducciones bushing NPT Ced.40", items: [
+        { medida: '3/4"×1/2"',   presentacion: "Pieza", precio: 31   },
+        { medida: '1"×3/4"',     presentacion: "Pieza", precio: 49   },
+        { medida: '1"×1/2"',     presentacion: "Pieza", precio: 52   },
+        { medida: '1-1/4"×1"',   presentacion: "Pieza", precio: 75   },
+        { medida: '1-1/4"×3/4"', presentacion: "Pieza", precio: 78   },
+        { medida: '1-1/4"×1/2"', presentacion: "Pieza", precio: 83   },
+        { medida: '1-1/2"×1"',   presentacion: "Pieza", precio: 107  },
+        { medida: '1-1/2"×3/4"', presentacion: "Pieza", precio: 135  },
+        { medida: '2"×1-1/2"',   presentacion: "Pieza", precio: 176  },
+        { medida: '2"×1"',       presentacion: "Pieza", precio: 189  },
+        { medida: '2"×3/4"',     presentacion: "Pieza", precio: 198  },
+        { medida: '2-1/2"×2"',   presentacion: "Pieza", precio: 330  },
+        { medida: '3"×2"',       presentacion: "Pieza", precio: 481  },
+        { medida: '3"×1-1/2"',   presentacion: "Pieza", precio: 511  },
+        { medida: '4"×3"',       presentacion: "Pieza", precio: 1024 },
+        { medida: '4"×2"',       presentacion: "Pieza", precio: 1092 },
+      ]},
+      { name: "Tapones macho NPT Ced.40", items: [
+        { medida: '1/2"',   presentacion: "Pieza", precio: 23   },
+        { medida: '3/4"',   presentacion: "Pieza", precio: 36   },
+        { medida: '1"',     presentacion: "Pieza", precio: 58   },
+        { medida: '1-1/4"', presentacion: "Pieza", precio: 85   },
+        { medida: '1-1/2"', presentacion: "Pieza", precio: 120  },
+        { medida: '2"',     presentacion: "Pieza", precio: 192  },
+        { medida: '2-1/2"', presentacion: "Pieza", precio: 358  },
+        { medida: '3"',     presentacion: "Pieza", precio: 579  },
+        { medida: '4"',     presentacion: "Pieza", precio: 1021 },
+      ]},
+      { name: "Tapones hembra NPT Ced.40", items: [
+        { medida: '1/2"',   presentacion: "Pieza", precio: 25   },
+        { medida: '3/4"',   presentacion: "Pieza", precio: 38   },
+        { medida: '1"',     presentacion: "Pieza", precio: 61   },
+        { medida: '1-1/4"', presentacion: "Pieza", precio: 90   },
+        { medida: '1-1/2"', presentacion: "Pieza", precio: 127  },
+        { medida: '2"',     presentacion: "Pieza", precio: 202  },
+        { medida: '3"',     presentacion: "Pieza", precio: 611  },
+        { medida: '4"',     presentacion: "Pieza", precio: 1073 },
+      ]},
+      { name: "Uniones universales NPT Ced.40", items: [
+        { medida: '1/2"',   presentacion: "Pieza", precio: 49  },
+        { medida: '3/4"',   presentacion: "Pieza", precio: 75  },
+        { medida: '1"',     presentacion: "Pieza", precio: 137 },
+        { medida: '1-1/4"', presentacion: "Pieza", precio: 194 },
+        { medida: '1-1/2"', presentacion: "Pieza", precio: 273 },
+        { medida: '2"',     presentacion: "Pieza", precio: 441 },
+      ]},
+      { name: "Codos 90° macho-hembra NPT Ced.40", items: [
+        { medida: '1/2"',   presentacion: "Pieza", precio: 38  },
+        { medida: '3/4"',   presentacion: "Pieza", precio: 57  },
+        { medida: '1"',     presentacion: "Pieza", precio: 104 },
+        { medida: '1-1/4"', presentacion: "Pieza", precio: 150 },
+        { medida: '1-1/2"', presentacion: "Pieza", precio: 211 },
+        { medida: '2"',     presentacion: "Pieza", precio: 338 },
+      ]},
+      { name: "Tees reducidas NPT Ced.40", items: [
+        { medida: '1"×3/4"×1"',       presentacion: "Pieza", precio: 117 },
+        { medida: '1"×1/2"×1"',       presentacion: "Pieza", precio: 127 },
+        { medida: '1-1/4"×1"×1-1/4"', presentacion: "Pieza", precio: 172 },
+        { medida: '1-1/2"×1"×1-1/2"', presentacion: "Pieza", precio: 247 },
+        { medida: '2"×1-1/2"×2"',     presentacion: "Pieza", precio: 416 },
+        { medida: '2"×1"×2"',         presentacion: "Pieza", precio: 442 },
+      ]},
+      /* ── SOLDABLES (SW) — sin precio, cotizar ── */
+      { name: "Codos 90° soldables", type: "chips", items: ['1/2"','3/4"','1"','1-1/4"','1-1/2"','2"'] },
+      { name: "Codos 45° soldables", type: "chips", items: ['1/2"','3/4"','1"','1-1/4"','1-1/2"','2"'] },
+      { name: "Tees soldables",      type: "chips", items: ['1/2"','3/4"','1"','1-1/4"','1-1/2"','2"'] },
+      { name: "Coples soldables",    type: "chips", items: ['1/2"','3/4"','1"','1-1/4"','1-1/2"','2"'] },
+      { name: "Reducciones soldables", type: "chips", items: ['3/4"×1/2"','1"×3/4"','1"×1/2"','1-1/4"×1"','1-1/4"×3/4"','1-1/2"×1"','2"×1-1/2"','2"×1"','2"×3/4"'] },
+      { name: "Tapas (caps) soldables", type: "chips", items: ['1/2"','3/4"','1"','1-1/4"','1-1/2"','2"'] }
+    ]
+  },
+  {
+    name: "Reguladores",
+    icon: "regulator",
+    subcategories: [
+      {
+        name: "Tipos disponibles",
+        items: [
+          { medida: "1ra etapa", presentacion: "Alta a media presión", precio: 2200 },
+          { medida: "2da etapa", presentacion: "Media a baja presión", precio: 680 },
+          { medida: "Integral", presentacion: "Alta a baja (1 paso)", precio: 2200 },
+          { medida: "De servicio", presentacion: "Regulación final", precio: 480 }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Válvulas",
+    icon: "valve",
+    subcategories: [
+      { name: "De paso / esfera", type: "chips", items: ['1/4"','3/8"','1/2"','3/4"','1"','1-1/4"','1-1/2"','2"'] },
+      {
+        name: "De alivio",
+        items: [
+          { medida: "Estándar", presentacion: "Para regulador", precio: 980 },
+          { medida: "Alta capacidad", presentacion: "Para tanque estacionario", precio: 1850 }
+        ]
+      },
+      { name: "De globo", type: "chips", items: ['1/2"','3/4"','1"','1-1/4"','1-1/2"','2"'] },
+      { name: "De servicio (exceso de flujo)", type: "chips", items: ['1/2"','3/4"','1"','1-1/4"','1-1/2"','2"'] }
+    ]
+  },
+  {
+    name: "Soportería",
+    icon: "support",
+    subcategories: [
+      {
+        name: "Soporte tipo pera (uña)",
+        items: [
+          { medida: '1/2"', presentacion: "Pieza", precio: 35 },
+          { medida: '3/4"', presentacion: "Pieza", precio: 40 },
+          { medida: '1"', presentacion: "Pieza", precio: 48 },
+          { medida: '1-1/4"', presentacion: "Pieza", precio: 58 },
+          { medida: '1-1/2"', presentacion: "Pieza", precio: 68 },
+          { medida: '2"', presentacion: "Pieza", precio: 85 }
+        ]
+      },
+      {
+        name: "Soporte tipo omega",
+        items: [
+          { medida: '1/2"', presentacion: "Pieza", precio: 38 },
+          { medida: '3/4"', presentacion: "Pieza", precio: 44 },
+          { medida: '1"', presentacion: "Pieza", precio: 52 },
+          { medida: '1-1/4"', presentacion: "Pieza", precio: 62 },
+          { medida: '1-1/2"', presentacion: "Pieza", precio: 72 },
+          { medida: '2"', presentacion: "Pieza", precio: 90 }
+        ]
+      },
+      {
+        name: "Soporte tipo clevis",
+        items: [
+          { medida: '1/2"', presentacion: "Pieza", precio: 120 },
+          { medida: '3/4"', presentacion: "Pieza", precio: 140 },
+          { medida: '1"', presentacion: "Pieza", precio: 165 },
+          { medida: '1-1/4"', presentacion: "Pieza", precio: 195 },
+          { medida: '1-1/2"', presentacion: "Pieza", precio: 225 },
+          { medida: '2"', presentacion: "Pieza", precio: 270 }
+        ]
+      },
+      {
+        name: "Riel Unistrut / canal estructural",
+        items: [
+          { medida: '4 × 2 cm', presentacion: "Tramo 3 m", precio: 280 },
+          { medida: '4 × 4 cm', presentacion: "Tramo 3 m", precio: 340 },
+          { medida: '4 × 2 cm', presentacion: "Tramo 6 m", precio: 520 },
+          { medida: '4 × 4 cm', presentacion: "Tramo 6 m", precio: 640 }
+        ]
+      },
+      { name: "Tornillería y anclas", type: "chips", items: ['Taquete 1/4"','Taquete 3/8"','Ancla 1/4"','Ancla 3/8"','Tornillo 1/4"×1"','Tornillo 3/8"×1-1/2"','Varilla roscada 1/4"','Varilla roscada 3/8"'] }
+    ]
+  },
+  {
+    name: "Abrazaderas",
+    icon: "clamp",
+    subcategories: [
+      {
+        name: "Abrazadera sin fin (metálica)",
+        items: [
+          { medida: '1/4" - 5/8"', presentacion: "Pieza", precio: 18 },
+          { medida: '5/16" - 7/8"', presentacion: "Pieza", precio: 20 },
+          { medida: '3/8" - 7/8"', presentacion: "Pieza", precio: 22 },
+          { medida: '1/2" - 1-1/4"', presentacion: "Pieza", precio: 25 },
+          { medida: '3/4" - 1-3/4"', presentacion: "Pieza", precio: 30 },
+          { medida: '1" - 2"', presentacion: "Pieza", precio: 35 },
+          { medida: '1-1/2" - 2-1/2"', presentacion: "Pieza", precio: 42 }
+        ]
+      },
+      {
+        name: "Abrazadera de presión (U-bolt)",
+        items: [
+          { medida: '1/2"', presentacion: "Pieza con tuercas", precio: 45 },
+          { medida: '3/4"', presentacion: "Pieza con tuercas", precio: 52 },
+          { medida: '1"', presentacion: "Pieza con tuercas", precio: 62 },
+          { medida: '1-1/4"', presentacion: "Pieza con tuercas", precio: 75 },
+          { medida: '1-1/2"', presentacion: "Pieza con tuercas", precio: 88 },
+          { medida: '2"', presentacion: "Pieza con tuercas", precio: 110 }
+        ]
+      },
+      {
+        name: "Abrazadera de tubo con base",
+        items: [
+          { medida: '1/2"', presentacion: "Pieza", precio: 38 },
+          { medida: '3/4"', presentacion: "Pieza", precio: 45 },
+          { medida: '1"', presentacion: "Pieza", precio: 55 },
+          { medida: '1-1/4"', presentacion: "Pieza", precio: 68 },
+          { medida: '1-1/2"', presentacion: "Pieza", precio: 80 },
+          { medida: '2"', presentacion: "Pieza", precio: 98 }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Manómetros",
+    icon: "gauge",
+    subcategories: [
+      {
+        name: "Manómetros de presión",
+        items: [
+          { medida: "Carátula 2\"", presentacion: "Conexión 1/4\" inf.", precio: 380 },
+          { medida: "Carátula 2-1/2\"", presentacion: "Conexión 1/4\" inf.", precio: 490 },
+          { medida: "Carátula 4\"", presentacion: "Conexión 1/4\" inf.", precio: 650 },
+          { medida: "Carátula 4\"", presentacion: "Conexión 1/2\" inf.", precio: 720 }
+        ]
+      },
+      {
+        name: "Por rango de presión",
+        items: [
+          { medida: "0–30 psi", presentacion: "Baja presión", precio: 350 },
+          { medida: "0–60 psi", presentacion: "Baja presión", precio: 390 },
+          { medida: "0–100 psi", presentacion: "Media presión", precio: 430 },
+          { medida: "0–160 psi", presentacion: "Media presión", precio: 490 },
+          { medida: "0–300 psi", presentacion: "Alta presión", precio: 590 }
+        ]
+      },
+      { name: "Accesorios de manómetro", type: "chips", items: ['Sifón 1/4"','Sifón 1/2"','Llave de manómetro 1/4"','Llave de manómetro 1/2"','Glicerina para llenado'] }
+    ]
+  },
+  {
+    name: "Perfiles y Ángulos",
+    icon: "profile",
+    subcategories: [
+      {
+        name: "Ángulo de acero",
+        items: [
+          { medida: '3/4" × 3/4" × 1/8"', presentacion: "Tramo 6 m" },
+          { medida: '1" × 1" × 1/8"', presentacion: "Tramo 6 m" },
+          { medida: '1" × 1" × 3/16"', presentacion: "Tramo 6 m" },
+          { medida: '1-1/4" × 1-1/4" × 1/8"', presentacion: "Tramo 6 m" },
+          { medida: '1-1/4" × 1-1/4" × 3/16"', presentacion: "Tramo 6 m" },
+          { medida: '1-1/2" × 1-1/2" × 1/8"', presentacion: "Tramo 6 m" },
+          { medida: '1-1/2" × 1-1/2" × 3/16"', presentacion: "Tramo 6 m" },
+          { medida: '2" × 2" × 1/8"', presentacion: "Tramo 6 m" },
+          { medida: '2" × 2" × 3/16"', presentacion: "Tramo 6 m" },
+          { medida: '2" × 2" × 1/4"', presentacion: "Tramo 6 m" }
+        ]
+      },
+      {
+        name: "Perfil PTR (tubular rectangular)",
+        items: [
+          { medida: '1" × 1"', presentacion: "Cal. 14 — Tramo 6 m" },
+          { medida: '1" × 2"', presentacion: "Cal. 14 — Tramo 6 m" },
+          { medida: '1-1/2" × 1-1/2"', presentacion: "Cal. 14 — Tramo 6 m" },
+          { medida: '2" × 2"', presentacion: "Cal. 14 — Tramo 6 m" },
+          { medida: '2" × 3"', presentacion: "Cal. 14 — Tramo 6 m" },
+          { medida: '2" × 4"', presentacion: "Cal. 14 — Tramo 6 m" },
+          { medida: '3" × 3"', presentacion: "Cal. 14 — Tramo 6 m" }
+        ]
+      },
+      {
+        name: "Perfil tubular redondo",
+        items: [
+          { medida: '1"', presentacion: "Cal. 14 — Tramo 6 m" },
+          { medida: '1-1/4"', presentacion: "Cal. 14 — Tramo 6 m" },
+          { medida: '1-1/2"', presentacion: "Cal. 14 — Tramo 6 m" },
+          { medida: '2"', presentacion: "Cal. 14 — Tramo 6 m" }
+        ]
+      },
+      {
+        name: "Solera (plana)",
+        items: [
+          { medida: '3/4" × 1/8"', presentacion: "Tramo 6 m" },
+          { medida: '1" × 1/8"', presentacion: "Tramo 6 m" },
+          { medida: '1" × 3/16"', presentacion: "Tramo 6 m" },
+          { medida: '1-1/4" × 1/8"', presentacion: "Tramo 6 m" },
+          { medida: '1-1/2" × 1/8"', presentacion: "Tramo 6 m" },
+          { medida: '1-1/2" × 3/16"', presentacion: "Tramo 6 m" },
+          { medida: '2" × 1/8"', presentacion: "Tramo 6 m" },
+          { medida: '2" × 3/16"', presentacion: "Tramo 6 m" }
+        ]
+      },
+      {
+        name: "Escalera para tanque estacionario",
+        items: [
+          { medida: "Escalera tipo gato", presentacion: "Fabricación sobre medida" },
+          { medida: "Escalera con plataforma", presentacion: "Fabricación sobre medida" },
+          { medida: "Barandal de seguridad", presentacion: "Fabricación sobre medida" }
+        ]
+      }
+    ]
+  }
+];
+
+const ICONS = {
+  pipe: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 10h16M4 14h16M6 10V6M6 14v4M18 10V6M18 14v4"/></svg>',
+  fitting: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 4v6M12 14v6M6 10h12M6 14h12"/><circle cx="12" cy="12" r="2"/></svg>',
+  vent: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 20V10M16 20V10M4 10h16M6 6h12M8 6V4M16 6V4M12 10v5"/></svg>',
+  regulator: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="6"/><path d="M12 6V2M4 12H2M22 12h-2"/><circle cx="12" cy="12" r="2"/></svg>',
+  valve: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12h6M14 12h6"/><path d="M10 8l4 4-4 4M14 8l-4 4 4 4"/></svg>',
+  support: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20h16M8 20v-6M16 20v-6M6 14h12M12 14V8"/><circle cx="12" cy="6" r="2"/></svg>',
+  clamp: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4"/></svg>',
+  gauge: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v2M12 16v2M6 12h2M16 12h2"/><path d="M12 12l3-3"/><circle cx="12" cy="12" r="1"/></svg>',
+  profile: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 20h20M4 20V8l4-4h8l4 4v12"/><path d="M8 20v-8h8v8"/></svg>'
+};
+
+let cart = {};
+
+const PRICES = {};
+(function buildPriceMap() {
+  CATALOG.forEach(cat => {
+    cat.subcategories.forEach(sub => {
+      if (sub.items && sub.type !== 'chips') {
+        sub.items.forEach(item => {
+          if (item.precio) {
+            PRICES[cartKey(cat.name, sub.name, item.medida)] = item.precio;
+          }
+        });
+      }
+    });
+  });
+})();
+
+function cartKey(catName, subName, itemLabel) {
+  return catName + ' | ' + subName + ' | ' + itemLabel;
+}
+function getQty(key) { return cart[key] || 0; }
+function setQty(key, qty) {
+  if (qty <= 0) delete cart[key];
+  else cart[key] = qty;
+  updateCart();
+}
+function changeQty(key, delta) { setQty(key, Math.max(0, getQty(key) + delta)); }
+function esc(s) { return s.replace(/'/g, "\\'").replace(/"/g, '&quot;'); }
+
+function updateCart() {
+  const keys = Object.keys(cart);
+
+  // FAB
+  const fab = document.getElementById('fab');
+  const fabBadge = document.getElementById('fabBadge');
+  fab.classList.toggle('visible', keys.length > 0);
+  fabBadge.textContent = keys.length;
+
+  // List section header badges
+  const badge = document.getElementById('listCountBadge');
+  const clearBtn = document.getElementById('btnClearList');
+  badge.textContent = keys.length;
+  badge.classList.toggle('visible', keys.length > 0);
+  clearBtn.classList.toggle('visible', keys.length > 0);
+
+  // Re-render add/qty controls in the catalog
+  document.querySelectorAll('[data-cart-key]').forEach(el => {
+    const key = el.dataset.cartKey;
+    const qty = getQty(key);
+    if (qty > 0) {
+      el.innerHTML =
+        '<button class="qty-btn remove" onclick="event.stopPropagation();changeQty(\'' + esc(key) + '\',-1)">−</button>' +
+        '<span class="qty-val">' + qty + '</span>' +
+        '<button class="qty-btn" onclick="event.stopPropagation();changeQty(\'' + esc(key) + '\',1)">+</button>';
+      el.className = 'qty-control';
+    } else {
+      el.innerHTML = '<button class="btn-add" onclick="event.stopPropagation();changeQty(\'' + esc(key) + '\',1)">Agregar</button>';
+      el.className = '';
+    }
+  });
+
+  // Render inline list section
+  updateListSection();
+}
+
+function updateListSection() {
+  const keys = Object.keys(cart);
+  const empty = document.getElementById('listEmpty');
+  const itemsEl = document.getElementById('listItems');
+  const footer = document.getElementById('listFooter');
+  const totalEl = document.getElementById('listTotal');
+
+  if (keys.length === 0) {
+    empty.style.display = 'block';
+    itemsEl.innerHTML = '';
+    footer.style.display = 'none';
+    return;
+  }
+
+  empty.style.display = 'none';
+
+  let grandTotal = 0;
+  let hasAnyPrice = false;
+  let grouped = {};
+
+  keys.sort().forEach(key => {
+    const parts = key.split(' | ');
+    const cat = parts[0];
+    if (!grouped[cat]) grouped[cat] = [];
+    grouped[cat].push({ sub: parts[1], item: parts[2], qty: cart[key], key });
+  });
+
+  let html = '';
+  Object.keys(grouped).forEach(cat => {
+    html += '<div class="list-group-label">' + cat + '</div>';
+    grouped[cat].forEach(p => {
+      const precio = PRICES[p.key];
+      let priceHTML;
+      if (precio) {
+        const sub = precio * p.qty;
+        grandTotal += sub;
+        hasAnyPrice = true;
+        priceHTML = '<div class="list-item-price">$' + precio.toLocaleString('es-MX') + '/u<br><strong>$' + sub.toLocaleString('es-MX') + '</strong></div>';
+      } else {
+        priceHTML = '<div class="list-item-price" style="color:var(--color-text-secondary);font-size:0.8rem">Por cotizar</div>';
+      }
+      html += '<div class="list-item">' +
+        '<div class="list-item-name"><strong>' + p.item + '</strong><span class="list-item-sub">' + p.sub + '</span></div>' +
+        priceHTML +
+        '<div class="qty-control" data-cart-key="' + esc(p.key) + '">' +
+        '<button class="qty-btn remove" onclick="changeQty(\'' + esc(p.key) + '\',-1)">−</button>' +
+        '<span class="qty-val">' + p.qty + '</span>' +
+        '<button class="qty-btn" onclick="changeQty(\'' + esc(p.key) + '\',1)">+</button>' +
+        '</div>' +
+        '<button class="list-item-remove" onclick="removeItem(\'' + esc(p.key) + '\')" title="Quitar">✕</button>' +
+        '</div>';
+    });
+  });
+
+  itemsEl.innerHTML = html;
+
+  if (hasAnyPrice) {
+    const extra = Object.keys(cart).some(k => !PRICES[k]) ? ' <em style="font-size:0.85rem;font-weight:normal"> + artículos por cotizar</em>' : '';
+    totalEl.innerHTML = 'Subtotal estimado: <strong>$' + grandTotal.toLocaleString('es-MX') + ' MXN</strong>' + extra;
+    totalEl.style.display = 'block';
+  } else {
+    totalEl.style.display = 'none';
+  }
+  footer.style.display = 'block';
+}
+
+function clearCart() {
+  cart = {};
+  updateCart();
+}
+
+function removeItem(key) {
+  delete cart[key];
+  updateCart();
+}
+
+function scrollToList() {
+  document.getElementById('listSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function downloadPDF() {
+  const keys = Object.keys(cart);
+  if (!keys.length) { alert('Agrega productos a la lista antes de generar el PDF.'); return; }
+  const date = new Date().toLocaleDateString('es-MX', { day: '2-digit', month: 'long', year: 'numeric' });
+  const folio = 'COT-' + Date.now().toString().slice(-6);
+  const money = n => n.toLocaleString('es-MX', { style: 'currency', currency: 'MXN' });
+
+  // Build items rows
+  let rows = '', subtotal = 0;
+  keys.sort().forEach(key => {
+    const qty    = cart[key];
+    const precio = PRICES[key] || 0;
+    const importe = precio * qty;
+    subtotal += importe;
+    const parts = key.split(' | ');
+    const cat  = parts[0] || '';
+    const sub  = parts[1] || '';
+    const med  = parts[2] || '';
+    rows += '<tr>' +
+      '<td style="padding:7px 10px;border-bottom:1px solid #e2e8f0;font-size:12px">' + sub + ' ' + med + '<br><span style="color:#94a3b8;font-size:10px">' + cat + '</span></td>' +
+      '<td style="padding:7px 10px;border-bottom:1px solid #e2e8f0;font-size:12px;text-align:center">' + qty + '</td>' +
+      '<td style="padding:7px 10px;border-bottom:1px solid #e2e8f0;font-size:12px;text-align:right;color:#64748b">' + (precio ? money(precio) : '—') + '</td>' +
+      '<td style="padding:7px 10px;border-bottom:1px solid #e2e8f0;font-size:12px;text-align:right;font-weight:700">' + (precio ? money(importe) : 'Cotizar') + '</td>' +
+    '</tr>';
+  });
+
+  const iva   = subtotal * 0.16;
+  const total = subtotal + iva;
+
+  const html = '<!DOCTYPE html><html lang="es"><head>' +
+    '<meta charset="utf-8"><title>Cotización ' + folio + ' — COENERVGAS</title>' +
+    '<style>' +
+      'body{margin:0;padding:32px;font-family:Arial,sans-serif;color:#0f172a;font-size:13px}' +
+      '.header{background:#1a2d5a;color:#fff;padding:20px 28px;border-radius:8px;display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}' +
+      '.brand{font-size:22px;font-weight:900;letter-spacing:-0.5px}' +
+      '.brand span{color:#f97316}' +
+      '.folio-box{text-align:right}' +
+      '.folio-label{font-size:10px;opacity:.7;text-transform:uppercase;letter-spacing:1px}' +
+      '.folio-num{font-size:18px;font-weight:700;color:#f97316}' +
+      '.meta{display:flex;justify-content:space-between;margin-bottom:20px;padding:14px 18px;background:#f1f5f9;border-radius:6px;font-size:12px}' +
+      'table{width:100%;border-collapse:collapse;margin-bottom:16px}' +
+      'thead tr{background:#1a2d5a;color:#fff}' +
+      'thead th{padding:9px 10px;font-size:11px;font-weight:700;text-align:left;letter-spacing:.5px}' +
+      'thead th:nth-child(2){text-align:center}thead th:nth-child(3),thead th:nth-child(4){text-align:right}' +
+      'tbody tr:nth-child(even){background:#f8fafc}' +
+      '.totals{margin-left:auto;width:280px}' +
+      '.tot-row{display:flex;justify-content:space-between;padding:5px 0;font-size:12px;color:#64748b}' +
+      '.tot-total{display:flex;justify-content:space-between;padding:10px 14px;background:#1a2d5a;color:#fff;border-radius:6px;font-weight:700;font-size:14px;margin-top:6px}' +
+      '.tot-total span:last-child{color:#f97316}' +
+      '.footer{margin-top:32px;padding-top:12px;border-top:1px solid #e2e8f0;font-size:10px;color:#94a3b8;text-align:center;line-height:1.6}' +
+      '.note{background:#fffbeb;border:1px solid #fcd34d;border-radius:6px;padding:10px 14px;font-size:11px;color:#92400e;margin-bottom:16px}' +
+      '@media print{body{padding:16px}button{display:none}}' +
+    '</style></head><body>' +
+    '<div class="header">' +
+      '<div class="brand">COENER<span>V</span>GAS</div>' +
+      '<div class="folio-box"><div class="folio-label">Cotización</div><div class="folio-num">' + folio + '</div></div>' +
+    '</div>' +
+    '<div class="meta">' +
+      '<div><strong>Fecha:</strong> ' + date + '</div>' +
+      '<div><strong>Vigencia:</strong> 15 días naturales</div>' +
+      '<div><strong>Condición:</strong> Precios sujetos a cambio sin previo aviso</div>' +
+    '</div>' +
+    '<table><thead><tr>' +
+      '<th>MATERIAL / DESCRIPCIÓN</th><th>CANT.</th><th>P. UNIT.</th><th>IMPORTE</th>' +
+    '</tr></thead><tbody>' + rows + '</tbody></table>' +
+    '<div class="totals">' +
+      '<div class="tot-row"><span>Subtotal</span><span>' + money(subtotal) + '</span></div>' +
+      '<div class="tot-row"><span>IVA 16%</span><span>' + money(iva) + '</span></div>' +
+      '<div class="tot-total"><span>TOTAL</span><span>' + money(total) + '</span></div>' +
+    '</div>' +
+    (subtotal === 0 ? '<div class="note" style="margin-top:16px">⚠️ Algunos artículos no tienen precio asignado — se marcan como "Cotizar". Contáctenos para precio actualizado.</div>' : '') +
+    '<div class="footer">' +
+      '<strong>COENERVGAS</strong> · Edgar Aaron Garcia Sanchez · RFC: GASE820515MB5<br>' +
+      'Circuito Eucaliptos 262, Col. Las Arboledas, C.P. 36764 — Salamanca, Guanajuato<br>' +
+      'coenervgas@outlook.com' +
+    '</div>' +
+    '<div style="text-align:center;margin-top:24px">' +
+      '<button onclick="window.print()" style="background:#f97316;color:#fff;border:none;padding:14px 40px;font-size:15px;font-weight:700;border-radius:8px;cursor:pointer;letter-spacing:.3px">🖨️&nbsp; Imprimir / Guardar como PDF</button>' +
+    '</div>' +
+    '</body></html>';
+
+  const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+  const url  = URL.createObjectURL(blob);
+  const win  = window.open(url, '_blank');
+  if (!win) alert('Permite ventanas emergentes para este sitio y vuelve a intentarlo.');
+  setTimeout(() => URL.revokeObjectURL(url), 60000);
+}
+
+function sendByEmail() {
+  const text = generateList();
+  const date = new Date().toLocaleDateString('es-MX', { day: '2-digit', month: '2-digit', year: 'numeric' });
+  const subject = encodeURIComponent('Solicitud de Cotización COENERVGAS — ' + date);
+  const body = encodeURIComponent(text);
+  window.location.href = 'mailto:coenervgas@outlook.com?subject=' + subject + '&body=' + body;
+}
+
+function generateList() {
+  const keys = Object.keys(cart).sort();
+  const date = new Date();
+  const dateStr = date.toLocaleDateString('es-MX', { day: '2-digit', month: '2-digit', year: 'numeric' });
+  let lines = [];
+  lines.push('COENERVGAS — Solicitud de Cotización');
+  lines.push('Fecha: ' + dateStr);
+  lines.push('─'.repeat(40));
+  lines.push('');
+
+  let grouped = {};
+  keys.forEach(key => {
+    const parts = key.split(' | ');
+    const cat = parts[0];
+    if (!grouped[cat]) grouped[cat] = [];
+    grouped[cat].push({ sub: parts[1], item: parts[2], qty: cart[key] });
+  });
+
+  let grandTotal = 0;
+  let hasAnyPrice = false;
+  Object.keys(grouped).forEach(cat => {
+    lines.push(cat.toUpperCase());
+    grouped[cat].forEach(p => {
+      const key = cat + ' | ' + p.sub + ' | ' + p.item;
+      const precio = PRICES[key];
+      if (precio) {
+        const sub = precio * p.qty;
+        grandTotal += sub;
+        hasAnyPrice = true;
+        lines.push('  ' + p.qty + 'x  ' + p.item + '  (' + p.sub + ')  →  $' + precio.toLocaleString('es-MX') + '/u = $' + sub.toLocaleString('es-MX'));
+      } else {
+        lines.push('  ' + p.qty + 'x  ' + p.item + '  (' + p.sub + ')  →  Precio por cotizar');
+      }
+    });
+    lines.push('');
+  });
+
+  lines.push('─'.repeat(40));
+  lines.push('Total: ' + keys.length + ' productos, ' + keys.reduce((s, k) => s + cart[k], 0) + ' unidades');
+  if (hasAnyPrice) lines.push('Subtotal estimado: $' + grandTotal.toLocaleString('es-MX') + ' MXN');
+  lines.push('');
+  lines.push('Favor de confirmar disponibilidad y precios. Gracias.');
+  return lines.join('\n');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('visible');
+  setTimeout(() => t.classList.remove('visible'), 2000);
+}
+
+function renderCatalog(filter) {
+  const container = document.getElementById('categories');
+  const noResults = document.getElementById('noResults');
+  const term = (filter || '').toLowerCase().trim();
+  container.innerHTML = '';
+  let visibleCount = 0;
+
+  CATALOG.forEach((cat) => {
+    const catMatches = !term || cat.name.toLowerCase().includes(term);
+    let hasVisibleSub = false;
+    let subcatsHTML = '';
+
+    cat.subcategories.forEach((sub) => {
+      const subMatches = catMatches || sub.name.toLowerCase().includes(term);
+      let bodyHTML = '';
+
+      if (sub.type === 'chips') {
+        const chips = sub.items.filter(item => subMatches || item.toLowerCase().includes(term));
+        if (chips.length === 0 && !subMatches) return;
+        bodyHTML = '<ul class="product-list">' +
+          chips.map(c => {
+            const key = cartKey(cat.name, sub.name, c);
+            const qty = getQty(key);
+            let ctrl;
+            if (qty > 0) {
+              ctrl = '<span class="qty-control" data-cart-key="' + esc(key) + '">' +
+                '<button class="qty-btn remove" onclick="event.stopPropagation();changeQty(\'' + esc(key) + '\',-1)">−</button>' +
+                '<span class="qty-val">' + qty + '</span>' +
+                '<button class="qty-btn" onclick="event.stopPropagation();changeQty(\'' + esc(key) + '\',1)">+</button></span>';
+            } else {
+              ctrl = '<span data-cart-key="' + esc(key) + '">' +
+                '<button class="btn-add" onclick="event.stopPropagation();changeQty(\'' + esc(key) + '\',1)">Agregar</button></span>';
+            }
+            return '<li class="product-chip">' + c + ' ' + ctrl + '</li>';
+          }).join('') + '</ul>';
+      } else {
+        const rows = sub.items.filter(item =>
+          subMatches || item.medida.toLowerCase().includes(term) ||
+          item.presentacion.toLowerCase().includes(term)
+        );
+        if (rows.length === 0 && !subMatches) return;
+        bodyHTML = '<div class="product-table-wrap"><table class="product-table">' +
+          '<thead><tr><th>Medida</th><th>Presentación</th><th style="text-align:right">Precio</th><th style="text-align:right"></th></tr></thead><tbody>' +
+          rows.map(r => {
+            const key = cartKey(cat.name, sub.name, r.medida);
+            const qty = getQty(key);
+            let ctrl;
+            if (qty > 0) {
+              ctrl = '<span class="qty-control" data-cart-key="' + esc(key) + '">' +
+                '<button class="qty-btn remove" onclick="event.stopPropagation();changeQty(\'' + esc(key) + '\',-1)">−</button>' +
+                '<span class="qty-val">' + qty + '</span>' +
+                '<button class="qty-btn" onclick="event.stopPropagation();changeQty(\'' + esc(key) + '\',1)">+</button></span>';
+            } else {
+              ctrl = '<span data-cart-key="' + esc(key) + '">' +
+                '<button class="btn-add" onclick="event.stopPropagation();changeQty(\'' + esc(key) + '\',1)">Agregar</button></span>';
+            }
+            const precioCell = r.precio
+              ? '<td style="text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap">$' + r.precio.toLocaleString('es-MX') + '</td>'
+              : '<td style="text-align:right;color:var(--color-text-secondary);font-size:0.8rem">Consultar</td>';
+            return '<tr><td class="measure">' + r.medida + '</td><td>' + r.presentacion + '</td>' + precioCell + '<td style="text-align:right">' + ctrl + '</td></tr>';
+          }).join('') + '</tbody></table></div>';
+      }
+
+      hasVisibleSub = true;
+      subcatsHTML += '<div class="subcategory' + (term ? ' open' : '') + '">' +
+        '<button class="subcategory-header" onclick="toggleSub(this)">' +
+        '<span>' + sub.name + '</span>' +
+        '<svg class="sub-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>' +
+        '</button>' +
+        '<div class="subcategory-body">' + bodyHTML + '</div></div>';
+    });
+
+    if (!hasVisibleSub && !catMatches) return;
+    visibleCount++;
+
+    const totalItems = cat.subcategories.reduce((s, sub) => s + (sub.items ? sub.items.length : 0), 0);
+    container.innerHTML += '<div class="category' + (term ? ' open' : '') + '">' +
+      '<button class="category-header" onclick="toggleCat(this)">' +
+      '<div class="pipe-icon">' + ICONS[cat.icon] + '</div>' +
+      '<div class="category-info">' +
+      '<div class="category-name">' + cat.name + '</div>' +
+      '<div class="category-count">' + cat.subcategories.length + ' tipo' + (cat.subcategories.length > 1 ? 's' : '') + ' &middot; ' + totalItems + ' producto' + (totalItems > 1 ? 's' : '') + '</div>' +
+      '</div>' +
+      '<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>' +
+      '</button>' +
+      '<div class="category-body">' + subcatsHTML + '</div></div>';
+  });
+
+  noResults.classList.toggle('visible', visibleCount === 0);
+}
+
+function toggleCat(btn) { btn.closest('.category').classList.toggle('open'); }
+function toggleSub(btn) { btn.closest('.subcategory').classList.toggle('open'); }
+
+document.getElementById('searchInput').addEventListener('input', function() { renderCatalog(this.value); });
+renderCatalog();
+
+function switchTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach((b, i) => {
+    b.classList.toggle('active',
+      (tab === 'catalog' && i === 0) ||
+      (tab === 'checker' && i === 1) ||
+      (tab === 'proy'    && i === 2));
+  });
+  document.getElementById('tab-catalog').classList.toggle('active', tab === 'catalog');
+  document.getElementById('tab-checker').classList.toggle('active', tab === 'checker');
+  document.getElementById('tab-proy').classList.toggle('active', tab === 'proy');
+}
+
+/* ══════════════════════════════════════════
+   PROYECCIÓN DE CONSUMO — CALCULADOR
+══════════════════════════════════════════ */
+const EQUIP_PRESETS = [
+  { group: "— Selecciona un equipo —", items: [] },
+  { group: "Tortillería", items: [
+    { label: "Máquina tortillera pequeña (≤ 500 tort/hr)", btu: 45000 },
+    { label: "Máquina tortillera mediana (500–1,000 tort/hr)", btu: 78000 },
+    { label: "Máquina tortillera grande (> 1,000 tort/hr)", btu: 145000 },
+  ]},
+  { group: "Alimentaria general", items: [
+    { label: "Paila / cazuela 50–100 L", btu: 35000 },
+    { label: "Paila / cazuela 100–300 L", btu: 80000 },
+    { label: "Paila / cazuela 300–500 L", btu: 145000 },
+    { label: "Freidora industrial pequeña (< 15 L)", btu: 45000 },
+    { label: "Freidora industrial mediana (15–30 L)", btu: 85000 },
+    { label: "Horno de pan / panadería", btu: 65000 },
+    { label: "Asador / grill industrial", btu: 42000 },
+    { label: "Vaporera / tamalera", btu: 52000 },
+    { label: "Fogón industrial (por quemador)", btu: 25000 },
+    { label: "Estufa industrial (6 quemadores)", btu: 120000 },
+  ]},
+  { group: "Caldera de vapor", items: [
+    { label: "Caldera  5 BHP — 167,000 BTU/hr", btu: 167375 },
+    { label: "Caldera 10 BHP — 335,000 BTU/hr", btu: 334750 },
+    { label: "Caldera 15 BHP — 502,000 BTU/hr", btu: 502125 },
+    { label: "Caldera 20 BHP — 670,000 BTU/hr", btu: 669500 },
+    { label: "Caldera 30 BHP — 1,004,000 BTU/hr", btu: 1004250 },
+    { label: "Caldera 50 BHP — 1,674,000 BTU/hr", btu: 1673750 },
+    { label: "Caldera 100 BHP — 3,348,000 BTU/hr", btu: 3347500 },
+  ]},
+  { group: "Industrial / otro", items: [
+    { label: "Horno industrial (genérico)", btu: 150000 },
+    { label: "Secadora / deshidratadora", btu: 80000 },
+    { label: "Equipo personalizado — ingresa BTU manualmente", btu: 0, custom: true },
+  ]},
+];
+
+const BTU_PER_KG_LP  = 44000;   // BTU/kg gas LP (valor comercial México)
+const LP_KG_PER_L    = 0.504;   // kg/litro LP líquido (densidad promedio)
+const MAX_FILL       = 0.85;    // llenado máximo según NOM-011-SEDG
+
+const TANK_SIZES = [
+  { l: 300,   n: '300 L',    type: 'Cilindro portátil' },
+  { l: 500,   n: '500 L',    type: 'Tanque vertical' },
+  { l: 1000,  n: '1,000 L',  type: 'Tanque estacionario' },
+  { l: 2000,  n: '2,000 L',  type: 'Tanque estacionario' },
+  { l: 3000,  n: '3,000 L',  type: 'Tanque estacionario' },
+  { l: 5000,  n: '5,000 L',  type: 'Tanque estacionario' },
+  { l: 10000, n: '10,000 L', type: 'Tanque estacionario' },
+  { l: 20000, n: '20,000 L', type: 'Tanque estacionario' },
+  { l: 30000, n: '30,000 L', type: 'Tanque estacionario' },
+];
+
+let equipCounter = 0;
+
+function buildEquipSelect(id) {
+  let opts = '';
+  EQUIP_PRESETS.forEach(g => {
+    if (!g.items.length) { opts += '<option value="" disabled selected>' + g.group + '</option>'; return; }
+    opts += '<optgroup label="' + g.group + '">';
+    g.items.forEach((item, i) => {
+      opts += '<option value="' + g.group + '__' + i + '" data-btu="' + item.btu + '" data-custom="' + (item.custom ? '1' : '0') + '">' + item.label + '</option>';
+    });
+    opts += '</optgroup>';
+  });
+  return opts;
+}
+
+function addEquip() {
+  const id = ++equipCounter;
+  const list = document.getElementById('equipList');
+  const div = document.createElement('div');
+  div.className = 'equip-row';
+  div.id = 'equip-' + id;
+  div.innerHTML =
+    '<div class="equip-field">' +
+      '<select class="equip-select" id="esel-' + id + '" onchange="onEquipChange(' + id + ')">' +
+        buildEquipSelect(id) +
+      '</select>' +
+      '<div class="equip-btu-display" id="ebtu-' + id + '"></div>' +
+    '</div>' +
+    '<div class="equip-field"><input class="equip-input" type="number" id="eqty-' + id + '" value="1" min="1" max="99" placeholder="Cant."></div>' +
+    '<div class="equip-field"><input class="equip-input" type="number" id="ehrs-' + id + '" value="8" min="0.5" max="24" step="0.5" placeholder="Hrs"></div>' +
+    '<button class="equip-remove" onclick="removeEquip(' + id + ')" title="Quitar">✕</button>';
+  list.appendChild(div);
+}
+
+function onEquipChange(id) {
+  const sel = document.getElementById('esel-' + id);
+  const opt = sel.options[sel.selectedIndex];
+  const btu = parseInt(opt.dataset.btu) || 0;
+  const custom = opt.dataset.custom === '1';
+  const btuEl = document.getElementById('ebtu-' + id);
+  if (custom) {
+    btuEl.innerHTML = '<input class="equip-input" type="number" id="ecbtu-' + id + '" style="width:130px;margin-top:4px" placeholder="BTU/hr del equipo" min="1000">';
+  } else if (btu > 0) {
+    btuEl.textContent = btu.toLocaleString('es-MX') + ' BTU/hr';
+  } else {
+    btuEl.textContent = '';
+  }
+}
+
+function removeEquip(id) {
+  const el = document.getElementById('equip-' + id);
+  if (el) el.remove();
+}
+
+function getEquipBtu(id) {
+  const sel = document.getElementById('esel-' + id);
+  if (!sel) return null;
+  const opt = sel.options[sel.selectedIndex];
+  if (!opt || !opt.value) return null;
+  const custom = opt.dataset.custom === '1';
+  let btu = custom
+    ? (parseInt((document.getElementById('ecbtu-' + id) || {}).value) || 0)
+    : (parseInt(opt.dataset.btu) || 0);
+  const qty = parseFloat(document.getElementById('eqty-' + id).value) || 1;
+  const hrs = parseFloat(document.getElementById('ehrs-' + id).value) || 8;
+  return { btu, qty, hrs, label: opt.text };
+}
+
+function calcProy() {
+  const rows = document.querySelectorAll('#equipList .equip-row');
+  if (!rows.length) { alert('Agrega al menos un equipo antes de calcular.'); return; }
+
+  let totalBtuHr = 0;
+  let totalBtuDay = 0;
+  let valid = true;
+
+  rows.forEach(row => {
+    const id = row.id.replace('equip-', '');
+    const e = getEquipBtu(id);
+    if (!e) { valid = false; return; }
+    if (!e.btu) return; // skip 0 BTU (custom not filled)
+    totalBtuHr  += e.btu * e.qty;
+    totalBtuDay += e.btu * e.qty * e.hrs;
+  });
+
+  if (!valid) { alert('Selecciona el tipo de equipo en todas las filas.'); return; }
+  if (totalBtuDay === 0) { alert('Revisa que los equipos tengan BTU válidos y horas mayores a 0.'); return; }
+
+  const kgDay  = totalBtuDay / BTU_PER_KG_LP;
+  const kgHr   = totalBtuHr  / BTU_PER_KG_LP;
+  const lDay   = kgDay / LP_KG_PER_L;
+
+  renderProyResults(totalBtuHr, totalBtuDay, kgDay, kgHr, lDay);
+}
+
+function renderProyResults(totalBtuHr, totalBtuDay, kgDay, kgHr, lDay) {
+  // Stats
+  document.getElementById('statGrid').innerHTML =
+    stat(fmt(Math.round(totalBtuHr / 1000)) + 'k', 'BTU/hr', 'Consumo máximo simultáneo') +
+    stat(fmt(Math.round(kgDay)),'kg/día', 'Gas LP consumido al día') +
+    stat(fmt(Math.round(lDay)),'L/día', 'Equivalente en litros LP líquido') +
+    stat(fmt(Math.round(kgDay * 30)),'kg/mes', 'Consumo mensual estimado');
+
+  // Tanks
+  let tankHTML = '';
+  [7, 15, 30].forEach(days => {
+    const kgNeed = kgDay * days;
+    const lNeed  = kgNeed / LP_KG_PER_L;
+    const lGeom  = lNeed / MAX_FILL;
+    const tank   = TANK_SIZES.find(t => t.l >= lGeom) || TANK_SIZES[TANK_SIZES.length - 1];
+    const kgTank = tank.l * MAX_FILL * LP_KG_PER_L;
+    const rec    = days === 15;
+    tankHTML +=
+      '<div class="autonomy-section">' +
+      '<div class="autonomy-title">' + (days === 7 ? '⚡ Mínimo — ' : days === 15 ? '✅ Recomendado — ' : '🏆 Óptimo — ') + 'Autonomía ' + days + ' días</div>' +
+      '<div class="tank-option' + (rec ? ' recommended' : '') + '">' +
+      '<div class="tank-icon">🛢️</div>' +
+      '<div class="tank-info">' +
+        '<div class="tank-name">' + tank.n + ' — ' + tank.type + '</div>' +
+        '<div class="tank-detail">' +
+          'Capacidad útil: ~' + fmt(Math.round(kgTank)) + ' kg LP · ' +
+          'Necesitas: ~' + fmt(Math.round(kgNeed)) + ' kg para ' + days + ' días<br>' +
+          'Volumen geométrico mínimo requerido: ' + fmt(Math.round(lGeom)) + ' L' +
+        '</div>' +
+      '</div>' +
+      (rec ? '<span class="tank-badge">Recomendado</span>' : '') +
+      '</div></div>';
+  });
+  tankHTML += '<div style="font-size:0.78rem;color:var(--color-text-secondary);margin-top:0.5rem">* Llenado máximo 85% según NOM-011-SEDG-2010. Densidad LP usada: 0.504 kg/L</div>';
+  document.getElementById('tankResults').innerHTML = tankHTML;
+
+  // Regulators
+  let regHTML = '';
+  if (kgHr <= 4) {
+    regHTML += regItem('🟢','Regulador de servicio (doméstico/comercial ligero)',
+      'Flujo: ≤ 4 kg/hr · Presión salida: 280 mmca (11" c.a.) · Rosca 3/8" o 1/2"');
+  } else if (kgHr <= 15) {
+    regHTML += regItem('🟡','Regulador 2ª etapa comercial',
+      'Flujo: hasta 15 kg/hr · Presión entrada: 0.35–1.5 kg/cm² · Salida: 280 mmca · Rosca 1/2" a 1"');
+  } else if (kgHr <= 60) {
+    regHTML += regItem('🔵','Sistema de regulación 2 etapas',
+      '1ª etapa: reduce de alta presión (tanque) a media presión (1.5–4 kg/cm²) · 2ª etapa: reduce a baja presión (280 mmca) · Flujo: hasta 60 kg/hr');
+    regHTML += regItem('🔵','Regulador 1ª etapa',
+      'Entrada: presión de tanque · Salida: ~1.5 kg/cm² · Capacidad según flujo calculado');
+    regHTML += regItem('🔵','Regulador 2ª etapa',
+      'Entrada: ~1.5 kg/cm² · Salida: 280 mmca · Conexión: 3/4" a 1-1/2"');
+  } else {
+    regHTML += regItem('🔴','Sistema de regulación industrial',
+      'Flujo > 60 kg/hr · Se requiere diseño específico con reguladores industriales aprobados por SENER/ASEA · Consulta con distribuidor autorizado de Gas LP');
+    regHTML += regItem('🔴','1ª etapa industrial',
+      'Alta capacidad — Entrada desde tanque estacionario · Válvula exceso flujo incluida');
+    regHTML += regItem('🔴','2ª etapa industrial',
+      'Capacidad adecuada al flujo calculado · Incluir manifold de distribución si hay múltiples equipos');
+  }
+
+  // Pipe diameter hint
+  const flowM3hr = (totalBtuHr / BTU_PER_KG_LP / LP_KG_PER_L) / 1000; // m³/hr (gas)
+  let pipeTip = '';
+  if (kgHr <= 5) pipeTip = '1/2" cédula 40';
+  else if (kgHr <= 15) pipeTip = '3/4" cédula 40';
+  else if (kgHr <= 35) pipeTip = '1" cédula 40';
+  else if (kgHr <= 70) pipeTip = '1-1/4" cédula 40';
+  else pipeTip = '1-1/2" o 2" cédula 40 (verificar con cálculo hidráulico)';
+
+  regHTML += regItem('⚙️','Diámetro de tubería sugerido (línea principal)',
+    'Para un flujo de ~' + kgHr.toFixed(1) + ' kg/hr se recomienda tubería ' + pipeTip + ' según NOM-004-SEDG-2004. Verificar longitud y caída de presión permitida.');
+
+  document.getElementById('regResults').innerHTML = regHTML;
+
+  document.getElementById('nomRefs').innerHTML =
+    '<strong>Referencias normativas aplicables:</strong><br>' +
+    '• <strong>NOM-004-SEDG-2004</strong> — Sistemas de aprovechamiento de gas LP. Diseño y construcción<br>' +
+    '• <strong>NOM-011-SEDG-2010</strong> — Recipientes estacionarios para almacenamiento de gas LP<br>' +
+    '• <strong>NOM-012-SEDG-2017</strong> — Equipos y aparatos que utilizan gas LP<br>' +
+    '• <strong>NOM-013-SEDG-2017</strong> — Conexiones para aparatos que utilizan gas LP<br>' +
+    '• <strong>SEDG / ASEA</strong> — Reglamentos de instalaciones y comercialización de gas LP';
+
+  document.getElementById('proyResults').style.display = 'block';
+  document.getElementById('proyResults').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function stat(val, unit, label) {
+  return '<div class="result-stat"><div class="result-stat-value">' + val +
+    '</div><div class="result-stat-unit">' + unit +
+    '</div><div class="result-stat-label">' + label + '</div></div>';
+}
+function regItem(icon, label, spec) {
+  return '<div class="reg-item"><div class="reg-bullet">' + icon + '</div><div class="reg-text"><span class="reg-label">' + label + '</span><span class="reg-spec">' + spec + '</span></div></div>';
+}
+function fmt(n) { return n.toLocaleString('es-MX'); }
+
+// Inicializa con un equipo vacío
+addEquip();
+
+/* ── FILE UPLOAD ── */
+function handleFile(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const area = document.getElementById('previewArea');
+  if (file.type.startsWith('image/')) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      area.innerHTML = '<img src="' + e.target.result + '" class="preview-img" alt="Lista">' +
+        '<div class="preview-bar"><span>' + file.name + '</span><button onclick="clearPreview()">Quitar</button></div>' +
+        '<div style="font-size:0.8rem;color:var(--color-text-secondary);margin-bottom:0.5rem">Copia el texto de la imagen al cuadro de abajo.</div>';
+    };
+    reader.readAsDataURL(file);
+  } else if (file.type === 'text/plain' || file.name.endsWith('.csv') || file.name.endsWith('.txt')) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      document.getElementById('checkerInput').value = e.target.result;
+      area.innerHTML = '<div class="preview-bar"><span>' + file.name + ' — texto cargado</span><button onclick="clearPreview()">Quitar</button></div>';
+    };
+    reader.readAsText(file);
+  } else {
+    area.innerHTML = '<div class="preview-bar"><span>' + file.name + ' (vista previa no disponible)</span><button onclick="clearPreview()">Quitar</button></div>' +
+      '<div style="font-size:0.8rem;color:var(--color-text-secondary);margin-bottom:0.5rem">Abre el archivo y copia el texto al cuadro de abajo.</div>';
+  }
+}
+function clearPreview() {
+  document.getElementById('previewArea').innerHTML = '';
+  document.getElementById('fileInput').value = '';
+}
+
+var uploadZone = document.getElementById('uploadZone');
+if (uploadZone) {
+  ['dragenter','dragover'].forEach(function(ev) {
+    uploadZone.addEventListener(ev, function(e) { e.preventDefault(); uploadZone.classList.add('dragover'); });
+  });
+  ['dragleave','drop'].forEach(function(ev) {
+    uploadZone.addEventListener(ev, function(e) { e.preventDefault(); uploadZone.classList.remove('dragover'); });
+  });
+  uploadZone.addEventListener('drop', function(e) {
+    if (e.dataTransfer.files.length) {
+      document.getElementById('fileInput').files = e.dataTransfer.files;
+      handleFile(document.getElementById('fileInput'));
+    }
+  });
+}
+
+/* ── MATCHING ENGINE ── */
+function buildSearchIndex() {
+  var index = [];
+  CATALOG.forEach(function(cat) {
+    cat.subcategories.forEach(function(sub) {
+      if (sub.type === 'chips') {
+        sub.items.forEach(function(size) {
+          index.push({ category: cat.name, subcategory: sub.name, size: size,
+            label: cat.name + ' — ' + sub.name + ' ' + size,
+            keywords: buildKeywords(cat.name, sub.name, size) });
+        });
+      } else {
+        sub.items.forEach(function(item) {
+          index.push({ category: cat.name, subcategory: sub.name, size: item.medida,
+            label: cat.name + ' — ' + sub.name + ' ' + item.medida,
+            keywords: buildKeywords(cat.name, sub.name, item.medida) });
+        });
+      }
+    });
+  });
+  return index;
+}
+
+function buildKeywords(cat, sub, size) {
+  var text = (cat + ' ' + sub + ' ' + size).toLowerCase();
+  return text.replace(/á/g,'a').replace(/é/g,'e').replace(/í/g,'i').replace(/ó/g,'o').replace(/ú/g,'u').replace(/ñ/g,'n');
+}
+
+function normalize(s) {
+  return s.toLowerCase()
+    .replace(/á/g,'a').replace(/é/g,'e').replace(/í/g,'i').replace(/ó/g,'o').replace(/ú/g,'u').replace(/ñ/g,'n')
+    .replace(/["""'']/g, '"').replace(/pulgadas?/g, '"').replace(/pulg\.?/g, '"').replace(/plg\.?/g, '"')
+    .replace(/\bx\b/g, '×').trim();
+}
+
+var ALIASES = {
+  'tubo':['tuberia','tubo','tube'],'cobre':['cobre','cu','cob','cobra'],
+  'galvanizado':['galvanizado','galv','galvanizada','galv.','hierro galv'],
+  'acero':['acero','ac','acero al carbon','carbon','acero carbon','a.c.'],
+  'cpvc':['cpvc','pvc','ventilacion','vent'],'codo':['codo','codos','cod'],
+  'tee':['tee','tees','te','t'],'cople':['cople','coples','coplee','coupling'],
+  'reduccion':['reduccion','reducciones','red','campana'],
+  'conector':['conector','conectores','tuerca conica'],
+  'niple':['niple','niples','nipple'],'tapon':['tapon','tapones','cap','caps','tapa','tapas'],
+  'union':['union','uniones','universal','universales'],
+  'regulador':['regulador','reguladores','reg'],
+  '1ra':['1ra','primera','1er','1a','alta'],'2da':['2da','segunda','2a','baja'],
+  'integral':['integral','integ','1 paso','un paso'],
+  'valvula':['valvula','valvulas','valve','valv'],'esfera':['esfera','paso','bola','ball','paso/esfera'],
+  'alivio':['alivio','relief','seguridad','sobrepresion'],'globo':['globo','globe'],
+  'servicio':['servicio','exceso','flujo','exceso de flujo'],
+  'soporte':['soporte','soporteria','soport'],'pera':['pera','una','uña'],
+  'omega':['omega'],'clevis':['clevis'],
+  'unistrut':['unistrut','riel','canal','canal estructural'],
+  'abrazadera':['abrazadera','abrazaderas','abraz','clamp'],
+  'sin fin':['sin fin','sinfin','metalica','worm'],'u-bolt':['u-bolt','ubolt','presion','u bolt'],
+  'manometro':['manometro','manometros','gauge','presion','psi'],
+  'angulo':['angulo','angular','ang'],'perfil':['perfil','perfiles'],
+  'ptr':['ptr','tubular rectangular','rectangular'],'redondo':['redondo','tubular redondo','circular'],
+  'solera':['solera','plana','flat','flat bar'],
+  'escalera':['escalera','escaleras','gato','plataforma','barandal'],
+  'soldable':['soldable','soldables','soldar','soldadura','weld'],
+  'roscado':['roscado','cuerda','roscada','rosca','con cuerda','thread'],
+  'sin cuerda':['sin cuerda','liso','sin rosca','plain'],
+  'cedula 40':['cedula 40','ced 40','c40','ced40','schedule 40','sch 40'],
+  'cedula 80':['cedula 80','ced 80','c80','ced80','schedule 80','sch 80']
+};
+
+function matchLine(line, index) {
+  var raw = line.replace(/^\s*[-•*]\s*/, '');
+  var qtyMatch = raw.match(/^(\d+)\s+/);
+  var qty = qtyMatch ? parseInt(qtyMatch[1]) : 1;
+  var text = qtyMatch ? raw.substring(qtyMatch[0].length) : raw;
+  var norm = normalize(text);
+  if (!norm || norm.length < 2) return null;
+  var bestScore = 0, bestMatch = null;
+  index.forEach(function(entry) {
+    var score = scoreMatch(norm, entry.keywords, entry);
+    if (score > bestScore) { bestScore = score; bestMatch = entry; }
+  });
+  return { original: line.trim(), qty: qty, text: text.trim(), match: bestScore >= 3 ? bestMatch : null, score: bestScore };
+}
+
+function scoreMatch(input, keywords, entry) {
+  var score = 0;
+  var inputTokens = input.split(/[\s,;.]+/).filter(function(t) { return t.length > 0; });
+  inputTokens.forEach(function(token) {
+    if (keywords.indexOf(token) !== -1) { score += 2; return; }
+    Object.keys(ALIASES).forEach(function(key) {
+      ALIASES[key].forEach(function(alias) {
+        if (token === alias || (alias.length > 3 && token.indexOf(alias) !== -1) || (token.length > 3 && alias.indexOf(token) !== -1)) {
+          if (keywords.indexOf(key) !== -1 || entry.label.toLowerCase().indexOf(key) !== -1) score += 2;
+        }
+      });
+    });
+    var sizeMatch = token.match(/(\d+[-\/]?\d*\/?\d*)\s*("|\bin\b)?/);
+    if (sizeMatch && entry.size && entry.size.indexOf(sizeMatch[1]) !== -1) score += 3;
+    if (keywords.indexOf(token) !== -1) score += 1;
+  });
+  var sizes = input.match(/\d+[-\/]?\d*\/?\d*\s*"/g);
+  if (sizes) {
+    sizes.forEach(function(s) {
+      var clean = s.replace(/\s/g, '');
+      if (entry.size && entry.size.replace(/\s/g, '').indexOf(clean) !== -1) score += 3;
+    });
+  }
+  var psiMatch = input.match(/(\d+)\s*psi/);
+  if (psiMatch && entry.size && entry.size.indexOf(psiMatch[1]) !== -1) score += 4;
+  return score;
+}
+
+function checkList() {
+  var input = document.getElementById('checkerInput').value.trim();
+  if (!input) return;
+  var index = buildSearchIndex();
+  var lines = input.split('\n').filter(function(l) { return l.trim().length > 0; });
+  var found = [], missing = [];
+  lines.forEach(function(line) {
+    var result = matchLine(line, index);
+    if (!result) return;
+    if (result.match) found.push(result); else missing.push(result);
+  });
+  renderResults(found, missing);
+}
+
+function renderResults(found, missing) {
+  var container = document.getElementById('checkerResults');
+  var total = found.length + missing.length;
+  if (total === 0) { container.innerHTML = '<div class="empty-result"><p>No se encontraron líneas para revisar.</p></div>'; return; }
+
+  var html = '<div class="result-summary">' +
+    '<span class="result-pill found"><span class="pill-dot"></span>' + found.length + ' disponible' + (found.length !== 1 ? 's' : '') + '</span>' +
+    '<span class="result-pill missing"><span class="pill-dot"></span>' + missing.length + ' faltante' + (missing.length !== 1 ? 's' : '') + '</span>' +
+    '</div>';
+
+  if (found.length > 0) {
+    html += '<div class="result-group"><div class="result-group-title found-title">' +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> En catálogo</div>';
+    found.forEach(function(r) {
+      html += '<div class="result-item">' +
+        '<svg class="result-icon ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>' +
+        '<div class="result-item-text"><div>' + (r.qty > 1 ? '<strong>' + r.qty + 'x</strong> ' : '') + r.text + '</div>' +
+        '<div class="result-item-match">' + r.match.label + '</div></div></div>';
+    });
+    html += '</div>';
+  }
+
+  if (missing.length > 0) {
+    html += '<div class="result-group"><div class="result-group-title missing-title">' +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg> Faltantes</div>';
+    missing.forEach(function(r) {
+      html += '<div class="result-item">' +
+        '<svg class="result-icon no" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>' +
+        '<div class="result-item-text"><div>' + (r.qty > 1 ? '<strong>' + r.qty + 'x</strong> ' : '') + r.text + '</div>' +
+        '<div class="result-item-match">No encontrado en catálogo — FALTANTE</div></div></div>';
+    });
+    html += '</div>';
+  }
+
+  var report = generateReport(found, missing);
+  var encoded = encodeURIComponent(report);
+  var date = new Date().toLocaleDateString('es-MX', { day: '2-digit', month: '2-digit', year: 'numeric' });
+  var emailSubject = encodeURIComponent('COENERVGAS — Revisión de Lista ' + date);
+
+  html += '<div class="result-export">' +
+    '<button class="btn-export btn-export-copy" onclick="exportResults()">Copiar reporte</button>' +
+    '<a class="btn-export btn-export-email" href="mailto:coenervgas@outlook.com?subject=' + emailSubject + '&body=' + encoded + '">Enviar por correo</a>' +
+    '</div>';
+  html += '<textarea class="result-textarea" id="resultText" readonly onclick="this.select()">' + report + '</textarea>';
+
+  container.innerHTML = html;
+}
+
+function generateReport(found, missing) {
+  var date = new Date().toLocaleDateString('es-MX', { day: '2-digit', month: '2-digit', year: 'numeric' });
+  var lines = ['COENERVGAS — Revisión de Lista', 'Fecha: ' + date, '─'.repeat(40), ''];
+  if (found.length > 0) {
+    lines.push('EN CATÁLOGO (' + found.length + '):');
+    found.forEach(function(r) { lines.push('  ' + (r.qty > 1 ? r.qty + 'x ' : '') + r.text); lines.push('    → ' + r.match.label); });
+    lines.push('');
+  }
+  if (missing.length > 0) {
+    lines.push('FALTANTES (' + missing.length + '):');
+    missing.forEach(function(r) { lines.push('  ' + (r.qty > 1 ? r.qty + 'x ' : '') + r.text + '  ⚠ FALTANTE'); });
+    lines.push('');
+  }
+  lines.push('─'.repeat(40));
+  lines.push('Resumen: ' + found.length + ' disponibles, ' + missing.length + ' faltantes');
+  return lines.join('\n');
+}
+
+function exportResults() {
+  var area = document.getElementById('resultText');
+  area.classList.add('visible');
+  area.select();
+  try {
+    navigator.clipboard.writeText(area.value).then(
+      function() { showToast('Reporte copiado al portapapeles'); },
+      function() { document.execCommand('copy'); showToast('Reporte copiado'); }
+    );
+  } catch(e) { document.execCommand('copy'); showToast('Reporte copiado'); }
+}
+</script>
+</body>
+</html>
